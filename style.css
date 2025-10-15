@@ -1,28 +1,38 @@
+/* ============================= */
+/* 🌐 GLOBAL */
+/* ============================= */
 body {
     margin: 0;
     padding: 0;
-
+    background-color: #0f0f0f;
+    color: #ffffff;
 }
 
+/* ============================= */
+/* 🎬 HEADER (bannière vidéo) */
+/* ============================= */
 header {
     position: relative;
     overflow: hidden;
+    margin-bottom: 0; /* colle la section à la vidéo */
 }
 
 header video {
     width: 100%;
     height: 60vh;
     object-fit: cover;
+    display: block;
 }
 
 header h1,
 header p {
     position: absolute;
     left: 20px;
-    color: white;
+    color: #DBDBFF;
     width: 100%;
     z-index: 1;
 }
+
 header button {
     position: absolute;
     bottom: 15px;
@@ -30,29 +40,88 @@ header button {
     z-index: 2;
     width: 50px;
     height: 50px;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(100, 100, 100, 0.7);
     border: none;
     border-radius: 50%;
     cursor: pointer;
     font-size: 1.1rem;
+    color: white;
+    transition: 0.3s ease;
+}
+
+header button:hover {
+    background-color: rgba(255, 56, 12, 0.8);
+    transform: scale(1.1);
 }
 
 header h1 {
-    top: 25%;
+    top: 20%;
     font-size: 8em;
     font-family: 'Kolker Brush', cursive;
     font-weight: 400;
     color: #ff380c;
     margin-left: 25px;
-    top: 20%;
-   
 }
 
 header p {
     top: 55%;
     font-size: 1.8rem;
     font-family: "Goudy Bookletter 1911", serif;
-    margin-left: 25px; 
+    margin-left: 25px;
 }
 
-.interet {}
+/* ============================= */
+/* 👥 SECTION "WHO" */
+/* ============================= */
+.who {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #1B1616;
+    color: #ffffff;
+    margin-top: -4px; /* colle à la bannière */
+    padding: 60px 80px;
+    gap: 40px; /* espace entre texte et image */
+}
+
+/* Bloc de texte à gauche */
+.who-text {
+    flex: 1;
+}
+
+.who-text h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #ffffff;
+    position: relative; 
+
+}
+.who-text h2::after {
+    content: "";
+    position: absolute;
+    bottom: -10px; /* espace entre le texte et le trait */
+    left: 140px; /* alignement avec le texte */
+    width: 120px; /* longueur du trait */
+    height: 4px; /* épaisseur du trait */
+    background-color: #ff380c; /* couleur rouge/orange */
+    border-radius: 2px; /* coins arrondis */
+}
+
+.who-text p {
+    font-family: 'Glory', serif;
+    font-weight: 300;
+    font-size: 1.4rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Image à droite */
+.who2 {
+    width: 60%;
+    max-width: 750px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}

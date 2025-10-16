@@ -104,7 +104,7 @@ header p {
     bottom: -10px; /* espace entre le texte et le trait */
     left: 140px; /* alignement avec le texte */
     width: 120px; /* longueur du trait */
-    height: 4px; /* épaisseur du trait */
+    height: 2px; /* épaisseur du trait */
     background-color: #ff380c; /* couleur rouge/orange */
     border-radius: 2px; /* coins arrondis */
 }
@@ -112,15 +112,15 @@ header p {
 .who-text p {
     font-family: 'Glory', serif;
     font-weight: 300;
-    font-size: 1.4rem;
+    font-size: 1.7rem;
     line-height: 1.6;
     margin-bottom: 20px;
 }
 
 /* Image à droite */
 .who2 {
-    width: 60%;
-    max-width: 750px;
+    width: 70%;
+    max-width: 800px;
     height: auto;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -133,7 +133,7 @@ header p {
     background-color: #ffffff; /* fond blanc */
     color: #000000; /* texte noir pour contraster */
     padding: 80px 100px;
-    gap: 60px;
+    gap: 40px;
 }
 
 /* Partie gauche : le logo rond */
@@ -144,8 +144,8 @@ header p {
 }
 
 .interet .logo img {
-    width: 250px;
-    height: 250px;
+    width: 350px;
+    height: 350px;
     border-radius: 50%; /* rend l’image parfaitement circulaire */
     object-fit: cover; /* adapte l’image à la forme ronde */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* ombre douce */
@@ -159,7 +159,7 @@ header p {
 .interet-text h2 {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 600;
-    font-size: 2rem;
+    font-size: 2.5rem;
     color: #000000; /* rouge Staytistics */
     margin-bottom: 25px;
     position: relative;
@@ -171,7 +171,7 @@ header p {
     bottom: -10px;
     left: 0;
     width: 80px;
-    height: 4px;
+    height: 2px;
     background-color: #ff380c;
     border-radius: 2px;
 }
@@ -179,8 +179,20 @@ header p {
 .interet-text p {
     font-family: 'Glory', serif;
     font-weight: 300;
-    font-size: 1.3rem;
+    font-size: 1.7rem;
     line-height: 1.6;
     margin-bottom: 20px;
 }
 
+.discographie {
+
+    backgroun
+
+
+        
+
+    
+    
+
+}
+    

@@ -4,7 +4,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #0f0f0f;
+    background-color: #ffffff;
     color: #ffffff;
 }
 
@@ -14,7 +14,8 @@ body {
 header {
     position: relative;
     overflow: hidden;
-    margin-bottom: 0; /* colle la section à la vidéo */
+    margin-bottom: 0;
+    /* colle la section à la vidéo */
 }
 
 header video {
@@ -79,9 +80,11 @@ header p {
     justify-content: space-between;
     background-color: #1B1616;
     color: #ffffff;
-    margin-top: -9px; /* colle à la bannière */
+    margin-top: -9px;
+    /* colle à la bannière */
     padding: 60px 80px;
-    gap: 40px; /* espace entre texte et image */
+    gap: 40px;
+    /* espace entre texte et image */
 }
 
 /* Bloc de texte à gauche */
@@ -95,18 +98,25 @@ header p {
     font-size: 2.5rem;
     margin-bottom: 20px;
     color: #ffffff;
-    position: relative; 
+    position: relative;
 
 }
+
 .who-text h2::after {
     content: "";
     position: absolute;
-    bottom: -10px; /* espace entre le texte et le trait */
-    left: 140px; /* alignement avec le texte */
-    width: 120px; /* longueur du trait */
-    height: 2px; /* épaisseur du trait */
-    background-color: #ff380c; /* couleur rouge/orange */
-    border-radius: 2px; /* coins arrondis */
+    bottom: -10px;
+    /* espace entre le texte et le trait */
+    left: 140px;
+    /* alignement avec le texte */
+    width: 120px;
+    /* longueur du trait */
+    height: 2px;
+    /* épaisseur du trait */
+    background-color: #ff380c;
+    /* couleur rouge/orange */
+    border-radius: 2px;
+    /* coins arrondis */
 }
 
 .who-text p {
@@ -130,8 +140,10 @@ header p {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #ffffff; /* fond blanc */
-    color: #000000; /* texte noir pour contraster */
+    background-color: #ffffff;
+    /* fond blanc */
+    color: #000000;
+    /* texte noir pour contraster */
     padding: 80px 100px;
     gap: 40px;
 }
@@ -146,9 +158,12 @@ header p {
 .interet .logo img {
     width: 350px;
     height: 350px;
-    border-radius: 50%; /* rend l’image parfaitement circulaire */
-    object-fit: cover; /* adapte l’image à la forme ronde */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* ombre douce */
+    border-radius: 50%;
+    /* rend l’image parfaitement circulaire */
+    object-fit: cover;
+    /* adapte l’image à la forme ronde */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    /* ombre douce */
 }
 
 /* Partie droite : le texte */
@@ -160,7 +175,7 @@ header p {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 600;
     font-size: 2.5rem;
-    color: #000000; /* rouge Staytistics */
+    color: #000000;
     margin-bottom: 25px;
     position: relative;
 }
@@ -185,14 +200,31 @@ header p {
 }
 
 .discographie {
+    background: #1B1616;
 
-    backgroun
+    border-bottom-left-radius: 80px 80px;
+    border-bottom-right-radius: 80px 80px;
+}
 
-
-        
-
-    
-    
+.discographie h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.8rem;
+    text-align: center;
 
 }
+.discrogprahie button {
+    background : #f0f0f0;
+
+   
+}
+.discographie button:hover{
     
+}
+.discographie .tri {
+
+    background: #f0f0f0;
+    color: #000000;
+    font-size: 1.4rem;
+    border-radius : 50px;
+
+}

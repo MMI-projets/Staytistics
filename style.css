@@ -4,17 +4,17 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #0f0f0f;
-    color: #ffffff;
+    background-color: #ffffff;
+    color: #fff;
+    font-family: 'Glory', serif;
 }
 
 /* ============================= */
-/* 🎬 HEADER (bannière vidéo) */
+/* 🎬 HEADER */
 /* ============================= */
 header {
     position: relative;
     overflow: hidden;
-    margin-bottom: 0; /* colle la section à la vidéo */
 }
 
 header video {
@@ -27,31 +27,10 @@ header video {
 header h1,
 header p {
     position: absolute;
-    left: 20px;
+    left: 25px;
     color: #DBDBFF;
-    width: 100%;
     z-index: 1;
-}
-
-header button {
-    position: absolute;
-    bottom: 15px;
-    right: 10px;
-    z-index: 2;
-    width: 50px;
-    height: 50px;
-    background-color: rgba(100, 100, 100, 0.7);
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 1.1rem;
-    color: white;
-    transition: 0.3s ease;
-}
-
-header button:hover {
-    background-color: rgba(255, 56, 12, 0.8);
-    transform: scale(1.1);
+    width: 100%;
 }
 
 header h1 {
@@ -60,83 +39,104 @@ header h1 {
     font-family: 'Kolker Brush', cursive;
     font-weight: 400;
     color: #ff380c;
-    margin-left: 25px;
 }
 
 header p {
     top: 55%;
     font-size: 1.8rem;
     font-family: "Goudy Bookletter 1911", serif;
-    margin-left: 25px;
+}
+
+header button {
+    position: absolute;
+    bottom: 15px;
+    right: 10px;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    background-color: rgba(100, 100, 100, 0.7);
+    color: #fff;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.3s ease;
+    z-index: 2;
+}
+
+header button:hover {
+    background-color: rgba(255, 56, 12, 0.8);
+    transform: scale(1.1);
 }
 
 /* ============================= */
-/* 👥 SECTION "WHO" */
+/* 👥 SECTION WHO */
 /* ============================= */
 .who {
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: #1B1616;
-    color: #ffffff;
-    margin-top: -9px; /* colle à la bannière */
+    margin-top: -9px;
     padding: 60px 80px;
-    gap: 40px; /* espace entre texte et image */
+    gap: 40px;
 }
 
-/* Bloc de texte à gauche */
 .who-text {
     flex: 1;
 }
 
-.who-text h2 {
+.who-text h2,
+.interet-text h2 {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 600;
     font-size: 2.5rem;
+    position: relative;
     margin-bottom: 20px;
-    color: #ffffff;
-    position: relative; 
-
 }
+
+.who-text h2 {
+    color: #fff;
+}
+
 .who-text h2::after {
     content: "";
     position: absolute;
-    bottom: -10px; /* espace entre le texte et le trait */
-    left: 140px; /* alignement avec le texte */
-    width: 120px; /* longueur du trait */
-    height: 2px; /* épaisseur du trait */
-    background-color: #ff380c; /* couleur rouge/orange */
-    border-radius: 2px; /* coins arrondis */
+    bottom: -10px;
+    left: 140px;
+    width: 120px;
+    height: 2px;
+    background-color: #ff380c;
+    border-radius: 2px;
 }
 
-.who-text p {
-    font-family: 'Glory', serif;
+.who-text p,
+.interet-text p {
     font-weight: 300;
     font-size: 1.7rem;
     line-height: 1.6;
     margin-bottom: 20px;
 }
 
-/* Image à droite */
 .who2 {
     width: 70%;
     max-width: 800px;
-    height: auto;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* ============================= */
+/* 💡 SECTION INTERET */
+/* ============================= */
 .interet {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #ffffff; /* fond blanc */
-    color: #000000; /* texte noir pour contraster */
+    background-color: #fff;
+    color: #000;
     padding: 80px 100px;
     gap: 40px;
 }
 
-/* Partie gauche : le logo rond */
 .interet .logo {
     flex: 1;
     display: flex;
@@ -146,23 +146,18 @@ header p {
 .interet .logo img {
     width: 350px;
     height: 350px;
-    border-radius: 50%; /* rend l’image parfaitement circulaire */
-    object-fit: cover; /* adapte l’image à la forme ronde */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* ombre douce */
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
-/* Partie droite : le texte */
 .interet-text {
     flex: 2;
 }
 
 .interet-text h2 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 600;
-    font-size: 2.5rem;
-    color: #000000; /* rouge Staytistics */
+    color: #000;
     margin-bottom: 25px;
-    position: relative;
 }
 
 .interet-text h2::after {
@@ -176,18 +171,12 @@ header p {
     border-radius: 2px;
 }
 
-.interet-text p {
-    font-family: 'Glory', serif;
-    font-weight: 300;
-    font-size: 1.7rem;
-    line-height: 1.6;
-    margin-bottom: 20px;
-}
-
+/* ============================= */
+/* 🖼️ BANNIERE */
+/* ============================= */
 .banniere {
     position: relative;
-    width: 100%;
-    height: 350px; /* Ajuste la hauteur ici */
+    height: 350px;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -196,18 +185,16 @@ header p {
 }
 
 .banniere img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    filter: brightness(40%); /* effet foncé uniforme */
     position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(40%);
     z-index: 0;
 }
 
-/* Contenu de la bannière (texte + bouton) */
 .banniere-content {
     position: relative;
     z-index: 1;
@@ -217,18 +204,15 @@ header p {
 
 .banniere-content h2 {
     font-size: 2rem;
-    font-family : 'Space Grotesk' sans-serif; 
+    font-family: 'Space Grotesk', sans-serif;
     font-weight: 600;
     margin-bottom: 20px;
 }
 
-/* Bouton stylé */
-.banniere-content button {
-    background: white;
-    color: black;
+.banniere-content button,
+.banniere-content .info-btn {
     border: none;
     border-radius: 40px;
-    padding: 12px 30px;
     font-size: 1rem;
     font-weight: 500;
     cursor: pointer;
@@ -236,6 +220,12 @@ header p {
     align-items: center;
     gap: 10px;
     transition: all 0.3s ease;
+    padding: 12px 30px;
+}
+
+.banniere-content button {
+    background: #fff;
+    color: #000;
 }
 
 .banniere-content button:hover {
@@ -243,4 +233,55 @@ header p {
     transform: scale(1.05);
 }
 
-    
+.banniere-content .info-btn {
+    background: rgba(255, 255, 255, 0.95);
+    color: #111;
+    padding: 15px 18px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.banniere-content .info-btn:hover {
+    transform: translateY(-2px) scale(1.03);
+    background: #f3f3f3;
+}
+
+.banniere-content .info-btn img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+
+/* ============================= */
+/* Discographie */
+.discographie {
+    padding: 60px 80px;
+    background-color: #1B1616;
+    border-bottom-left-radius : 70px;
+    border-bottom-right-radius : 70px;
+
+}
+
+.discographie-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: -10px;
+
+}
+
+.discographie-img {
+    height: 100px;
+    width: auto;
+}
+
+
+.discographie h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 2.5rem;
+    color: #fff;
+
+}

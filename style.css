@@ -5,8 +5,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #ffffff;
-    color: #fff;
-    font-family: 'Glory', serif;
+    color: #ffffff;
 }
 
 /* ============================= */
@@ -15,6 +14,8 @@ body {
 header {
     position: relative;
     overflow: hidden;
+    margin-bottom: 0;
+    /* colle la section à la vidéo */
 }
 
 header video {
@@ -261,6 +262,7 @@ header button:hover {
     border-bottom-left-radius : 70px;
     border-bottom-right-radius : 70px;
 
+   
 }
 
 .discographie-header {

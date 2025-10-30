@@ -287,3 +287,46 @@ header button:hover {
     color: #fff;
 
 }
+
+.tri-container {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+}
+.tri {
+    background-color: #ffffff;
+    color: #000000;
+    font-family:'Space Grotesk', sans-serif;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.tri:hover {
+    background-color: #e2e1e0;
+}
+.tri:active {
+    background-color: #c32f09;
+}
+
+
+.discographie-lists {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    gap: 30px;
+}
+.discographie-lists img {
+    width: 250px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.discographie-items {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

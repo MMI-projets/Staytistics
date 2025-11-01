@@ -27,6 +27,14 @@
     <!-- Ajout de ChartJS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    <!-- Bibliothèque pour animation de compteur -->
+    <script src="https://unpkg.com/counterup2@2.0.2/dist/index.js"></script>
+
+    <!-- AOS -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
 </head>
 
 <body>
@@ -40,7 +48,8 @@
         </div>
     </header>
 
-    <div class="who">
+    
+    <div class="who" data-aos="fade-right">
         <div class="who-text">
             <h2>Qui sont Stray Kids ?</h2>
 
@@ -54,14 +63,32 @@
         <img src="images/straykids-who.png" alt="Image des membres de Stray Kids" class="who2">
     </div>
 
+    <!-- Défilement des noms des membres -->
+    <div class="scrolling-members-skz" >
+        <span>Les 8 membres de Stray Kids :</span>
+        <p>
+            <span>Felix</span> <span class="sep">-</span>
+            <span>Seungmin</span> <span class="sep">-</span>
+            <span>Bang Chan</span> <span class="sep">-</span>
+            <span>IN</span> <span class="sep">-</span>
+            <span>Han</span> <span class="sep">-</span>
+            <span>Lee Know</span> <span class="sep">-</span>
+            <span>Hyunjin</span> <span class="sep">-</span>
+            <span>Changbin</span>
+        </p>
+    </div>
 
-    <div class="interet">
+    <div class="interet" data-aos="fade-right">
         <div class="logo">
             <img src="images/staytistics.png" alt="Logo de Staytistics">
         </div>
 
-        <div class="interet-text">
-            <h2>Ensemble, les morceaux de Stray Kids dépassent 12,19 milliards d’écoutes sur Spotify</h2>
+        <div class="interet-text">            
+            <h2>
+                Ensemble, les morceaux de Stray Kids dépassent 
+                <span class="counter">12.19</span> milliards d’écoutes sur Spotify
+            </h2>
+            
             <p>
                 Staytistics a pour intérêt de représenter sous forme de statistiques le nombre d’auditeurs des albums de
                 Stray Kids. <br><br>
@@ -72,15 +99,13 @@
     </div>
 
     <div class="banniere">
-        <img src="images/image-3.webp" alt="Image des membres du groupe">
-        <div class="banniere-content">
-            <h2>Les données ne s'arrêtent pas aux albums : chaque morceau est aussi analysé !</h2>
-            <button class="info-btn">
-                <i class='bx  bx-chart-bar-big-columns'></i> 
-                Se renseigner
-            </button>
-
-        </div>
+    <div class="banniere-content">
+        <h2>Les données ne s'arrêtent pas aux albums : chaque morceau est aussi analysé !</h2>
+        <button class="info-btn">
+        <i class='bx bx-chart-bar-big-columns'></i> 
+        Se renseigner
+        </button>
+    </div>
     </div>
 
     <div class="discographie">
@@ -118,18 +143,12 @@
 
     <script src="js/functions.js"></script>
     <script>
-    // Gestion des boutons
-    document.querySelector('.display-albums').addEventListener('click', () => {
-        document.querySelector("h2.title-list-albums-eps").textContent = "Albums";
-        afficherFiltres('album');
-    });
-    document.querySelector('.display-eps').addEventListener('click', () => {
-        document.querySelector("h2.title-list-albums-eps").textContent = "EPs";
-        afficherFiltres('ep');
-    });
+
     </script>
 
     <!-- Appel JSONP Deezer -->
     <script src="https://api.deezer.com/artist/13923487/albums?output=jsonp&callback=afficherAlbums"></script>
+
+
 </body>
 </html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staytistics - Stray Kids Data</title>
+
+    <!-- PapaParse -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"
+        integrity="sha512-dfX5uYVXzyU8+KHqj8bjo7UkOdg18PaOtpa48djpNbZHwExddghZ+ZmzWT06R5v6NSk3ZUfsH6FNEDepLx9hPQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+    <h1>Staytistics - Données Spotify (Stray Kids)</h1>
+    <pre id="output">Chargement des données...</pre>
+
+    <script>
+
+        // STREAMS KWORB - STRAY KIDS - TOP ALBUMS
+
+        // Charger et parser le fichier CSV
+        Papa.parse("kworb_stray_top_albums_streams.csv", {
+            download: true,    
+            header: true,    
+            dynamicTyping: true,
+            complete: function(results) {
+                console.log("Données CSV albums converties :", results.data);
+
+                const jsonDataAlbums = results.data;            
+            }
+        });
+
+        Papa.parse("kworb_stray_top_musics_streams.csv", {
+            download: true,
+            header: true,
+            dynamicTyping: true,
+            complete: function(results_musics) {
+                console.log("✅ Données CSV musics converties :", results_musics.data);
+                const jsonDataMusics = results_musics.data;
+            }
+        })
+    </script>
+
+  <h1>Albums et EPs de Stray Kids (via API Deezer JSONP)</h1>
+
+  <button class="display-albums">🎵 Albums</button>
+  <button class="display-eps">🎧 EPs</button>
+
+  <div id="albums">Clique sur un bouton pour afficher les données !</div>
+
+  <script>
+    let tousLesAlbums = [];
+
+    // Fonction callback appelée automatiquement par Deezer
+    function afficherAlbums(data) {
+      console.log("✅ Données Deezer :", data);
+      tousLesAlbums = data.data; 
+      afficherFiltres('album'); 
+    }
+
+    // Fonction pour afficher albums ou EPs selon le filtre du type
+    function afficherFiltres(type) {
+        const albumsDiv = document.getElementById("albums");
+        albumsDiv.innerHTML = "";
+
+        let filtres = [];
+        const album = null;
+
+        tousLesAlbums.forEach(function(album) {
+            if (album.record_type === type) {
+                filtres.push(album);
+            }
+        });
+
+        if (filtres.length === 0) {
+            albumsDiv.textContent = "Aucun résultat trouvé 😕";
+            return;
+        }
+
+        for (const album of filtres) {
+            const div = document.createElement("div");
+            div.className = "album";
+            div.dataset.title = album.title;
+            div.innerHTML = `
+            <img src="${album.cover_medium}" alt="${album.title}">
+            <div>
+                <strong>${album.title}</strong><br>
+                <small>Sortie : ${album.release_date}</small><br>
+                <small>Type : ${album.record_type}</small><br>
+                <a href="${album.link}" target="_blank">Écouter sur Deezer 🎧</a>
+            </div>
+            `;
+
+            div.addEventListener('click', function() {
+                // Crée la popup
+                let divPopup = document.createElement('div');
+                divPopup.className = 'popup-album';
+                divPopup.style.backgroundColor = 'rgba(0,0,0,0.5)';
+                divPopup.style.position = 'fixed';
+                divPopup.style.top = '0';
+                divPopup.style.left = '0';
+                divPopup.style.width = '100vw';
+                divPopup.style.height = '100vh';
+                divPopup.style.zIndex = '1000';
+                divPopup.innerHTML = `
+                    <div style="position: relative; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                                background: white; padding: 20px; border-radius: 10px; text-align:center;">
+                        <img src="${album.cover_medium}" alt="${album.title}">
+                        <h2>${album.title}</h2>
+                        <p>Date de sortie : ${album.release_date}</p>
+                        <p>Type : ${album.record_type}</p>
+                        <a href="${album.link}" target="_blank">Écouter sur Deezer 🎧</a><br><br>
+
+                        <div>
+                            <strong>Tracks :</strong>
+                            <ul id="trackList">
+                                Chargement des pistes...
+                                
+
+                            </ul>
+                        
+                        </div>
+                        
+                        <br>
+
+
+                        <button id="closePopup">Fermer</button>
+                    </div>
+                `;
+
+                // On ajoute la popup au body
+                document.body.appendChild(divPopup);
+
+                // Sélectionner le bouton femer à l’intérieur de cette popup
+                const closeBtn = divPopup.querySelector('#closePopup');
+                closeBtn.addEventListener('click', function() {
+                    document.body.removeChild(divPopup); // retirer correctement
+                });
+            });
+
+            albumsDiv.appendChild(div);
+        }
+    }
+
+
+    // Boutons
+    let buttonDisplayAlbums = document.querySelector('.display-albums');
+    let buttonDisplayEps = document.querySelector('.display-eps');
+
+    buttonDisplayAlbums.addEventListener('click', function() {
+      afficherFiltres('album');
+    });
+
+    buttonDisplayEps.addEventListener('click', function() {
+      afficherFiltres('ep');
+    });
+  </script>
+
+  <!-- Appel JSONP vers Deezer -->
+  <script src="https://api.deezer.com/artist/13923487/albums?output=jsonp&callback=afficherAlbums"></script>
+
+</body>
+</html>

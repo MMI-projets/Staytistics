@@ -10,8 +10,8 @@ Papa.parse("kworb_stray_top_musics_streams.csv", {
     complete: function(results) {
         // Chaque ligne = array [titre, streams, autre]
         streamsData = results.data.map(row => ({
-            Title: row[0], 
-            Streams: row[1] 
+            Title: row[0],
+            Streams: row[1]
         }));
         console.log("Données des streams chargées :", streamsData);
     }
@@ -23,6 +23,10 @@ Papa.parse("kworb_stray_top_musics_streams.csv", {
 let tousLesAlbums = []; // Données de Deezer
 let popupActive = null; // Popup actuelle (pour la fermer facilement)
 
+// Nouveaux états pour le tri et le filtre courant
+let sortAlphabetique = false;
+let currentFilterType = 'album';
+
 
 // ===============================
 // FONCTION D’AFFICHAGE DES ALBUMS/EPs
@@ -32,17 +36,27 @@ let popupActive = null; // Popup actuelle (pour la fermer facilement)
 function afficherAlbums(data) {
     console.log("✅ Données Deezer :", data);
     tousLesAlbums = data.data;
-    afficherFiltres('album'); // on affiche les albums par défaut
+    // afficher albums par défaut (met à jour currentFilterType)
+    afficherFiltres('album');
 }
 
 function afficherFiltres(type) {
+    // Si on reçoit un type, on met à jour le filtre courant
+    if (type) currentFilterType = type;
+
     const albumsDiv = document.querySelector(".discographie-lists");
+    if (!albumsDiv) return;
     albumsDiv.innerHTML = ""; // on vide le conteneur
 
     // Filtrer selon le type demandé (album ou ep)
-    const filtres = tousLesAlbums.filter(album => {
-        return album.record_type === type;
+    let filtres = tousLesAlbums.filter(album => {
+        return album.record_type === currentFilterType;
     });
+
+    // Appliquer tri alphabétique si activé
+    if (sortAlphabetique) {
+        filtres.sort((a, b) => a.title.localeCompare(b.title, 'fr', { sensitivity: 'base' }));
+    }
 
     if (filtres.length === 0) {
         albumsDiv.textContent = "Aucun résultat trouvé...";
@@ -127,7 +141,6 @@ function fermerPopup() {
 
     // Mettre par défaut le scroll au body
     document.body.style.overflow = '';
-
 }
 
 // ===============================
@@ -207,3 +220,25 @@ function afficherGraphiquePistes(tracks) {
         }
     });
 }
+
+// ===============================
+// ATTACHEMENT DU BOUTON DE TRI
+// ===============================
+document.addEventListener('DOMContentLoaded', () => {
+    const triBtn = document.querySelector('.tri');
+    if (!triBtn) return;
+
+    // Label initial
+    triBtn.innerHTML = "<i class='bx bx-filter'></i> Par ordre alphabétique";
+
+    triBtn.addEventListener('click', () => {
+        sortAlphabetique = !sortAlphabetique;
+        if (sortAlphabetique) {
+            triBtn.innerHTML = "<i class='bx bx-sort-alpha-down'></i> A → Z";
+        } else {
+            triBtn.innerHTML = "<i class='bx bx-filter'></i> Par ordre alphabétique";
+        }
+        // Raffraîchir l'affichage en gardant le filtre courant
+        afficherFiltres(currentFilterType);
+    });
+});

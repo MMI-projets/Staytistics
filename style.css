@@ -113,8 +113,8 @@ header button:hover {
     content: "";
     position: absolute;
     bottom: -10px;
-    left: 230px;
-    width: 230px;
+    left: 270px;
+    width: 200px;
     height: 2px;
     background-color: #ff380c;
     border-radius: 2px;
@@ -123,9 +123,10 @@ header button:hover {
 .who-text p,
 .interet-text p {
     font-weight: 300;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     line-height: 1.6;
     margin: 4rem 0;
+    font-family: "Glory", sans-serif;
 }
 
 .who2 {

@@ -19,6 +19,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     });
 
+
+
     /* ============================= */
     /* Boutons qui gère albums/EPs */
     /* ============================= */

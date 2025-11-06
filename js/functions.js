@@ -41,22 +41,13 @@ function afficherAlbums(data) {
 }
 
 function afficherFiltres(type) {
-    // Si on reçoit un type, on met à jour le filtre courant
-    if (type) currentFilterType = type;
-
     const albumsDiv = document.querySelector(".discographie-lists");
-    if (!albumsDiv) return;
     albumsDiv.innerHTML = ""; // on vide le conteneur
 
     // Filtrer selon le type demandé (album ou ep)
-    let filtres = tousLesAlbums.filter(album => {
-        return album.record_type === currentFilterType;
+    const filtres = tousLesAlbums.filter(album => {
+        return album.record_type === type;
     });
-
-    // Appliquer tri alphabétique si activé
-    if (sortAlphabetique) {
-        filtres.sort((a, b) => a.title.localeCompare(b.title, 'fr', { sensitivity: 'base' }));
-    }
 
     if (filtres.length === 0) {
         albumsDiv.textContent = "Aucun résultat trouvé...";
@@ -68,14 +59,22 @@ function afficherFiltres(type) {
         const div = document.createElement("div");
         div.className = "album"; // Mettre la classe album à la div
         div.dataset.idAlbum = album.id; // Mettre l'id de l'album à la div
+        div.dataset.titleAlbum = album.title; // Mettre l'id de l'album à la div
 
+        // Préparer le titre (tronqué si trop long)
+        let titleDisplay = album.title || '';
+        if (titleDisplay.length > 30) {
+            titleDisplay = titleDisplay.substr(0, 30) + '...';
+        }
+
+        // Construire le HTML de la carte d'album proprement
         div.innerHTML = `
             <img src="${album.cover_medium}" alt="${album.title}">
             <div>
-                <strong>${album.title}</strong><br>
+                <strong>${titleDisplay}</strong><br>
                 <small>Sortie : ${album.release_date}</small><br>
                 <small>Type : ${album.record_type}</small><br>
-                <a href="${album.link}" target="_blank">Écouter sur Deezer 🎧</a>
+                <a href="${album.link}" target="_blank">Écouter sur Deezer</a>
             </div>
         `;
 
@@ -107,7 +106,7 @@ function ouvrirPopupAlbum(album) {
             <h2>${album.title}</h2>
             <p>Date de sortie : ${album.release_date}</p>
             <p>Type : ${album.record_type}</p>
-            <a href="${album.link}" target="_blank">Écouter l'album sur Deezer 🎧</a><br><br><br>
+            <a href="${album.link}" target="_blank">Écouter l'album sur Deezer </a><br><br><br>
 
             <strong>Pistes :</strong>
             <ul id="trackList">Chargement des pistes...</ul>

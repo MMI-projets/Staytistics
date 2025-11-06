@@ -89,3 +89,5 @@ document.addEventListener("DOMContentLoaded", (event) => {
     observer.observe(counter);
     });
 });
+
+

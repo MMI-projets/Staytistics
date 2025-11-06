@@ -267,7 +267,7 @@ header button:hover {
     margin-bottom: 20px;
 }
 
-.banniere-content .info-btn {
+.banniere-content a.info-btn {
     background: rgba(255, 255, 255, 0.95);
     color: #111;
     padding: 15px 18px;
@@ -275,18 +275,24 @@ header button:hover {
     border: none;
     border-radius: 40px;
     font-size: 1rem;
+   font-family: 'Space Grotesk', sans-serif;
     display: inline-flex;
     align-items: center;
     gap: 10px;
     cursor: pointer;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     transition: all 0.3s ease;
+    text-decoration : none; 
+    
 }
 
-.banniere-content .info-btn:hover {
+.banniere-content a.info-btn:hover {
     transform: translateY(-2px) scale(1.03);
     background: #f3f3f3;
+    text-decoration: none;
 }
+
+
 
 
 /* ============================= */
@@ -465,16 +471,18 @@ header button:hover {
 
 /* Métadonnées (date / type) */
 .discographie-lists .album small {
+    font-family: 'Glory', sans-serif;
     display: block;
     color: #666;
     font-size: 1rem;
     margin: 0 0 4px 0; /* resserré */
-    line-height: 1;
+    
 }
 
 /* Lien d'écoute */
 .discographie-lists .album a {
     color: #1c0cff;
+    font-family : 'Glory', sans-serif;
     text-decoration: none;
     font-weight: 700;
     font-size: 1rem;

@@ -73,7 +73,6 @@ function afficherFiltres(type) {
             <div>
                 <strong>${titleDisplay}</strong><br>
                 <small>Sortie : ${album.release_date}</small><br>
-                <small>Type : ${album.record_type}</small><br>
                 <a href="${album.link}" target="_blank">Écouter sur Deezer</a>
             </div>
         `;

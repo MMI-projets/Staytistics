@@ -43,11 +43,22 @@ function afficherAlbums(data) {
 function afficherFiltres(type) {
     const albumsDiv = document.querySelector(".discographie-lists");
     albumsDiv.innerHTML = ""; // on vide le conteneur
+    // mettre à jour le filtre courant (utile pour le bouton de tri)
+    currentFilterType = type;
 
     // Filtrer selon le type demandé (album ou ep)
     const filtres = tousLesAlbums.filter(album => {
         return album.record_type === type;
     });
+
+    // Appliquer le tri alphabétique si demandé
+    if (sortAlphabetique) {
+        filtres.sort((a, b) => {
+            const ta = (a.title || '').toString();
+            const tb = (b.title || '').toString();
+            return ta.localeCompare(tb, 'fr', { sensitivity: 'base' });
+        });
+    }
 
     if (filtres.length === 0) {
         albumsDiv.textContent = "Aucun résultat trouvé...";
@@ -79,6 +90,16 @@ function afficherFiltres(type) {
 
         // Ouvrir popup au clic
         div.addEventListener('click', () => ouvrirPopupAlbum(album));
+
+        // Si l'utilisateur clique sur le lien Deezer à l'intérieur de la carte,
+        // on doit laisser le lien ouvrir dans un nouvel onglet sans déclencher la popup.
+        const deezerLink = div.querySelector('a');
+        if (deezerLink) {
+            deezerLink.addEventListener('click', (e) => {
+                e.stopPropagation(); // empêche la propagation vers la div parent
+                // laisser le lien fonctionner normalement (target="_blank")
+            });
+        }
 
         albumsDiv.appendChild(div);
     });

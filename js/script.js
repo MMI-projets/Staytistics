@@ -1,20 +1,20 @@
 document.addEventListener("DOMContentLoaded", (event) => {
-  console.log("DOM fully loaded and parsed");
+    console.log("DOM fully loaded and parsed");
 
     /* ============================= */
     /* Boutons stop/play pour la vidéo dans le hero-section */
     /* ============================= */
 
-   const playButtons = document.querySelectorAll(".play");
+    const playButtons = document.querySelectorAll(".play");
     playButtons.forEach((button) => {
         button.addEventListener("click", () => {
             const video = button.previousElementSibling;
             if (video.paused) {
                 video.play();
-                button.textContent = "⏸"; 
+                button.textContent = "⏸";
             } else {
                 video.pause();
-                button.textContent = "⏵"; 
+                button.textContent = "⏵";
             }
         });
     });
@@ -73,21 +73,33 @@ document.addEventListener("DOMContentLoaded", (event) => {
     const counters = document.querySelectorAll('.counter');
 
     const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-        if(entry.isIntersecting) {
-        // Lancer l'animation CounterUp
-        window.counterUp.default(entry.target, {
-            duration: 2500,
-            delay: 16
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Lancer l'animation CounterUp
+                window.counterUp.default(entry.target, {
+                    duration: 2500,
+                    delay: 16
+                });
+                observer.unobserve(entry.target); // pour ne l’animer qu’une seule fois
+            }
         });
-        observer.unobserve(entry.target); // pour ne l’animer qu’une seule fois
-        }
-    });
     }, { threshold: 0.5 }); // 50% visible pour déclencher
 
     counters.forEach(counter => {
-    observer.observe(counter);
+        observer.observe(counter);
     });
+
+    const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    gradient.addColorStop(0, '#ff4c4c'); // rouge doux en haut
+    gradient.addColorStop(1, '#ffc04c'); // doré clair en bas
+    ctx.fillStyle = gradient;
+    ctx.shadowColor = 'rgba(255, 76, 76, 0.3)';
+    ctx.shadowBlur = 10;
+
+    ctx.strokeStyle = 'rgba(0,0,0,0.1)';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(x, y, width, height);
+
 });
 
 

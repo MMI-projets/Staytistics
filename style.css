@@ -504,7 +504,8 @@ header button:hover {
 /* POPUPs */
 /* ============================= */
 
-div.popup-album {
+div.popup-album, 
+div.popup-MentionsCredits {
     background-color: rgba(0, 0, 0, 0.6); 
     position: fixed;
     top: 0; left: 0;
@@ -519,12 +520,13 @@ div.popup-album {
     transition: background-color 0.3s ease;
 }
 
+
 div.popup {
     background: #fff;
     padding: 25px 30px;
     border-radius: 15px;
     width: 90%;
-    max-width: 450px;
+    max-width: 700px;
     max-height: 90vh; 
     overflow-y: auto; 
     box-shadow: 0 10px 40px rgba(0,0,0,0.3);
@@ -532,6 +534,7 @@ div.popup {
     font-family: 'Space Grotesk', sans-serif;
     position: relative;
     transition: transform 0.3s ease;
+    margin-bottom: 50px;
 }
 
 
@@ -556,7 +559,6 @@ div.popup p {
     font-size: 0.95rem;
     margin-bottom: 8px;
     line-height: 1.4;
-    
 }
 
 /* Liste des pistes */
@@ -576,20 +578,39 @@ div.popup ul li {
     font-size: 0.9rem;
 }
 
-/* Canvas du graphique */
 div.popup canvas {
     width: 100% !important;
     height: auto !important;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    background: #fff; /* fond clair conservé */
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08),
+                inset 0 0 10px rgba(255, 255, 255, 0.6);
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: graphAppear 0.6s ease forwards;
 }
+
+div.popup canvas:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12),
+                0 0 10px rgba(255, 180, 0, 0.2);
+}
+
+@keyframes graphAppear {
+    from { opacity: 0; transform: translateY(20px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
 
 /* Bouton fermer */
 div.popup button#closePopup {
     position: absolute;
     top: 15px;
     right: 15px;
-    background: #ff4c4c;
-    color: #fff;
+    background: #920202;
+    color: #E0E0E0;
     border: none;
     padding: 8px 12px;
     border-radius: 8px;
@@ -615,6 +636,12 @@ div.popup::-webkit-scrollbar-thumb {
 div.popup::-webkit-scrollbar-track {
     background: transparent;
 }
+
+.disclaimer {
+    font-size: 0.8rem;
+    color: rgb(206, 203, 203);
+}
+
 
 /* ============================= */
 /* Footer */

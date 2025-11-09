@@ -141,17 +141,17 @@ header button:hover {
 /* Défilement horizontal SKZ des membres */
 /* ============================= */
 .scrolling-members-skz {
-  width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
-  background: #1B1616;
-  color: #fff;
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 600;
-  padding: 15px 0;
-  position: relative;
-  display: flex;
-  flex-direction: column;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    background: #1B1616;
+    color: #fff;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    padding: 15px 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .scrolling-members-skz span {
@@ -160,17 +160,17 @@ header button:hover {
 }
 
 .scrolling-members-skz p {
-  display: inline-flex;
-  align-items: center;
-  gap: 2rem; 
-  font-size: 2.5rem;
-  transition: transform 0.1s linear;
-  padding-left: 5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 2rem;
+    font-size: 2.5rem;
+    transition: transform 0.1s linear;
+    padding-left: 5rem;
 }
 
 .scrolling-members-skz p .sep {
-  margin: 0 1rem; 
-  opacity: 0.8;
+    margin: 0 1rem;
+    opacity: 0.8;
 }
 
 /* ============================= */
@@ -249,13 +249,15 @@ header button:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.55); /* plus ou moins sombre selon ton goût */
+    background: rgba(0, 0, 0, 0.55);
+    /* plus ou moins sombre selon ton goût */
     z-index: 0;
 }
 
 .banniere-content {
     position: relative;
-    z-index: 1; /* au-dessus de la couche sombre */
+    z-index: 1;
+    /* au-dessus de la couche sombre */
     text-align: center;
     max-width: 80%;
 }
@@ -275,15 +277,15 @@ header button:hover {
     border: none;
     border-radius: 40px;
     font-size: 1rem;
-   font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
     display: inline-flex;
     align-items: center;
     gap: 10px;
     cursor: pointer;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     transition: all 0.3s ease;
-    text-decoration : none; 
-    
+    text-decoration: none;
+
 }
 
 .banniere-content a.info-btn:hover {
@@ -300,8 +302,8 @@ header button:hover {
 .discographie {
     /* padding: 60px 80px; */
     /* background-color: #1B1616; */
-    border-bottom-left-radius : 70px;
-    border-bottom-right-radius : 70px;
+    border-bottom-left-radius: 70px;
+    border-bottom-right-radius: 70px;
 
     color: black;
     width: 100%;
@@ -354,10 +356,11 @@ header button:hover {
     justify-content: center;
     align-items: center;
 }
+
 .tri {
     background-color: #ffffff;
     color: #000000;
-    font-family:'Space Grotesk', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
     border: none;
     border-radius: 25px;
     padding: 10px 20px;
@@ -365,9 +368,11 @@ header button:hover {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
+
 .tri:hover {
     background-color: #e2e1e0;
 }
+
 .tri:active {
     background-color: #c32f09;
 }
@@ -379,12 +384,14 @@ header button:hover {
     margin-top: 40px;
     gap: 30px;
 }
+
 .discographie-lists img {
     width: 250px;
     height: auto;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
 .discographie-items {
     flex: 1;
     display: flex;
@@ -446,13 +453,16 @@ header button:hover {
 
 /* Contenu texte sous l'image (modifié) */
 
-.discographie-lists .album > div {
+.discographie-lists .album>div {
     width: 100%;
-    padding: 6px 6px; /* moins d'espace autour */
+    padding: 6px 6px;
+    /* moins d'espace autour */
     box-sizing: border-box;
-    line-height: 1; /* interligne plus compact */
+    line-height: 1;
+    /* interligne plus compact */
     font-size: 0.95rem;
 }
+
 /* Titre de l'album — rapproché et tronqué si trop long */
 .discographie-lists .album strong,
 .discographie-lists .album h2 {
@@ -460,7 +470,8 @@ header button:hover {
     font-weight: 700;
     font-size: 1.2rem;
     color: #111;
-    margin: 0 0 4px 0; /* moins d'espace sous le titre */
+    margin: 0 0 4px 0;
+    /* moins d'espace sous le titre */
     line-height: 1.08;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -475,27 +486,29 @@ header button:hover {
     display: block;
     color: #666;
     font-size: 1rem;
-    margin: 0 0 4px 0; /* resserré */
-    
+    margin: 0 0 4px 0;
+    /* resserré */
+
 }
 
 /* Lien d'écoute */
 .discographie-lists .album a {
     color: #1c0cff;
-    font-family : 'Glory', sans-serif;
+    font-family: 'Glory', sans-serif;
     text-decoration: none;
     font-weight: 700;
     font-size: 1rem;
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    margin-top: 2px; /* petit écart pour rester lisible */
+    margin-top: 2px;
+    /* petit écart pour rester lisible */
 }
 
 /* Séparateur visuel sous le contenu */
 .discographie-lists .album .card-footer {
     margin-top: 6px;
-    border-top: 1px dashed rgba(0,0,0,0.06);
+    border-top: 1px dashed rgba(0, 0, 0, 0.06);
     padding-top: 6px;
 }
 
@@ -578,39 +591,72 @@ div.popup ul li {
     font-size: 0.9rem;
 }
 
-div.popup canvas {
-    width: 100% !important;
-    height: auto !important;
-    margin-bottom: 20px;
-    background: #fff; /* fond clair conservé */
+/* Modernisation du canvas pour coller au style du site */
+div.popup .chart-container {
+    width: 100%;
+    background: linear-gradient(180deg, rgba(27,22,22,0.92) 0%, rgba(255,56,12,0.04) 100%);
     border-radius: 12px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08),
-                inset 0 0 10px rgba(255, 255, 255, 0.6);
-    padding: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    animation: graphAppear 0.6s ease forwards;
+    padding: 14px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    backdrop-filter: blur(6px) saturate(120%);
+    margin-bottom: 12px;
 }
 
-div.popup canvas:hover {
-    transform: scale(1.02);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12),
-                0 0 10px rgba(255, 180, 0, 0.2);
+div.popup .chart-container canvas {
+    width: 100% !important;
+    height: 320px !important;
+    display: block;
+    border-radius: 8px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    border: 1px solid rgba(255,56,12,0.12);
 }
 
-@keyframes graphAppear {
-    from { opacity: 0; transform: translateY(20px) scale(0.95); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
+/* Légende compacte alignée à droite */
+div.popup .chart-legend {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 0.9rem;
+    color: #e6e6e6;
+    margin-top: 8px;
 }
 
+/* élément de légende */
+div.popup .chart-legend .item {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    opacity: 0.95;
+}
+
+div.popup .chart-legend .swatch {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Adaptations mobile */
+@media (max-width: 600px) {
+    div.popup .chart-container canvas {
+        height: 220px !important;
+    }
+    div.popup .chart-legend {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
 
 /* Bouton fermer */
 div.popup button#closePopup {
     position: absolute;
     top: 15px;
     right: 15px;
-    background: #920202;
-    color: #E0E0E0;
+    background: #f71c1c;
+    color: #fff;
     border: none;
     padding: 8px 12px;
     border-radius: 8px;
@@ -620,7 +666,7 @@ div.popup button#closePopup {
 }
 
 div.popup button#closePopup:hover {
-    background: #e04343;
+    background: #ee1616;
 }
 
 /* Scrollbar interne (optionnel, pour Firefox et Webkit) */
@@ -642,6 +688,12 @@ div.popup::-webkit-scrollbar-track {
     color: rgb(206, 203, 203);
 }
 
+/* POP UP - MENTIONS LEGALES */
+
+div.popup section {
+    padding: 0 30px;
+}
+
 
 /* ============================= */
 /* Footer */
@@ -654,4 +706,3 @@ footer {
     color: white;
     background-color: #1B1616;
 }
-

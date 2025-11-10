@@ -33,32 +33,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
         afficherFiltres('ep');
     });
 
-
-    /* ============================= */
-    /* Scroll intéractif pour les membres de skz */
-    /* ============================= */
-    const scrollingText = document.querySelector('.scrolling-members-skz p');
-    let lastScrollY = window.scrollY;   // dernière position du scroll
-    let currentOffset = 0;               // offset horizontal actuel
-    const speed = 3;                     // vitesse du défilement horizontal
-
-    window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY;
-        const delta = scrollY - lastScrollY; // différence de scroll depuis le dernier event
-
-        // on ajoute delta * speed à l'offset horizontal
-        currentOffset += delta * speed;
-
-        // boucle infinie
-        const width = scrollingText.offsetWidth;
-        currentOffset = currentOffset % width;
-
-        scrollingText.style.transform = `translateX(-${currentOffset}px)`;
-
-        lastScrollY = scrollY; // mise à jour pour le prochain scroll
-    });
-
-
     /* ============================= */
     /* Effet de compteur - Animation - Chiffres du nombres d'écoutes sur Spotify de Stray Kids */
     /* ============================= */
@@ -86,4 +60,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
     counters.forEach(counter => {
     observer.observe(counter);
     });
+
+    /* ============================= */
+    /* Popup sur les mentions légales et les crédits */
+    /* ============================= */
+    document.querySelector("button.mentions-legales-credits").addEventListener("click", ouvrirPopUpMentionsCredits);
+
+
 });
+

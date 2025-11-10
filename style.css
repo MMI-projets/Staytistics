@@ -1,6 +1,10 @@
 /* ============================= */
 /* 🌐 GLOBAL */
 /* ============================= */
+
+html {
+    scroll-behavior: smooth;
+}
 body {
     margin: 0;
     padding: 0;
@@ -139,7 +143,9 @@ header button:hover {
 /* ============================= */
 /* Défilement horizontal SKZ des membres */
 /* ============================= */
-.scrolling-members-skz {
+
+
+/* .scrolling-members-skz {
   width: 100%;
   overflow: hidden;
   white-space: nowrap;
@@ -163,14 +169,84 @@ header button:hover {
   align-items: center;
   gap: 2rem; 
   font-size: 2.5rem;
-  transition: transform 0.1s linear;
+  transition: scrollingLeft 0.1s linear;
   padding-left: 5rem;
+
+  animation: scrollingLeft infinite ease-in 30s;
 }
 
 .scrolling-members-skz p .sep {
   margin: 0 1rem; 
   opacity: 0.8;
 }
+
+.infinite-scroll {
+    display: flex;
+    gap: 20px;
+}
+
+@keyframes scrollingLeft {
+    0% {
+        transform: translateX(0%);
+    }
+
+    50% {
+        transform: translateX(-40%);
+    }
+
+    100% {
+        transform: translateX(0%);
+    }
+} */
+
+
+.scrolling-members-skz {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  background: #1B1616;
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  padding: 15px 0;
+  position: relative;
+}
+
+.scrolling-members-skz span {
+  margin: 10px 60px;
+  font-size: 2rem;
+}
+
+.infinite-scroll {
+  display: flex;
+  width: max-content;
+  animation: scroll-left 30s linear infinite;
+  gap: 200px;    
+}
+
+.infinite-scroll p {
+  display: inline-flex;
+  align-items: center;
+  gap: 2rem;
+  font-size: 2.5rem;
+  padding-left: 5rem;
+}
+
+.scrolling-members-skz .sep {
+  opacity: 0.8;
+}
+
+/* Animation fluide, sans retour en arrière */
+@keyframes scroll-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+
 
 /* ============================= */
 /* 💡 SECTION INTERET */
@@ -264,6 +340,10 @@ header button:hover {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 600;
     margin-bottom: 20px;
+}
+
+a.info-btn {
+    text-decoration: none;
 }
 
 .banniere-content .info-btn {
@@ -436,11 +516,54 @@ header button:hover {
     cursor: pointer;
 }
 
+
+/* graphic-over-years */
+/* ===========================
+   SECTION : Graphique sur les années
+   =========================== */
+.graphic-over-years {
+    background-color: #fff;
+    color: #111;
+    text-align: center;
+    padding: 80px 0;
+    border-top: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Titre */
+.graphic-over-years h2 {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+    color: #000;
+    /* border-bottom: 2px solid #000; */
+    display: inline-block;
+    padding-bottom: 8px;
+}
+
+/* Conteneur du graphique */
+.graphic-over-years canvas {
+    width: 60%;
+    max-width: 850px;
+    height: 200px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+
 /* ============================= */
 /* POPUPs */
 /* ============================= */
 
-div.popup-album {
+div.popup-album, 
+div.popup-MentionsCredits {
     background-color: rgba(0, 0, 0, 0.6); 
     position: fixed;
     top: 0; left: 0;
@@ -455,12 +578,13 @@ div.popup-album {
     transition: background-color 0.3s ease;
 }
 
+
 div.popup {
     background: #fff;
     padding: 25px 30px;
     border-radius: 15px;
     width: 90%;
-    max-width: 450px;
+    max-width: 700px;
     max-height: 90vh; 
     overflow-y: auto; 
     box-shadow: 0 10px 40px rgba(0,0,0,0.3);
@@ -468,6 +592,7 @@ div.popup {
     font-family: 'Space Grotesk', sans-serif;
     position: relative;
     transition: transform 0.3s ease;
+    margin-bottom: 50px;
 }
 
 
@@ -551,6 +676,18 @@ div.popup::-webkit-scrollbar-track {
     background: transparent;
 }
 
+.disclaimer {
+    font-size: 0.8rem;
+    color: rgb(206, 203, 203);
+}
+
+/* POP UP - MENTIONS LEGALES */
+
+div.popup section {
+    padding: 0 30px;
+}
+
+
 /* ============================= */
 /* Footer */
 /* ============================= */
@@ -561,5 +698,19 @@ footer {
     align-items: center;
     color: white;
     background-color: #1B1616;
+    padding: 20px;
 }
 
+footer button.mentions-legales-credits {
+    border: none;
+    text-decoration: underline;
+    color: #ffffff;
+    outline: inherit;
+    background: none;
+    font-size: 1.02rem;
+    font-family: "Goudy Bookletter 1911", serif;
+}
+
+footer button.mentions-legales-credits:hover {
+    cursor: pointer;
+}

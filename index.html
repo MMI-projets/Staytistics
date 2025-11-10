@@ -66,16 +66,28 @@
     <!-- Défilement des noms des membres -->
     <div class="scrolling-members-skz" >
         <span>Les 8 membres de Stray Kids :</span>
-        <p>
-            <span>Felix</span> <span class="sep">-</span>
-            <span>Seungmin</span> <span class="sep">-</span>
-            <span>Bang Chan</span> <span class="sep">-</span>
-            <span>IN</span> <span class="sep">-</span>
-            <span>Han</span> <span class="sep">-</span>
-            <span>Lee Know</span> <span class="sep">-</span>
-            <span>Hyunjin</span> <span class="sep">-</span>
-            <span>Changbin</span>
-        </p>
+        <div class="infinite-scroll">
+            <p>
+                <span>Felix</span><span class="sep">-</span>
+                <span>Seungmin</span><span class="sep">-</span>
+                <span>Bang Chan</span><span class="sep">-</span>
+                <span>IN</span><span class="sep">-</span>
+                <span>Han</span><span class="sep">-</span>
+                <span>Lee Know</span><span class="sep">-</span>
+                <span>Hyunjin</span><span class="sep">-</span>
+                <span>Changbin</span>
+            </p>
+            <p>
+                <span>Felix</span><span class="sep">-</span>
+                <span>Seungmin</span><span class="sep">-</span>
+                <span>Bang Chan</span><span class="sep">-</span>
+                <span>IN</span><span class="sep">-</span>
+                <span>Han</span><span class="sep">-</span>
+                <span>Lee Know</span><span class="sep">-</span>
+                <span>Hyunjin</span><span class="sep">-</span>
+                <span>Changbin</span>
+            </p>
+        </div>
     </div>
 
     <div class="interet" data-aos="fade-right">
@@ -99,52 +111,56 @@
     </div>
 
     <div class="banniere">
-    <div class="banniere-content">
-        <h2>Les données ne s'arrêtent pas aux albums : chaque morceau est aussi analysé !</h2>
-        <button class="info-btn">
-        <i class='bx bx-chart-bar-big-columns'></i> 
-        Se renseigner
-        </button>
-    </div>
+        <div class="banniere-content">
+            <h2>Les données ne s'arrêtent pas aux albums : chaque morceau est aussi analysé !</h2>
+            <a href="#albums" class="info-btn">
+                <i class='bx bx-chart-bar-big-columns'></i> 
+                Se renseigner
+            </a>
+        </div>
     </div>
 
     <div class="discographie">
-
         <div class="discographie-header">
             <img src="images/disque.png" alt="Image d'un disque" class="discographie-img">
             <h2>Discographies</h2>
             <div class="tri-container">
                 <button class="tri"><i class='bx  bx-filter'></i> Par ordre alphabétique</button>
-                <button class="tri"><i class='bx  bx-slider-vertical'></i> Par année</button>
             </div>
 
-            <div class="display-type-albums">
-                <button class="display-albums">🎵 Albums</button>
-                <button class="display-eps">🎧 EPs</button>
+            <div class="display-type-albums" >
+                <button class="display-albums">Albums</button>
+                <button class="display-eps" id="eps">EPs</button>
             </div>
         </div>
 
-        <div class="list-albums-eps">
+        <div class="list-albums-eps" id="albums">
             <h2 class="title-list-albums-eps">Albums</h2>
             <div class="discographie-lists">
                 <!-- Albums / EPs seront insérés ici dynamiquement -->
             </div>
         </div>
-
     </div>
+
+    <div class="graphic-over-years">
+        <h2>Évolution du nombres d'écoutes de chaque album au fil des années </h2>
+        <canvas id="albumsOverYearsChart"></canvas>
+    </div>
+
+
 
     <script src="js/script.js"></script>
 
     <footer>
         <p>&copy; 2025 Staytistics. Tous droits réservés.</p>
         <p>Développé par Fiol Alex, TE Jimmy</p>
+        <button class="mentions-legales-credits">Mentions légales et crédits</button>
     </footer>
 
-
     <script src="js/functions.js"></script>
-    <script>
-
-    </script>
+    <!-- TEST POUR L'EVOLUTION AU FIL DU TEMPS -->
+    <!-- <script src="https://api.deezer.com/album/663535781/tracks?output=jsonp&callback=getTracksFromAlbum"></script> -->
+    <script src="https://api.deezer.com/artist/13923487/albums?output=jsonp&callback=getAllAlbums"></script>
 
     <!-- Appel JSONP Deezer -->
     <script src="https://api.deezer.com/artist/13923487/albums?output=jsonp&callback=afficherAlbums"></script>

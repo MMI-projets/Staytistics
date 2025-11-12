@@ -1,3 +1,6 @@
+let sortAlphabetique = false;  // Tri alphabétique désactivé par défaut
+let currentFilterType = 'album'; // Filtre courant par défaut
+
 document.addEventListener("DOMContentLoaded", (event) => {
   console.log("DOM fully loaded and parsed");
 
@@ -65,6 +68,32 @@ document.addEventListener("DOMContentLoaded", (event) => {
     /* Popup sur les mentions légales et les crédits */
     /* ============================= */
     document.querySelector("button.mentions-legales-credits").addEventListener("click", ouvrirPopUpMentionsCredits);
+
+
+    // ===============================
+    // ATTACHEMENT DU BOUTON DE TRI
+    // ===============================
+
+
+    const triBtn = document.querySelector('.tri');
+    if (!triBtn) {
+        return;
+    } 
+
+    // Label initial
+    triBtn.innerHTML = "<i class='bx bx-filter'></i> Par ordre alphabétique";
+
+    triBtn.addEventListener('click', () => {
+        sortAlphabetique = !sortAlphabetique;
+        if (sortAlphabetique) {
+            triBtn.innerHTML = "<i class='bx bx-sort-alpha-down'></i> A → Z";
+        } else {
+            triBtn.innerHTML = "<i class='bx bx-filter'></i> Par ordre alphabétique";
+        }
+        // Raffraîchir l'affichage en gardant le filtre courant
+        afficherFiltres(currentFilterType);
+    });
+
 
 
 });

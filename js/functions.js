@@ -39,52 +39,69 @@ function afficherFiltres(type) {
     const albumsDiv = document.querySelector(".discographie-lists");
     albumsDiv.innerHTML = ""; // on vide le conteneur
 
-    // Filtrer selon le type demandé (album ou ep)
-    const filtres = tousLesAlbums.filter(album => {
-        return album.record_type === type;
-    });
+    // mettre à jour le filtre courant (utile pour le bouton de tri)
+    currentFilterType = type;
 
-    if (filtres.length === 0) {
+    // Filtrer selon le type demandé (album ou ep)
+    let filtres = tousLesAlbums.filter(album => album.record_type === type);
+
+    if (!filtres || filtres.length === 0) {
         albumsDiv.textContent = "Aucun résultat trouvé...";
         return;
     }
 
+    // Appliquer le tri alphabétique si demandé
+    if (sortAlphabetique) {
+        filtres.sort((a, b) => {
+            const ta = (a.title || '').toString();
+            const tb = (b.title || '').toString();
+            return ta.localeCompare(tb, 'fr', { sensitivity: 'base' });
+        });
+    }
+
     // Créer chaque carte d’album
     filtres.forEach(album => {
+        if (!album) {
+            return;
+        }
+        
         const div = document.createElement("div");
-        div.className = "album"; // Mettre la classe album à la div
-        div.dataset.idAlbum = album.id; // Mettre l'id de l'album à la div
-        div.dataset.titleAlbum = album.title; // Mettre le titre de l'album à la div
+        div.className = "album";
+        div.dataset.idAlbum = album.id || '';
+        div.dataset.titleAlbum = album.title || '';
 
+        // Préparer le titre (tronqué si trop long)
+        let titleDisplay = album.title || '';
+        if (titleDisplay.length > 30) {
+            titleDisplay = titleDisplay.substr(0, 30) + '...';
+            console.log("---");
+            console.log("SUBSTRING TEST : " + titleDisplay);
+            console.log("---");
+        }
+
+        // Construire le HTML de la carte d'album
         div.innerHTML = `
-            <img src="${album.cover_medium}" alt="${album.title}">
-            <div>`
-
-            if(album.title.length > 20) {
-                let nameAlbum = album.title.substr(0, 30);
-
-                console.log("---");
-                console.log("SUBSTRING TEST : " + nameAlbum);
-                console.log("---");
-
-                div.innerHTML += `<strong>${nameAlbum + '...' }</strong><br>`;
-            } else {
-                div.innerHTML += `<strong>${album.title}</strong><br>`;
-                
-            }
-
-            div.innerHTML += `
-                <small>Sortie : ${album.release_date}</small><br>
-                <a href="${album.link}" target="_blank">Écouter sur Deezer</a>
+            <img src="${album.cover_medium || ''}" alt="${album.title || ''}">
+            <div>
+                <strong>${titleDisplay}</strong><br>
+                <small>Sortie : ${album.release_date || 'Inconnue'}</small><br>
+                <a href="${album.link || '#'}" target="_blank">Écouter sur Deezer</a>
             </div>
         `;
 
         // Ouvrir popup au clic
         div.addEventListener('click', () => ouvrirPopupAlbum(album));
 
+        // Empêcher la popup si l'utilisateur clique sur le lien Deezer
+        const deezerLink = div.querySelector('a');
+        if (deezerLink) {
+            deezerLink.addEventListener('click', (e) => e.stopPropagation());
+        }
+
         albumsDiv.appendChild(div);
     });
 }
+
 
 // ===============================
 // POPUP : OUVERTURE / FERMETURE

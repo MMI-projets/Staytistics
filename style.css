@@ -1,6 +1,10 @@
 /* ============================= */
 /* 🌐 GLOBAL */
 /* ============================= */
+
+html {
+    scroll-behavior: smooth;
+}
 body {
     margin: 0;
     padding: 0;
@@ -140,38 +144,54 @@ header button:hover {
 /* ============================= */
 /* Défilement horizontal SKZ des membres */
 /* ============================= */
+
 .scrolling-members-skz {
-    width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-    background: #1B1616;
-    color: #fff;
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 600;
-    padding: 15px 0;
-    position: relative;
-    display: flex;
-    flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  background: #1B1616;
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  padding: 15px 0;
+  position: relative;
 }
 
 .scrolling-members-skz span {
-    margin: 10px 60px 10px 60px;
-    font-size: 2rem;
+  margin: 10px 60px;
+  font-size: 2rem;
 }
 
-.scrolling-members-skz p {
-    display: inline-flex;
-    align-items: center;
-    gap: 2rem;
-    font-size: 2.5rem;
-    transition: transform 0.1s linear;
-    padding-left: 5rem;
+.infinite-scroll {
+  display: flex;
+  width: max-content;
+  animation: scroll-left 30s linear infinite;
+  gap: 200px;    
 }
 
-.scrolling-members-skz p .sep {
-    margin: 0 1rem;
-    opacity: 0.8;
+.infinite-scroll p {
+  display: inline-flex;
+  align-items: center;
+  gap: 2rem;
+  font-size: 2.5rem;
+  padding-left: 5rem;
 }
+
+.scrolling-members-skz .sep {
+  opacity: 0.8;
+}
+
+/* Animation fluide, sans retour en arrière */
+@keyframes scroll-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+
 
 /* ============================= */
 /* 💡 SECTION INTERET */
@@ -184,7 +204,6 @@ header button:hover {
     color: #000;
     padding: 80px 100px;
     gap: 40px;
-    /* height: 100vh; */
 }
 
 .interet .logo {
@@ -233,15 +252,12 @@ header button:hover {
     color: #fff;
     overflow: hidden;
 
-    /* ✅ Image en fond, avec effet de fixation */
     background-image: url("images/image-3.webp");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    /* filter: brightness(80%); */
 }
 
-/* ✅ Couche sombre indépendante (ne touche pas au texte) */
 .banniere::before {
     content: "";
     position: absolute;
@@ -249,15 +265,13 @@ header button:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.55);
-    /* plus ou moins sombre selon ton goût */
+    background: rgba(0, 0, 0, 0.55); 
     z-index: 0;
 }
 
 .banniere-content {
     position: relative;
     z-index: 1;
-    /* au-dessus de la couche sombre */
     text-align: center;
     max-width: 80%;
 }
@@ -269,7 +283,11 @@ header button:hover {
     margin-bottom: 20px;
 }
 
-.banniere-content a.info-btn {
+a.info-btn {
+    text-decoration: none;
+}
+
+.banniere-content .info-btn {
     background: rgba(255, 255, 255, 0.95);
     color: #111;
     padding: 15px 18px;
@@ -277,24 +295,18 @@ header button:hover {
     border: none;
     border-radius: 40px;
     font-size: 1rem;
-    font-family: 'Space Grotesk', sans-serif;
     display: inline-flex;
     align-items: center;
     gap: 10px;
     cursor: pointer;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     transition: all 0.3s ease;
-    text-decoration: none;
-
 }
 
-.banniere-content a.info-btn:hover {
+.banniere-content .info-btn:hover {
     transform: translateY(-2px) scale(1.03);
     background: #f3f3f3;
-    text-decoration: none;
 }
-
-
 
 
 /* ============================= */

@@ -6,15 +6,14 @@ let streamsData = []; // contiendra les données du CSV
 Papa.parse("kworb_stray_top_musics_streams.csv", {
     download: true,
     header: false,
-    dynamicTyping: false, // on garde les chiffres en string pour traiter les ","
+    dynamicTyping: false, // On garde les chiffres en string pour traiter les ","
     complete: function(results) {
         // Chaque ligne = array [titre, streams, autre]
         streamsData = results.data.map(row => ({
-            Title: row[0],
-            Streams: row[1]
+            Title: row[0], 
+            Streams: row[1] 
         }));
         console.log("Données des streams chargées :", streamsData);
-        
     }
 });
 
@@ -23,10 +22,6 @@ Papa.parse("kworb_stray_top_musics_streams.csv", {
 // ===============================
 let tousLesAlbums = []; // Données de Deezer
 let popupActive = null; // Popup actuelle (pour la fermer facilement)
-
-// Nouveaux états pour le tri et le filtre courant
-let sortAlphabetique = false;
-let currentFilterType = 'album';
 
 
 // ===============================
@@ -37,29 +32,17 @@ let currentFilterType = 'album';
 function afficherAlbums(data) {
     console.log("✅ Données Deezer :", data);
     tousLesAlbums = data.data;
-    // afficher albums par défaut (met à jour currentFilterType)
-    afficherFiltres('album');
+    afficherFiltres('album'); // on affiche les "albums" par défaut
 }
 
 function afficherFiltres(type) {
     const albumsDiv = document.querySelector(".discographie-lists");
     albumsDiv.innerHTML = ""; // on vide le conteneur
-    // mettre à jour le filtre courant (utile pour le bouton de tri)
-    currentFilterType = type;
 
     // Filtrer selon le type demandé (album ou ep)
     const filtres = tousLesAlbums.filter(album => {
         return album.record_type === type;
     });
-
-    // Appliquer le tri alphabétique si demandé
-    if (sortAlphabetique) {
-        filtres.sort((a, b) => {
-            const ta = (a.title || '').toString();
-            const tb = (b.title || '').toString();
-            return ta.localeCompare(tb, 'fr', { sensitivity: 'base' });
-        });
-    }
 
     if (filtres.length === 0) {
         albumsDiv.textContent = "Aucun résultat trouvé...";
@@ -71,19 +54,26 @@ function afficherFiltres(type) {
         const div = document.createElement("div");
         div.className = "album"; // Mettre la classe album à la div
         div.dataset.idAlbum = album.id; // Mettre l'id de l'album à la div
-        div.dataset.titleAlbum = album.title; // Mettre l'id de l'album à la div
+        div.dataset.titleAlbum = album.title; // Mettre le titre de l'album à la div
 
-        // Préparer le titre (tronqué si trop long)
-        let titleDisplay = album.title || '';
-        if (titleDisplay.length > 30) {
-            titleDisplay = titleDisplay.substr(0, 30) + '...';
-        }
-
-        // Construire le HTML de la carte d'album proprement
         div.innerHTML = `
             <img src="${album.cover_medium}" alt="${album.title}">
-            <div>
-                <strong>${titleDisplay}</strong><br>
+            <div>`
+
+            if(album.title.length > 20) {
+                let nameAlbum = album.title.substr(0, 30);
+
+                console.log("---");
+                console.log("SUBSTRING TEST : " + nameAlbum);
+                console.log("---");
+
+                div.innerHTML += `<strong>${nameAlbum + '...' }</strong><br>`;
+            } else {
+                div.innerHTML += `<strong>${album.title}</strong><br>`;
+                
+            }
+
+            div.innerHTML += `
                 <small>Sortie : ${album.release_date}</small><br>
                 <a href="${album.link}" target="_blank">Écouter sur Deezer</a>
             </div>
@@ -91,16 +81,6 @@ function afficherFiltres(type) {
 
         // Ouvrir popup au clic
         div.addEventListener('click', () => ouvrirPopupAlbum(album));
-
-        // Si l'utilisateur clique sur le lien Deezer à l'intérieur de la carte,
-        // on doit laisser le lien ouvrir dans un nouvel onglet sans déclencher la popup.
-        const deezerLink = div.querySelector('a');
-        if (deezerLink) {
-            deezerLink.addEventListener('click', (e) => {
-                e.stopPropagation(); // empêche la propagation vers la div parent
-                // laisser le lien fonctionner normalement (target="_blank")
-            });
-        }
 
         albumsDiv.appendChild(div);
     });
@@ -111,13 +91,13 @@ function afficherFiltres(type) {
 // ===============================
 
 function ouvrirPopupAlbum(album) {
-    // Bloquer le scroll du body
+    // On bloque le scroll du body
     document.body.style.overflow = 'hidden';
 
-    // Fermer une popup existante
+    // On ferme une popup existante
     if (popupActive) popupActive.remove();
 
-    // Créer la popup
+    // On crée la popup
     const divPopup = document.createElement('div');
     divPopup.className = 'popup-album';
 
@@ -127,13 +107,14 @@ function ouvrirPopupAlbum(album) {
             <h2>${album.title}</h2>
             <p>Date de sortie : ${album.release_date}</p>
             <p>Type : ${album.record_type}</p>
-            <a href="${album.link}" target="_blank">Écouter l'album sur Deezer </a><br><br><br>
+            <a href="${album.link}" target="_blank">Écouter l'album sur Deezer</a><br><br><br>
 
             <strong>Pistes :</strong>
             <ul id="trackList">Chargement des pistes...</ul>
 
             <br>
-            <strong>Popularité / Écoutes :</strong>
+            <strong>Nombres d'écoutes :</strong> <br>
+            <i class="disclaimer">(Certaines musiques n'ont pas de données)</i>
             <canvas id="trackChart" width="350" height="250"></canvas>
 
             <br>
@@ -144,14 +125,112 @@ function ouvrirPopupAlbum(album) {
     // Bouton fermer
     divPopup.querySelector('#closePopup').addEventListener('click', fermerPopup);
 
-    // Ajouter au body
+    // On ajoute au body
     document.body.appendChild(divPopup);
     popupActive = divPopup;
+    popupActive.dataset.albumTitle = album.title; // On stocke le titre
+
 
     // Charger les pistes via JSONP
     chargerPistesAlbum(album.id);
 }
 
+function ouvrirPopUpMentionsCredits() {
+    // On bloque le scroll du body
+    document.body.style.overflow = 'hidden';
+
+
+    console.log("ertesesrafgazeabdjnok,")
+
+    // On ferme une popup existante
+    if (popupActive) popupActive.remove();
+
+    const divPopupMentionsCredits = document.createElement('div');
+    divPopupMentionsCredits.className = 'popup-MentionsCredits';
+
+    divPopupMentionsCredits.innerHTML = `
+        <div class="popup">
+            <h1>Mentions légales</h1>
+            <section id="mentions-legales">
+                <h2>1. Éditeur du site</h2>
+                <p>
+                    <strong>Nom du site :</strong> Staytistics<br>
+                    <strong>Projet étudiant</strong> réalisé dans le cadre du BUT MMI (Métiers du Multimédia et de l’Internet) – Université Gustave Eiffel.<br>
+                    <strong>Éditeurs :</strong> Alex Fiol et Jimmy Te<br>
+                    <strong>Contact :</strong> 
+                    <a href="mailto:alex.fiol@edu.univ-eiffel.fr">alex.fiol@edu.univ-eiffel.fr</a> / 
+                    <a href="mailto:jimmy.te@edu.univ-eiffel.fr">jimmy.te@edu.univ-eiffel.fr</a><br><br>
+                    Ce site a été conçu à des fins <strong>pédagogiques et non commerciales</strong>. 
+                    Aucune transaction ni collecte de données personnelles sensibles n’est effectuée.
+                </p>
+
+                <h2>2. Délégué à la protection des données (DPO)</h2>
+                <p>
+                    Conformément au RGPD, l’Université Gustave Eiffel dispose d’un Délégué à la Protection des Données (DPO) chargé de veiller au respect des obligations légales relatives à la protection des données.<br><br>
+                    <strong>Université Gustave Eiffel</strong><br>
+                    <strong>DPO :</strong> dpo@univ-eiffel.fr<br>
+                    <strong>Adresse :</strong> 5 boulevard Descartes, 77454 Marne-la-Vallée Cedex 2, France
+                </p>
+
+                <h2>3. Responsabilités et rôles</h2>
+                <ul>
+                    <li><strong>Alex Fiol</strong> – Développeur Front-end, aide au graphisme</li>
+                    <li><strong>Jimmy Te</strong> – Développeur Back-end, graphiste</li>
+                </ul>
+
+                <h2>4. Hébergement</h2>
+                <p>
+                    <strong>Hébergeur :</strong> GitHub, Inc.<br>
+                    <strong>Adresse :</strong> 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis<br>
+                    <strong>Site web :</strong> 
+                    <a href="https://pages.github.com" target="_blank">https://pages.github.com</a>
+                </p>
+
+
+                <h2>6. Données personnelles</h2>
+                <p>
+                    Le site ne collecte <strong>aucune donnée personnelle</strong> à des fins commerciales.<br>
+                    Des données anonymes peuvent être recueillies via des outils d’analyse de trafic (par exemple GitHub Pages) uniquement à des fins statistiques.
+                </p>
+
+                <h2>7. Cookies</h2>
+                <p>
+                    Le site <em>Staytistics</em> ne dépose <strong>pas de cookies à des fins publicitaires</strong>.<br>
+                    Seuls des cookies techniques essentiels au fonctionnement du site peuvent être utilisés.
+                </p>
+
+                <h2>8. Responsabilité</h2>
+                <p>
+                    Ce projet est réalisé dans un cadre universitaire et non professionnel.<br>
+                    Les auteurs ne peuvent être tenus responsables d’éventuelles erreurs ou inexactitudes contenues sur le site, 
+                    ni des changements apportés aux données externes par leurs fournisseurs (tels que Deezer).
+                </p>
+
+
+            </section>
+            <h1>Crédits</h1>
+            <section id="credits">
+                <h2>Données et sources externes</h2>
+                <p>
+                    Les données affichées sur ce site proviennent de l’<strong>API publique de Deezer</strong> 
+                    (<a href="https://developers.deezer.com/api" target="_blank">https://developers.deezer.com/api</a>).<br>
+                    Ces données (titres, albums, artistes, pochettes, etc.) restent la propriété exclusive de Deezer et de leurs ayants droit.<br>
+                    Le site <em>Staytistics</em> ne revendique aucune propriété sur ces contenus et les utilise dans un cadre 
+                    strictement éducatif et non commercial.
+                </p>
+
+            </section>	
+            <button id="closePopup">X</button>
+        </div>
+    `;
+
+        // Bouton fermer
+    divPopupMentionsCredits.querySelector('#closePopup').addEventListener('click', fermerPopup);
+
+    // On ajoute au body
+    document.body.appendChild(divPopupMentionsCredits);
+    popupActive = divPopupMentionsCredits;
+}
 
 function fermerPopup() {
     if (popupActive) {
@@ -187,40 +266,43 @@ function parseTracks(data) {
     }
 
     // --- Affichage des titres ---
-    data.data.forEach(track => {
+    let tracksDeezer = data.data;
+    tracksDeezer.forEach(track => {
+
+        console.log("---");
+        console.log("TRACKS DE L'ALBUM : " + popupActive.dataset.albumTitle);
+        console.log(track)
+        console.log("---");
+
+
         const li = document.createElement('li');
         li.textContent = track.title;
         trackListUl.appendChild(li);
     });
 
     // --- Appel de la fonction du graphique ---
-    afficherGraphiquePistes(data.data);
+    afficherGraphiquePistes(tracksDeezer);
 }
 // ===============================
 // GRAPHIQUE CHART.JS (avec les données du CSV)
 // ===============================
-function afficherGraphiquePistes(tracks) {
+
+function afficherGraphiquePistes(tracksDeezer) {
     const ctx = popupActive.querySelector('#trackChart');
     if (!ctx) return;
 
-    const labels = tracks.map(t => t.title);
-    const streams = tracks.map(track => {
-        const found = streamsData.find(item =>
-            item.Title?.trim().toLowerCase() === track.title.trim().toLowerCase()
-        );
-        if (found) {
-            return parseInt(found.Streams.replace(/,/g, ''), 10);
-        }
-        return 0;
-    });
+    // On récupère les labels et les streams
+    // const { labels, streams } = compareTitleFromCSV_Deezer(tracksDeezer);
 
+    const { labels, streams } = getLabelsAndStreamsForAlbum(tracksDeezer); 
+
+
+    console.log("=====");
     console.log(labels, streams);
+    console.log("=====");
+
 
     if (ctx.chartInstance) ctx.chartInstance.destroy();
-
-    // Couleurs personnalisées : barres rouges et textes plus foncés
-    const barColor = '#c0392b'; // rouge
-    const barBorderColor = '#a52920';
 
     ctx.chartInstance = new Chart(ctx, {
         type: 'bar',
@@ -229,301 +311,243 @@ function afficherGraphiquePistes(tracks) {
             datasets: [{
                 label: 'Streams',
                 data: streams,
-                backgroundColor: barColor,
-                borderColor: barBorderColor,
-                borderWidth: 1,
-                borderRadius: 4
+                backgroundColor: 'rgba(75,192,192,0.6)',
+                borderColor: 'rgba(75,192,192,1)',
+                borderWidth: 1
             }]
         },
         options: {
             indexAxis: 'y',
             scales: {
-                x: { beginAtZero: true, ticks: { color: '#000' }, grid: { color: 'rgba(0,0,0,0.06)' } },
-                y: { ticks: { color: '#000' } }
+                x: { beginAtZero: true },
+                y: {}
+            },
+            plugins: { legend: { display: false } }
+        }
+    });
+}
+
+// =========================
+// ========= Idées =========
+// =========================
+// Prendre les données du nombres d'écoutes des musiques du fichier CSV, 
+// puispar l'API Deezer où on récupère les morceaux de musique par album, 
+// On fait la somme de toutes les musiques de l'album en question 
+// Chaque année, on récupère les données de tous les albums d'une même année,
+// On pioche l'album qui a fait le plus d'écoutes (qui correspond au MAX du nb d'écoutes sur tous les albums de la même année),
+// et on affiche dans le graphe l'album.
+
+function getAllAlbums(data) {
+    let tousLesAlbums = data.data; // Récupère tous les albums
+
+    console.log("====================");
+    console.log("GetAllAlbums");
+    console.log(tousLesAlbums);
+    console.log("====================");
+
+    albumsPerYear(tousLesAlbums)
+}
+
+function albumsPerYear(data) {
+    const albumsByYear = new Map();
+
+    data.forEach(album => {
+        const year = album.release_date.substr(0, 4);
+        if (!albumsByYear.has(year)) {
+            albumsByYear.set(year, []);
+        } 
+        albumsByYear.get(year).push(album);
+    });
+
+    // Initialisation globale (pour qu'elle soit accessible à l'intérieur des callbacks JSONP)
+    window.topAlbumsByYear = {};
+    window.remainingAlbumsByYear = {};
+
+    // On trie les années avant de boucler
+    const sortedYears = Array.from(albumsByYear.keys()).sort((a, b) => a - b);
+
+    sortedYears.forEach(year => {
+        const albums = albumsByYear.get(year); // On récupère tous les albums d'une même année
+
+        // On initialise le compteur pour cette même année
+        window.remainingAlbumsByYear[year] = albums.length; 
+
+        albums.forEach(album => {
+            if (!album.id) {
+                return;
+            } 
+
+            // Callback unique pour cet album
+            const callbackName = "callback_" + album.id;
+            window[callbackName] = function(data) {
+                const tracks = data.data;
+                if (!tracks || tracks.length === 0) {
+                    return;
+                }
+
+                // =======================
+                // Top album par année : 
+                // =======================
+
+                const { labels, streams } = getLabelsAndStreamsForAlbum(tracks); 
+
+                // On fait la somme de toutes les écoutes de chaque musique de l'album (pour avoir l'album avec le plus d'écoutes)
+                const totalStreams = streams.reduce((a, b) => a + b, 0); 
+                
+                if (!window.topAlbumsByYear[year] || totalStreams > window.topAlbumsByYear[year].streams) {
+                    window.topAlbumsByYear[year] = { album: album, streams: totalStreams };
+                }
+
+                window.remainingAlbumsByYear[year]--;
+
+                if (window.remainingAlbumsByYear[year] === 0) {
+                    const top = window.topAlbumsByYear[year];
+                    console.log(`Année ${year} : album le plus écouté = "${top.album.title}" avec ${top.streams} streams`);
+                }
+
+                // On affiche le graphique
+                if (Object.values(window.remainingAlbumsByYear).every(count => count === 0)) { // On vérifie si tous les compteurs sont à 0 (plus de d'albums restants à traiter)
+                    afficherGraphiqueAlbumsParAnnee();
+                }
+
+                delete window[callbackName];
+            };
+
+            const script = document.createElement('script');
+            script.src = `https://api.deezer.com/album/${album.id}/tracks?output=jsonp&callback=${callbackName}`;
+            document.body.appendChild(script);
+        });
+    });
+
+}
+
+function afficherGraphiqueAlbumsParAnnee() {
+    const ctx = document.getElementById('albumsOverYearsChart');
+    if (!ctx) return;
+
+    // On trie les années dans l'ordre croissant
+    const anneesTriees = Object.keys(window.topAlbumsByYear).sort((a, b) => a - b);
+
+    // Labels = années
+    const labels = anneesTriees;
+
+    // Données = streams max par année
+    const streams = anneesTriees.map(year => window.topAlbumsByYear[year].streams);
+
+    // Titres des albums pour chaque année
+    const albumTitles = anneesTriees.map(year => window.topAlbumsByYear[year].album.title);
+
+
+    // Si un graphique existe déjà, on le détruit pour éviter les doublons
+    if (ctx.chartInstance) {
+        ctx.chartInstance.destroy();
+    }
+    
+    // Création du graphique
+    ctx.chartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels,
+            datasets: [{
+                label: 'Streams (par top album)',
+                data: streams,
+                // backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                // borderColor: 'rgba(54, 162, 235, 1)',
+                // borderWidth: 1
+
+                // STYLES CSS
+                backgroundColor: 'rgba(54, 162, 235, 0.3)', // remplissage sous la ligne
+                borderColor: '#c0392b', // couleur de la ligne
+                borderWidth: 3,
+                tension: 0.4, // ligne courbée
+                pointBackgroundColor: '#ffffffff', // couleur des points
+                pointBorderColor: '#000000ff',
+                pointRadius: 6,
+                pointHoverRadius: 8
+
+
+            }]
+        },
+        options: {
+            layout: {
+                padding: 150
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        // color: 'rgba(0,0,0,0.1)'
+                        color: '#fff'
+                    },
+                    ticks: {
+                        color: '#fff',
+                        font: { size: 14 }
+                    }
+                },
+                x: {
+                    grid: {
+                        color: 'rgba(0,0,0,0.1)'
+                    },
+                    ticks: {
+                        color: '#fff',
+                        font: { size: 14 }
+                    }
+                }
             },
             plugins: {
-                legend: { display: false, labels: { color: '#000' } },
-                tooltip: { backgroundColor: 'rgba(0,0,0,0.85)', titleColor: '#fff', bodyColor: '#fff' }
+                title: {
+                    display: true,
+                    text: 'Top albums par année (en nombre de streams)'
+                },
+                legend: { display: false },
+                customCanvasBackgroundColor: {
+                    color: '#0f1113' // <- change ici la couleur de fond du canvas (ton noir profond)
+                },
+                tooltip: {
+                    mode: 'nearest', // important pour éviter de fusionner avec d'autres points
+                    intersect: true, // tooltip uniquement sur le point survolé
+                    callbacks: {
+                        // On remplace le "title" du tooltip par le titre de l'album
+                        title: function(context) {
+                            const idx = context[0].dataIndex;
+                            return albumTitles[idx]; // top album au lieu de l'année
+                        },
+                        label: function(context) {
+                            const value = context.raw;
+                            return `${value.toLocaleString()} streams`;
+                        }
+                    }
+                },
             }
         }
     });
 }
 
-// ===============================
-// ATTACHEMENT DU BOUTON DE TRI
-// ===============================
-document.addEventListener('DOMContentLoaded', () => {
-    const triBtn = document.querySelector('.tri');
-    if (!triBtn) return;
 
-    // Label initial
-    triBtn.innerHTML = "<i class='bx bx-filter'></i> Par ordre alphabétique";
+// Fonction de comparaison des titres du CSV et Deezer (il peut y avoir des différences dans le nom) 
+// => Fonction utilisée dans le popup lorsque l'on clique sur un album, pour récupérer toutes les musiques d'un album avec le nombre d'écoutes
+// Pour obtenir les streams/écoutes des morceaux de musiques dans un album (en "matchant" les titres du CSV et ceux proposés par Deezer pour lier les mêmes musiques ensemble)
 
-    triBtn.addEventListener('click', () => {
-        sortAlphabetique = !sortAlphabetique;
-        if (sortAlphabetique) {
-            triBtn.innerHTML = "<i class='bx bx-sort-alpha-down'></i> A → Z";
-        } else {
-            triBtn.innerHTML = "<i class='bx bx-filter'></i> Par ordre alphabétique";
-        }
-        // Raffraîchir l'affichage en gardant le filtre courant
-        afficherFiltres(currentFilterType);
-    });
-});
-
-// ===============================
-// RENDU GRAPHIQUE SYNTHÉTIQUE (Discographie) - Top 10
-// ===============================
-function renderDiscographyCharts() {
-    const container = document.querySelector('.discographie-charts');
-    if (!container) return;
-
-    container.innerHTML = '';
-
+function getLabelsAndStreamsForAlbum(albumTracks) {
     if (!streamsData || streamsData.length === 0) {
-        const p = document.createElement('p');
-        p.textContent = 'Données de streams non disponibles pour le moment.';
-        container.appendChild(p);
-        return;
+        return { labels: [], streams: [] };
     }
 
-    // Préparer les données (normaliser les nombres)
-    const processed = streamsData
-        .map(item => {
-            const n = typeof item.Streams === 'string'
-                ? parseInt(item.Streams.replace(/,/g, ''), 10)
-                : Number(item.Streams || 0);
-            return { title: (item.Title || '').trim(), streams: isNaN(n) ? 0 : n };
-        })
-        .filter(x => x.title)
-        .sort((a, b) => b.streams - a.streams)
-        .slice(0, 10);
+    const labels = albumTracks.map(track => track.title);
+    const streams = albumTracks.map(track => {
+        const found = streamsData.find(item => {
+            const csvTitle = (item.Title || "").trim().toLowerCase();
+            const trackTitle = (track.title || "").trim().toLowerCase();
+            return csvTitle && trackTitle && (trackTitle.includes(csvTitle) || trackTitle === csvTitle);
+        });
 
-    if (processed.length === 0) {
-        const p = document.createElement('p');
-        p.textContent = 'Aucune donnée de streams disponible.';
-        container.appendChild(p);
-        return;
-    }
-
-    // Controls (titre + bouton d'orientation)
-    const controls = document.createElement('div');
-    controls.className = 'chart-controls';
-
-    const left = document.createElement('div');
-    left.className = 'left';
-    const title = document.createElement('div');
-    title.innerHTML = `<strong>Top ${processed.length} morceaux (sources : Kworb)</strong>`;
-    left.appendChild(title);
-
-    const toggleBtn = document.createElement('button');
-    toggleBtn.className = 'toggle-orientation';
-    toggleBtn.type = 'button';
-    toggleBtn.setAttribute('aria-pressed', discographyOrientation === 'horizontal' ? 'true' : 'false');
-    toggleBtn.setAttribute('aria-label', 'Basculer l\'orientation du graphique');
-    toggleBtn.textContent = discographyOrientation === 'horizontal' ? 'Horizontal' : 'Vertical';
-    toggleBtn.addEventListener('click', () => {
-        discographyOrientation = discographyOrientation === 'horizontal' ? 'vertical' : 'horizontal';
-        toggleBtn.setAttribute('aria-pressed', discographyOrientation === 'horizontal' ? 'true' : 'false');
-        toggleBtn.textContent = discographyOrientation === 'horizontal' ? 'Horizontal' : 'Vertical';
-        // re-render
-        renderDiscographyCharts();
-    });
-
-    left.appendChild(toggleBtn);
-    controls.appendChild(left);
-
-    const right = document.createElement('div');
-    right.className = 'right';
-    right.innerHTML = `<small class="disclaimer">Les valeurs sont fournies par le fichier CSV et peuvent différer selon la source.</small>`;
-    controls.appendChild(right);
-
-    container.appendChild(controls);
-
-    // Zone du canvas
-    const chartArea = document.createElement('div');
-    chartArea.className = 'chart-area';
-    const canvas = document.createElement('canvas');
-    canvas.id = 'discographyTopChart';
-    canvas.setAttribute('role', 'img');
-    canvas.setAttribute('aria-label', `Graphique : Top ${processed.length} morceaux par nombre d\'écoutes`);
-    chartArea.appendChild(canvas);
-    container.appendChild(chartArea);
-
-    // Table accessible (sr-only)
-    const table = document.createElement('table');
-    table.className = 'sr-only';
-    table.id = 'discographyTopTable';
-    const caption = document.createElement('caption');
-    caption.textContent = `Tableau : Top ${processed.length} morceaux et leurs streams`;
-    table.appendChild(caption);
-    const thead = document.createElement('thead');
-    thead.innerHTML = '<tr><th scope="col">Titre</th><th scope="col">Streams</th></tr>';
-    table.appendChild(thead);
-    const tbody = document.createElement('tbody');
-    processed.forEach(item => {
-        const tr = document.createElement('tr');
-        const td1 = document.createElement('td');
-        td1.textContent = item.title;
-        const td2 = document.createElement('td');
-        td2.textContent = item.streams.toLocaleString();
-        tr.appendChild(td1);
-        tr.appendChild(td2);
-        tbody.appendChild(tr);
-    });
-    table.appendChild(tbody);
-    container.appendChild(table);
-
-    // Liste visible sous le graphique (pour lisibilité) — accessible
-    const listVisible = document.createElement('div');
-    listVisible.className = 'list-visible';
-    listVisible.id = 'discographyTopList';
-    processed.forEach(item => {
-        const it = document.createElement('div');
-        it.className = 'item';
-        it.tabIndex = 0;
-        it.setAttribute('role', 'group');
-        it.setAttribute('aria-label', `${item.title}, ${item.streams.toLocaleString()} écoutes`);
-
-        const h = document.createElement('h4');
-        h.textContent = item.title;
-        const c = document.createElement('div');
-        c.className = 'count';
-        c.textContent = item.streams.toLocaleString() + ' écoutes';
-
-        it.appendChild(h);
-        it.appendChild(c);
-        listVisible.appendChild(it);
-    });
-    container.appendChild(listVisible);
-
-    // Préparer dataset
-    const labels = processed.map(p => p.title);
-    const data = processed.map(p => p.streams);
-
-    // helper: split long labels into an array of lines for Chart.js multiline ticks
-    function wrapLabel(str, maxChars) {
-        if (!str) return [''];
-        // try to split on spaces to keep words
-        const words = str.split(' ');
-        const lines = [];
-        let current = '';
-        for (const w of words) {
-            if ((current + ' ' + w).trim().length <= maxChars) {
-                current = (current + ' ' + w).trim();
-            } else {
-                if (current) lines.push(current);
-                // if single word longer than maxChars, break it
-                if (w.length > maxChars) {
-                    for (let i = 0; i < w.length; i += maxChars) {
-                        lines.push(w.substr(i, maxChars));
-                    }
-                    current = '';
-                } else {
-                    current = w;
-                }
-            }
+        if (found) {
+            const streamsWithoutComma = found.Streams.replace(/,/g, ''); // On enlève les virgules
+            return parseInt(streamsWithoutComma, 10); // On transforme le nombre d'écoutes en int et non en string
+        } else {
+            return 0;
         }
-        if (current) lines.push(current);
-        // limit to 3 lines to avoid overflow
-        return lines.slice(0, 3);
-    }
+    });
 
-    // Détruire l'instance précédente si existante
-    if (discographyChart) {
-        try { discographyChart.destroy(); } catch (e) { /* ignore */ }
-        discographyChart = null;
-    }
-
-    const ctx = canvas.getContext('2d');
-    // helper: choose black or white text for contrast against a hex color
-    function getContrastingColor(hex) {
-        if (!hex) return '#111';
-        const h = hex.replace('#', '');
-        const r = parseInt(h.substring(0, 2), 16);
-        const g = parseInt(h.substring(2, 4), 16);
-        const b = parseInt(h.substring(4, 6), 16);
-        const yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
-        return yiq >= 128 ? '#111' : '#fff';
-    }
-
-    // choose colors and label color for contrast
-    const barColor = '#c0392b';
-    const datalabelColor = getContrastingColor(barColor);
-
-    // Auto-detect if horizontal orientation is needed based on label widths/count
-    let autoHorizontal = discographyOrientation === 'horizontal';
-    try {
-        // measure longest label width using canvas 2D context
-        const measureCtx = canvas.getContext('2d');
-        measureCtx.font = '13px Space Grotesk, sans-serif';
-        const labelWidths = labels.map(l => measureCtx.measureText(l || '').width || 0);
-        const maxLabelWidth = Math.max(...labelWidths, 0);
-        // available width per label
-        const availableWidth = Math.max(120, (chartArea.clientWidth || 800) / Math.max(1, labels.length));
-        // prefer vertical by default; switch to horizontal only when clearly needed
-        if (labels.length > 12) autoHorizontal = true;
-        // if label is much wider than available space and there are several labels, switch
-        if (maxLabelWidth > availableWidth * 1.1 && labels.length > 6) autoHorizontal = true;
-    } catch (e) { /* ignore measurement errors */ }
-
-    // add a short textual summary above the chart for quick reading and screen readers
-    try {
-        const prev = container.querySelector('#discographySummary');
-        if (prev) prev.remove();
-        const maxVal = Math.max(...data);
-        const idxMax = data.indexOf(maxVal);
-        const summary = document.createElement('div');
-        summary.id = 'discographySummary';
-        summary.setAttribute('role', 'note');
-        summary.setAttribute('aria-live', 'polite');
-        summary.style.fontSize = '14px';
-        summary.style.color = '#111';
-        summary.style.marginBottom = '8px';
-        if (idxMax >= 0) summary.textContent = `Piste la plus écoutée : ${labels[idxMax]} — ${maxVal.toLocaleString()} écoutes.`;
-        else summary.textContent = `Top ${processed.length} morceaux`;
-        container.insertBefore(summary, chartArea);
-    } catch (e) { /* ignore */ }
-
-    // build config with improved tick handling
-    const pluginsList = [];
-    try { if (typeof ChartDataLabels !== 'undefined') pluginsList.push(ChartDataLabels); } catch (e) { }
-
-    const config = {
-        type: 'bar',
-        data: {
-            labels,
-            datasets: [{ label: 'Streams', data, backgroundColor: barColor, borderRadius: 6, borderSkipped: false }]
-        },
-        options: {
-            indexAxis: autoHorizontal ? 'y' : 'x',
-            responsive: true,
-            maintainAspectRatio: false,
-            layout: { padding: { top: 8, right: 8, bottom: autoHorizontal ? 24 : 60, left: 8 } },
-            scales: (function () {
-                if (autoHorizontal) {
-                    // labels on y axis
-                    return {
-                        x: { ticks: { color: '#111', font: { family: 'Space Grotesk, sans-serif', size: 13 }, callback: (v) => v.toLocaleString() }, grid: { color: 'rgba(0,0,0,0.06)' }, beginAtZero: true },
-                        y: { ticks: { color: '#111', font: { family: 'Space Grotesk, sans-serif', size: 13 }, callback: function (value, index) { return wrapLabel(this.getLabelForValue ? this.getLabelForValue(index) : value, 28); }, autoSkip: true, maxRotation: 0 }, grid: { display: false } }
-                    };
-                }
-                // vertical labels on x axis
-                return {
-                    x: { ticks: { color: '#111', font: { family: 'Space Grotesk, sans-serif', size: 12 }, callback: function (value, index) { return wrapLabel(this.getLabelForValue ? this.getLabelForValue(index) : value, 14); }, maxRotation: 45, autoSkip: true, padding: 6 }, grid: { display: false } },
-                    y: { ticks: { color: '#111', font: { family: 'Space Grotesk, sans-serif', size: 13 }, callback: function (value) { return value.toLocaleString(); } }, grid: { color: 'rgba(0,0,0,0.06)' }, beginAtZero: true }
-                };
-            })(),
-            plugins: {
-                legend: { display: false },
-                tooltip: { backgroundColor: 'rgba(0,0,0,0.85)', titleColor: '#fff', bodyColor: '#fff', bodyFont: { size: 13 }, titleFont: { size: 13 }, callbacks: { title: (items) => items[0].label, label: (ctx) => ctx.parsed.y ? ctx.parsed.y.toLocaleString() + ' écoutes' : ctx.parsed.x.toLocaleString() + ' écoutes' } },
-                datalabels: (function () { if (autoHorizontal) { return { anchor: 'end', align: 'right', color: datalabelColor, font: { weight: '700', size: 12 }, formatter: (value) => value.toLocaleString() }; } return { anchor: 'end', align: 'end', color: datalabelColor, font: { weight: '700', size: 12 }, formatter: (value) => value.toLocaleString() }; })()
-            }
-        },
-        plugins: pluginsList
-    };
-
-    discographyChart = new Chart(ctx, config);
-    // link canvas to visible list for screen readers and make it focusable
-    try { canvas.setAttribute('aria-describedby', 'discographyTopList discographyTopTable discographySummary'); canvas.setAttribute('tabindex', '0'); } catch (e) { }
+    return { labels, streams };
 }

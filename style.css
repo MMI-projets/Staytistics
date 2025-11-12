@@ -550,7 +550,8 @@ a.info-btn {
     width: 60%;
     max-width: 850px;
     height: 200px;
-    background-color: #f5f5f5;
+    background-color: #1B1616;
+    color: white;
     border-radius: 10px;
     padding: 20px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;

@@ -35,6 +35,9 @@
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 
+
+
+
 </head>
 
 <body>
@@ -48,7 +51,7 @@
         </div>
     </header>
 
-    
+
     <div class="who" data-aos="fade-right">
         <div class="who-text">
             <h2>Qui sont Stray Kids ?</h2>
@@ -64,7 +67,7 @@
     </div>
 
     <!-- Défilement des noms des membres -->
-    <div class="scrolling-members-skz" >
+    <div class="scrolling-members-skz">
         <span>Les 8 membres de Stray Kids :</span>
         <p>
             <span>Felix</span> <span class="sep">-</span>
@@ -83,12 +86,12 @@
             <img src="images/staytistics.png" alt="Logo de Staytistics">
         </div>
 
-        <div class="interet-text">            
+        <div class="interet-text">
             <h2>
-                Ensemble, les morceaux de Stray Kids dépassent 
+                Ensemble, les morceaux de Stray Kids dépassent
                 <span class="counter">12.19</span> milliards d’écoutes sur Spotify
             </h2>
-            
+
             <p>
                 Staytistics a pour intérêt de représenter sous forme de statistiques le nombre d’auditeurs des albums de
                 Stray Kids. <br><br>
@@ -99,45 +102,185 @@
     </div>
 
     <div class="banniere">
-    <div class="banniere-content">
-        <h2>Les données ne s'arrêtent pas aux albums : chaque morceau est aussi analysé !</h2>
-        <button class="info-btn">
-        <i class='bx bx-chart-bar-big-columns'></i> 
-        Se renseigner
-        </button>
-    </div>
-    </div>
-
-    <div class="discographie">
-
-        <div class="discographie-header">
-            <img src="images/disque.png" alt="Image d'un disque" class="discographie-img">
-            <h2>Discographies</h2>
-            <div class="tri-container">
-                <button class="tri"><i class='bx  bx-filter'></i> Par ordre alphabétique</button>
-                <button class="tri"><i class='bx  bx-slider-vertical'></i> Par année</button>
-            </div>
-
-            <div class="display-type-albums">
-                <button class="display-albums">🎵 Albums</button>
-                <button class="display-eps">🎧 EPs</button>
-            </div>
+        <div class="banniere-content">
+            <h2>Les données ne s'arrêtent pas aux albums : chaque morceau est aussi analysé !</h2>
+            <a href="#discographie" class="info-btn">
+                <i class='bx bx-chart-bar-big-columns'></i>
+                Se renseigner
+            </a>
         </div>
+    </div>
 
-        <div class="list-albums-eps">
-            <h2 class="title-list-albums-eps">Albums</h2>
-            <div class="discographie-lists">
-                <!-- Albums / EPs seront insérés ici dynamiquement -->
+
+    <section id="discographie">
+        <div class="discographie">
+
+            <div class="discographie-header">
+                <img src="images/disque.png" alt="Image d'un disque" class="discographie-img">
+                <h2>Discographies</h2>
+                <div class="tri-container">
+                    <button class="tri"><i class='bx  bx-filter'></i> Par ordre alphabétique</button>
+                </div>
+
+                <div class="display-type-albums">
+                    <button class="display-albums">🎵 Albums</button>
+                    <button class="display-eps">🎧 EPs</button>
+                </div>
+                    
+                   
             </div>
-        </div>
 
+            <div class="list-albums-eps">
+                <h2 class="title-list-albums-eps">Albums</h2>
+                <div class="discographie-lists">
+                    <!-- Albums / EPs seront insérés ici dynamiquement -->
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div>
+        <section id="charts">
+            <div class="charts-section">
+                <h2>Visualisations des données depuis leur début</h2>
+                <p>Découvrez les statistiques détaillées des albums et morceaux de Stray Kids à travers des graphiques
+                    interactifs.</p>
+
+                <div class="charts-container">
+                    <!-- Graphiques seront insérés ici dynamiquement -->
+                </div>
+            </div>
+        </section>
     </div>
 
     <script src="js/script.js"></script>
 
     <footer>
-        <p>&copy; 2025 Staytistics. Tous droits réservés.</p>
-        <p>Développé par Fiol Alex, TE Jimmy</p>
+       
+
+        <!-- ===== SECTION MENTIONS LÉGALES ===== -->
+<footer>
+
+    
+    <section id="mentions-legales"
+        style="padding: 60px 20px; background-color: #111; color: #eee; font-family: Arial, sans-serif;">
+        <div style="max-width: 900px; margin: 0 auto; line-height: 1.6;">
+            <h2 style="text-align: center; margin-bottom: 30px; font-size: 2em; color: #fff;">Mentions légales</h2>
+
+            <h3 style="color: #fff; margin-top: 30px;">1. Éditeur du site</h3>
+            <p>
+                <strong>Nom du site :</strong> Staytistics<br>
+                <strong>Projet étudiant</strong> réalisé dans le cadre du BUT MMI (Métiers du Multimédia et de l’Internet)
+                – Université Gustave Eiffel.<br>
+                <strong>Éditeurs :</strong> Alex Fiol (Dév Front-end, aide au graphisme) et Jimmy Te (Dév Back-end,
+                Graphiste)<br>
+                <strong>Contact :</strong><br>
+                <a href="mailto:alex.fiol@edu.univ-eiffel.fr" style="color: #7dd3fc;">alex.fiol@edu.univ-eiffel.fr</a><br>
+                <a href="mailto:jimmy.te@edu.univ-eiffel.fr" style="color: #7dd3fc;">jimmy.te@edu.univ-eiffel.fr</a><br><br>
+                Ce site a été conçu à des fins <strong>pédagogiques et non commerciales</strong>.
+                Aucune transaction ni collecte de données personnelles sensibles n’est effectuée.
+            </p>
+
+            <h3 style="color: #fff; margin-top: 30px;">2. Protection des données et DPO</h3>
+            <p>
+                Ce site ne collecte pas de données personnelles à des fins commerciales.<br>
+                La protection des données relève du <strong>Délégué à la Protection des Données (DPO)</strong> de
+                l’Université Gustave Eiffel.<br><br>
+                <strong>Contact DPO :</strong> <a href="mailto:dpo@univ-eiffel.fr"
+                    style="color: #7dd3fc;">dpo@univ-eiffel.fr</a>
+            </p>
+
+            <h3 style="color: #fff; margin-top: 30px;">3. Hébergement</h3>
+            <p>
+                <strong>Hébergeur :</strong> GitHub, Inc.<br>
+                <strong>Adresse :</strong> 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis<br>
+                <strong>Site web :</strong>
+                <a href="https://pages.github.com" target="_blank" style="color: #7dd3fc;">https://pages.github.com</a>
+            </p>
+
+            <h3 style="color: #fff; margin-top: 30px;">4. Propriété intellectuelle</h3>
+            <p>
+                Le contenu, le design et le développement du site <em>Staytistics</em> ont été réalisés par
+                <strong>Alex Fiol</strong> et <strong>Jimmy Te</strong> dans le cadre d’un projet universitaire.<br>
+                Toute reproduction totale ou partielle du site est interdite sans autorisation des auteurs.<br>
+                © 2025 – Projet étudiant, Université Gustave Eiffel.
+            </p>
+
+            <h3 style="color: #fff; margin-top: 30px;">5. Données et sources externes</h3>
+            <p>
+                Les données affichées sur ce site proviennent en partie de l’<strong>API publique de Deezer</strong>
+                (<a href="https://developers.deezer.com/api" target="_blank"
+                    style="color: #7dd3fc;">https://developers.deezer.com/api</a>).<br>
+                Ces données (titres, albums, artistes, pochettes, etc.) restent la propriété exclusive de Deezer et de
+                leurs ayants droit.<br>
+                Le site <em>Staytistics</em> ne revendique aucune propriété sur ces contenus et les utilise dans un cadre
+                <strong>strictement éducatif et non commercial</strong>.
+            </p>
+
+            <h3 style="color: #fff; margin-top: 30px;">6. Cookies</h3>
+            <p>
+                Le site <em>Staytistics</em> ne dépose <strong>pas de cookies à des fins publicitaires</strong>.<br>
+                Seuls des cookies techniques essentiels au fonctionnement du site peuvent être utilisés.
+            </p>
+
+            <h3 style="color: #fff; margin-top: 30px;">7. Responsabilité</h3>
+            <p>
+                Ce projet est réalisé dans un cadre <strong>universitaire</strong> et <strong>non professionnel</strong>.<br>
+                Les auteurs ne peuvent être tenus responsables d’éventuelles erreurs ou inexactitudes contenues sur le
+                site,
+                ni des changements apportés aux données externes par leurs fournisseurs (tels que Deezer).
+            </p>
+        </div>
+    </section>
+
+    <!-- ===== SECTION CRÉDITS ===== -->
+    <section id="credits"
+        style="padding: 60px 20px; background-color: #0c0c0c; color: #eee; font-family: Arial, sans-serif; border-top: 1px solid #333;">
+        <div style="max-width: 900px; margin: 0 auto; line-height: 1.6;">
+            <h2 style="text-align: center; margin-bottom: 30px; font-size: 2em; color: #fff;">Crédits</h2>
+
+            <h3 style="color: #fff; margin-top: 30px;">1. Données et API</h3>
+            <p>
+                Les informations relatives aux <strong>titres, albums et artistes</strong> proviennent de l’<strong>API
+                    publique de Deezer</strong> :
+                <a href="https://developers.deezer.com/api" target="_blank"
+                    style="color: #7dd3fc;">https://developers.deezer.com/api</a>.<br>
+                Ces données appartiennent à Deezer et à leurs ayants droit. Leur utilisation se fait dans un but
+                <strong>strictement pédagogique</strong>.
+            </p>
+
+            <h3 style="color: #fff; margin-top: 30px;">2. Images et visuels</h3>
+            <p>
+                - Pochettes d’albums et images d’artistes : issues directement de l’API Deezer.<br>
+                - Logos ou éléments visuels tiers : droits réservés (<strong>DR</strong>) ou libres de droits selon la
+                licence.<br>
+                - Visuels du site et identité graphique : créés par <strong>Jimmy Te</strong> et <strong>Alex
+                    Fiol</strong>.
+            </p>
+
+            <h3 style="color: #fff; margin-top: 30px;">3. Graphiques et visualisations</h3>
+            <p>
+                - Conception et intégration : Alex Fiol (Front-end) et Jimmy Te (Back-end, Graphisme).<br>
+                - Données visuelles (écoutes, albums, titres) : extraites de l’API Deezer.<br>
+                - Librairies utilisées : <strong>Chart.js</strong> et <strong>AOS</strong> pour les animations.
+            </p>
+
+            <h3 style="color: #fff; margin-top: 30px;">4. Technologies</h3>
+            <p>
+                - HTML5, CSS3, JavaScript<br>
+                - Hébergement : GitHub Pages<br>
+                - Outils : Chart.js, PapaParse, AOS, BoxIcons, Google Fonts
+            </p>
+
+            <p style="margin-top: 40px; text-align: center; font-size: 0.9em;">
+                © 2025 – Projet étudiant Staytistics (Alex Fiol & Jimmy Te) – Université Gustave Eiffel
+            </p>
+        </div>
+    </section>
+
+</footer>
+
     </footer>
 
 
@@ -151,4 +294,5 @@
 
 
 </body>
+
 </html>

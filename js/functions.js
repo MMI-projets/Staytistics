@@ -83,8 +83,8 @@ function afficherFiltres(type) {
         div.innerHTML = `
             <img src="${album.cover_medium || ''}" alt="${album.title || ''}">
             <div>
-                <strong>${titleDisplay}</strong><br>
-                <small>Sortie : ${album.release_date || 'Inconnue'}</small><br>
+                <h3>${titleDisplay}</h3><br>
+                <p>Sortie : ${album.release_date || 'Inconnue'}</p><br>
                 <a href="${album.link || '#'}" target="_blank">Écouter sur Deezer</a>
             </div>
         `;
@@ -328,8 +328,8 @@ function afficherGraphiquePistes(tracksDeezer) {
             datasets: [{
                 label: 'Streams',
                 data: streams,
-                backgroundColor: 'rgba(75,192,192,0.6)',
-                borderColor: 'rgba(75,192,192,1)',
+                backgroundColor: 'rgba(165, 29, 25, 1)',
+                borderColor: 'rgba(224, 52, 30, 0.6)',
                 borderWidth: 1
             }]
         },

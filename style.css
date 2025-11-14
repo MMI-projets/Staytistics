@@ -708,7 +708,17 @@ div.popup section {
     padding: 0 30px;
 }
 
+div.popup > div {
+    padding: 10px 30px;
+}
 
+div.popup div[class^="infos-"] {
+    margin-left: 24px;
+}
+
+div.popup h1 {
+    margin: 10px 0 0 0;
+}
 /* ============================= */
 /* Footer */
 /* ============================= */

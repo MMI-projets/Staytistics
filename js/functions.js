@@ -235,7 +235,8 @@ function ouvrirPopUpMentionsCredits() {
                     Le site <em>Staytistics</em> ne revendique aucune propriété sur ces contenus et les utilise dans un cadre 
                     strictement éducatif et non commercial.
                 </p>
-
+                <p>Les images récupérées des artistes sont la propriété de l'entreprise JYP Entertainement.</p>
+ 
             </section>	
             <button id="closePopup">X</button>
         </div>

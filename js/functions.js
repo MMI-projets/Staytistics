@@ -171,6 +171,27 @@ function ouvrirPopUpMentionsCredits() {
 
             <p>Staytistics est un projet étudiant d’analyse de l’évolution des écoutes du groupe de k-pop Stray Kids au fil du temps, réalisé en deuxième année du BUT Métiers du Multimédia et de l’Internet (MMI) à l’Université Gustave Eiffel.</p>
 
+            <h2>Éditeur du site</h2>
+            <p><strong>Université Gustave Eiffel</strong><br>
+            Adresse : 5 boulevard Descartes, 77454 Marne-la-Vallée Cedex 2, France<br>
+            Site web : <a href="https://www.univ-eiffel.fr" target="_blank">https://www.univ-eiffel.fr</a></p>
+            <p>Gilles Roussel, Président de l’Université Gustave Eiffel.</p>
+            
+
+            <h2>Données personnelles</h2>
+            <p>Ce site a été conçu à des fins exclusivement pédagogiques. Il ne collecte aucune donnée personnelle sensible et n’utilise aucun cookie permettant d’identifier les visiteurs du site.</p>
+            <p>Aucune donnée personnelle n’est donc traitée ou stockée par le site. En revanche l'hébergeur du site récolte certaines données techniques nécessaires à l'hébergement et à la sécurité du site.</p>
+
+            <h3>Hébergement</h3>
+            <p>Le site est hébergé par GitHub Pages, une plateforme appartenant à GitHub, Inc., dont le siège est situé au : 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis.<br>
+            Site web : <a href="https://pages.github.com" target="_blank">https://pages.github.com/</a></p>
+
+            <h2>Délégué à la protection des données (DPO)</h2>
+            <p>Conformément au Règlement Général sur la Protection des Données (RGPD), l’Université Gustave Eiffel dispose d’un Délégué à la Protection des Données (DPO) chargé de veiller au respect des obligations légales relatives à la protection des données.</p>
+            <p>Vous pouvez contacter <strong>Véronique Juge</strong> à l’adresse mail suivante : <a href="mailto:protectiondesdonnees-dpo@univ-eiffel.fr">protectiondesdonnees-dpo@univ-eiffel.fr</a></p>
+
+            <p>Adresse : 5 boulevard Descartes, 77454 Marne-la-Vallée Cedex 2, France</p>
+
             <h2>Équipe du projet</h2>
             <p>Le projet a été réalisé par :<br>
             Alex Fiol, développeur front-end et contributeur au graphisme.<br>
@@ -179,22 +200,6 @@ function ouvrirPopUpMentionsCredits() {
             <p>Pour toute demande de contact, vous pouvez nous contacter à nos adresses universitaires :<br>
             <a href="mailto:alex.fiol@edu.univ-eiffel.fr">alex.fiol@edu.univ-eiffel.fr</a><br>
             <a href="mailto:jimmy.te@edu.univ-eiffel.fr">jimmy.te@edu.univ-eiffel.fr</a></p>
-
-            <h2>Données personnelles</h2>
-            <p>Ce site a été conçu à des fins exclusivement pédagogiques. Il ne collecte aucune donnée personnelle sensible et n’utilise aucun cookie permettant d’identifier les visiteurs du site.</p>
-            <p>Aucune donnée personnelle n’est donc traitée ou stockée par le site.</p>
-
-            <h3>Hébergement</h3>
-            <p>Le site est hébergé par GitHub Pages, une plateforme appartenant à GitHub, Inc., dont le siège est situé au : 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis.<br>
-            Site web : <a href="https://pages.github.com" target="_blank">https://pages.github.com/</a></p>
-
-            <h2>Délégué à la protection des données (DPO)</h2>
-            <p>Conformément au Règlement Général sur la Protection des Données (RGPD), l’Université Gustave Eiffel dispose d’un Délégué à la Protection des Données (DPO) chargé de veiller au respect des obligations légales relatives à la protection des données.</p>
-            <p>Vous pouvez contacter <strong>Véronique Juge</strong> à l’adresse suivante : <a href="mailto:protectiondesdonnees-dpo@univ-eiffel.fr">protectiondesdonnees-dpo@univ-eiffel.fr</a></p>
-
-            <p><strong>Université Gustave Eiffel</strong><br>
-            Siret : 130 026 123 00013<br>
-            Adresse : 5 boulevard Descartes, 77454 Marne-la-Vallée Cedex 2, France</p>
 
             <h2>Crédits</h2>
             <p>Les informations affichées sur ce site proviennent de sources publiques :</p>

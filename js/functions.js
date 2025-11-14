@@ -7,11 +7,11 @@ Papa.parse("kworb_stray_top_musics_streams.csv", {
     download: true,
     header: false,
     dynamicTyping: false, // On garde les chiffres en string pour traiter les ","
-    complete: function(results) {
+    complete: function (results) {
         // Chaque ligne = array [titre, streams, autre]
         streamsData = results.data.map(row => ({
-            Title: row[0], 
-            Streams: row[1] 
+            Title: row[0],
+            Streams: row[1]
         }));
         console.log("Données des streams chargées :", streamsData);
     }
@@ -64,7 +64,7 @@ function afficherFiltres(type) {
         if (!album) {
             return;
         }
-        
+
         const div = document.createElement("div");
         div.className = "album";
         div.dataset.idAlbum = album.id || '';
@@ -203,7 +203,13 @@ function ouvrirPopUpMentionsCredits() {
                 <li>Kworb (<a href="https://kworb.net/spotify/artist/2dIgFjalVxs4ThymZ67YCE_songs.html" target="_blank">https://kworb.net/</a>) : statistiques publiques concernant les écoutes des musiques de Stray Kids. (Kworb n’est pas une source officielle, il utilise des données provenant de différentes plateformes.)</li>
                 <li>Les images présentes sur le site des artistes sont relayées par l’entreprise JYP Entertainment.</li>
                 <li>Vidéo : montage réalisé à partir d’extraits de clips trouvés sur YouTube, utilisés à des fins pédagogiques. Les droits appartiennent aux auteurs respectifs.</li>
+                <li>Logo : généré initialement par une intelligence artificielle, puis modifié et adapté manuellement par les auteurs du projet.</li>
             </ul>
+            <h2>Polices et icônes</h2>
+            <p>
+               Polices utilisées sur le site : Kolker Brush, Goudy Bookletter 1911 et Space Grotesk (Google Fonts).<br>
+           Icônes utilisées : Boxicons (<a href="https://boxicons.com/" target="_blank">https://boxicons.com/</a>).
+               </p>
 
             
 
@@ -211,7 +217,7 @@ function ouvrirPopUpMentionsCredits() {
         </div>
     `;
 
-        // Bouton fermer
+    // Bouton fermer
     divPopupMentionsCredits.querySelector('#closePopup').addEventListener('click', fermerPopup);
 
     // On ajoute au body
@@ -281,7 +287,7 @@ function afficherGraphiquePistes(tracksDeezer) {
     // On récupère les labels et les streams
     // const { labels, streams } = compareTitleFromCSV_Deezer(tracksDeezer);
 
-    const { labels, streams } = getLabelsAndStreamsForAlbum(tracksDeezer); 
+    const { labels, streams } = getLabelsAndStreamsForAlbum(tracksDeezer);
 
 
     console.log("=====");
@@ -342,7 +348,7 @@ function albumsPerYear(data) {
         const year = album.release_date.substr(0, 4);
         if (!albumsByYear.has(year)) {
             albumsByYear.set(year, []);
-        } 
+        }
         albumsByYear.get(year).push(album);
     });
 
@@ -357,16 +363,16 @@ function albumsPerYear(data) {
         const albums = albumsByYear.get(year); // On récupère tous les albums d'une même année
 
         // On initialise le compteur pour cette même année
-        window.remainingAlbumsByYear[year] = albums.length; 
+        window.remainingAlbumsByYear[year] = albums.length;
 
         albums.forEach(album => {
             if (!album.id) {
                 return;
-            } 
+            }
 
             // Callback unique pour cet album
             const callbackName = "callback_" + album.id;
-            window[callbackName] = function(data) {
+            window[callbackName] = function (data) {
                 const tracks = data.data;
                 if (!tracks || tracks.length === 0) {
                     return;
@@ -376,11 +382,11 @@ function albumsPerYear(data) {
                 // Top album par année : 
                 // =======================
 
-                const { labels, streams } = getLabelsAndStreamsForAlbum(tracks); 
+                const { labels, streams } = getLabelsAndStreamsForAlbum(tracks);
 
                 // On fait la somme de toutes les écoutes de chaque musique de l'album (pour avoir l'album avec le plus d'écoutes)
-                const totalStreams = streams.reduce((a, b) => a + b, 0); 
-                
+                const totalStreams = streams.reduce((a, b) => a + b, 0);
+
                 if (!window.topAlbumsByYear[year] || totalStreams > window.topAlbumsByYear[year].streams) {
                     window.topAlbumsByYear[year] = { album: album, streams: totalStreams };
                 }
@@ -429,7 +435,7 @@ function afficherGraphiqueAlbumsParAnnee() {
     if (ctx.chartInstance) {
         ctx.chartInstance.destroy();
     }
-    
+
     // Création du graphique
     ctx.chartInstance = new Chart(ctx, {
         type: 'line',
@@ -495,11 +501,11 @@ function afficherGraphiqueAlbumsParAnnee() {
                     intersect: true, // tooltip uniquement sur le point survolé
                     callbacks: {
                         // On remplace le "title" du tooltip par le titre de l'album
-                        title: function(context) {
+                        title: function (context) {
                             const idx = context[0].dataIndex;
                             return albumTitles[idx]; // top album au lieu de l'année
                         },
-                        label: function(context) {
+                        label: function (context) {
                             const value = context.raw;
                             return `${value.toLocaleString()} streams`;
                         }

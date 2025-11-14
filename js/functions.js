@@ -168,76 +168,44 @@ function ouvrirPopUpMentionsCredits() {
     divPopupMentionsCredits.innerHTML = `
         <div class="popup">
             <h1>Mentions légales</h1>
-            <section id="mentions-legales">
-                <h2>1. Éditeur du site</h2>
-                <p>
-                    <strong>Nom du site :</strong> Staytistics<br>
-                    <strong>Projet étudiant</strong> réalisé dans le cadre du BUT MMI (Métiers du Multimédia et de l’Internet) – Université Gustave Eiffel.<br>
-                    <strong>Éditeurs :</strong> Alex Fiol et Jimmy Te<br>
-                    <strong>Contact :</strong> 
-                    <a href="mailto:alex.fiol@edu.univ-eiffel.fr">alex.fiol@edu.univ-eiffel.fr</a> / 
-                    <a href="mailto:jimmy.te@edu.univ-eiffel.fr">jimmy.te@edu.univ-eiffel.fr</a><br><br>
-                    Ce site a été conçu à des fins <strong>pédagogiques et non commerciales</strong>. 
-                    Aucune transaction ni collecte de données personnelles sensibles n’est effectuée.
-                </p>
 
-                <h2>2. Délégué à la protection des données (DPO)</h2>
-                <p>
-                    Conformément au RGPD, l’Université Gustave Eiffel dispose d’un Délégué à la Protection des Données (DPO) chargé de veiller au respect des obligations légales relatives à la protection des données.<br><br>
-                    <strong>Université Gustave Eiffel</strong><br>
-                    <strong>DPO :</strong> dpo@univ-eiffel.fr<br>
-                    <strong>Adresse :</strong> 5 boulevard Descartes, 77454 Marne-la-Vallée Cedex 2, France
-                </p>
+            <p>Staytistics est un projet étudiant d’analyse de l’évolution des écoutes du groupe de k-pop Stray Kids au fil du temps, réalisé en deuxième année du BUT Métiers du Multimédia et de l’Internet (MMI) à l’Université Gustave Eiffel.</p>
 
-                <h2>3. Responsabilités et rôles</h2>
-                <ul>
-                    <li><strong>Alex Fiol</strong> – Développeur Front-end, aide au graphisme</li>
-                    <li><strong>Jimmy Te</strong> – Développeur Back-end, graphiste</li>
-                </ul>
+            <h2>Équipe du projet</h2>
+            <p>Le projet a été réalisé par :<br>
+            Alex Fiol, développeur front-end et contributeur au graphisme.<br>
+            Jimmy TE, développeur back-end et graphiste.</p>
 
-                <h2>4. Hébergement</h2>
-                <p>
-                    <strong>Hébergeur :</strong> GitHub, Inc.<br>
-                    <strong>Adresse :</strong> 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis<br>
-                    <strong>Site web :</strong> 
-                    <a href="https://pages.github.com" target="_blank">https://pages.github.com</a>
-                </p>
+            <p>Pour toute demande de contact, vous pouvez nous contacter à nos adresses universitaires :<br>
+            <a href="mailto:alex.fiol@edu.univ-eiffel.fr">alex.fiol@edu.univ-eiffel.fr</a><br>
+            <a href="mailto:jimmy.te@edu.univ-eiffel.fr">jimmy.te@edu.univ-eiffel.fr</a></p>
 
+            <h2>Données personnelles</h2>
+            <p>Ce site a été conçu à des fins exclusivement pédagogiques. Il ne collecte aucune donnée personnelle sensible et n’utilise aucun cookie permettant d’identifier les visiteurs du site.</p>
+            <p>Aucune donnée personnelle n’est donc traitée ou stockée par le site.</p>
 
-                <h2>6. Données personnelles</h2>
-                <p>
-                    Le site ne collecte <strong>aucune donnée personnelle</strong> à des fins commerciales.<br>
-                    Des données anonymes peuvent être recueillies via des outils d’analyse de trafic (par exemple GitHub Pages) uniquement à des fins statistiques.
-                </p>
+            <h3>Hébergement</h3>
+            <p>Le site est hébergé par GitHub Pages, une plateforme appartenant à GitHub, Inc., dont le siège est situé au : 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis.<br>
+            Site web : <a href="https://pages.github.com" target="_blank">https://pages.github.com/</a></p>
 
-                <h2>7. Cookies</h2>
-                <p>
-                    Le site <em>Staytistics</em> ne dépose <strong>pas de cookies à des fins publicitaires</strong>.<br>
-                    Seuls des cookies techniques essentiels au fonctionnement du site peuvent être utilisés.
-                </p>
+            <h2>Délégué à la protection des données (DPO)</h2>
+            <p>Conformément au Règlement Général sur la Protection des Données (RGPD), l’Université Gustave Eiffel dispose d’un Délégué à la Protection des Données (DPO) chargé de veiller au respect des obligations légales relatives à la protection des données.</p>
+            <p>Vous pouvez le contacter à l’adresse suivante : <a href="mailto:protectiondesdonnees-dpo@univ-eiffel.fr">protectiondesdonnees-dpo@univ-eiffel.fr</a></p>
 
-                <h2>8. Responsabilité</h2>
-                <p>
-                    Ce projet est réalisé dans un cadre universitaire et non professionnel.<br>
-                    Les auteurs ne peuvent être tenus responsables d’éventuelles erreurs ou inexactitudes contenues sur le site, 
-                    ni des changements apportés aux données externes par leurs fournisseurs (tels que Deezer).
-                </p>
+            <p><strong>Université Gustave Eiffel</strong><br>
+            Siret : 130 026 123 00013<br>
+            Adresse : 5 boulevard Descartes, 77454 Marne-la-Vallée Cedex 2, France</p>
 
+            <h2>Crédits</h2>
+            <p>Les informations affichées sur ce site proviennent de sources publiques :</p>
+            <ul>
+                <li>API publique Deezer (<a href="https://developers.deezer.com/api" target="_blank">developers.deezer.com/api</a>) : données relatives aux albums, titres et métadonnées musicales.</li>
+                <li>Kworb (<a href="https://kworb.net/spotify/artist/2dIgFjalVxs4ThymZ67YCE_songs.html" target="_blank">https://kworb.net/</a>) : statistiques publiques concernant les écoutes des musiques de Stray Kids. (Kworb n’est pas une source officielle, il utilise des données provenant de différentes plateformes.)</li>
+                <li>Les images présentes sur le site des artistes sont relayées par l’entreprise JYP Entertainment.</li>
+            </ul>
 
-            </section>
-            <h1>Crédits</h1>
-            <section id="credits">
-                <h2>Données et sources externes</h2>
-                <p>
-                    Les données affichées sur ce site proviennent de l’<strong>API publique de Deezer</strong> 
-                    (<a href="https://developers.deezer.com/api" target="_blank">https://developers.deezer.com/api</a>).<br>
-                    Ces données (titres, albums, artistes, pochettes, etc.) restent la propriété exclusive de Deezer et de leurs ayants droit.<br>
-                    Le site <em>Staytistics</em> ne revendique aucune propriété sur ces contenus et les utilise dans un cadre 
-                    strictement éducatif et non commercial.
-                </p>
-                <p>Les images récupérées des artistes sont la propriété de l'entreprise JYP Entertainement.</p>
- 
-            </section>	
+            <p>Vidéo : montage réalisé à partir d’extraits de clips trouvés sur YouTube, utilisés à des fins pédagogiques. Les droits appartiennent aux auteurs respectifs.</p>
+
             <button id="closePopup">X</button>
         </div>
     `;

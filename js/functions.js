@@ -182,7 +182,7 @@ function ouvrirPopUpMentionsCredits() {
             <p>Ce site a été conçu à des fins exclusivement pédagogiques. Il ne collecte aucune donnée personnelle sensible et n’utilise aucun cookie permettant d’identifier les visiteurs du site.</p>
             <p>Aucune donnée personnelle n’est donc traitée ou stockée par le site. En revanche l'hébergeur du site récolte certaines données techniques nécessaires à l'hébergement et à la sécurité du site.</p>
 
-            <h3>Hébergement</h3>
+            <h2>Hébergement</h2>
             <p>Le site est hébergé par GitHub Pages, une plateforme appartenant à GitHub, Inc., dont le siège est situé au : 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis.<br>
             Site web : <a href="https://pages.github.com" target="_blank">https://pages.github.com/</a></p>
 
@@ -199,9 +199,9 @@ function ouvrirPopUpMentionsCredits() {
 
             <p>Pour toute demande de contact, vous pouvez nous contacter à nos adresses universitaires :<br>
             <a href="mailto:alex.fiol@edu.univ-eiffel.fr">alex.fiol@edu.univ-eiffel.fr</a><br>
-            <a href="mailto:jimmy.te@edu.univ-eiffel.fr">jimmy.te@edu.univ-eiffel.fr</a></p>
+            <a href="mailto:jimmy.te@edu.univ-eiffel.fr">jimmy.te@edu.univ-eiffel.fr</a></p><br><br>
 
-            <h2>Crédits</h2>
+            <h1>Crédits</h1>
             <p>Les informations affichées sur ce site proviennent de sources publiques :</p>
             <ul>
                 <li>API publique Deezer (<a href="https://developers.deezer.com/api" target="_blank">developers.deezer.com/api</a>) : données relatives aux albums, titres et métadonnées musicales.</li>

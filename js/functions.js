@@ -190,7 +190,7 @@ function ouvrirPopUpMentionsCredits() {
 
             <h2>Délégué à la protection des données (DPO)</h2>
             <p>Conformément au Règlement Général sur la Protection des Données (RGPD), l’Université Gustave Eiffel dispose d’un Délégué à la Protection des Données (DPO) chargé de veiller au respect des obligations légales relatives à la protection des données.</p>
-            <p>Vous pouvez le contacter à l’adresse suivante : <a href="mailto:protectiondesdonnees-dpo@univ-eiffel.fr">protectiondesdonnees-dpo@univ-eiffel.fr</a></p>
+            <p>Vous pouvez contacter <strong>Véronique Juge</strong> à l’adresse suivante : <a href="mailto:protectiondesdonnees-dpo@univ-eiffel.fr">protectiondesdonnees-dpo@univ-eiffel.fr</a></p>
 
             <p><strong>Université Gustave Eiffel</strong><br>
             Siret : 130 026 123 00013<br>
@@ -204,12 +204,13 @@ function ouvrirPopUpMentionsCredits() {
                 <li>Les images présentes sur le site des artistes sont relayées par l’entreprise JYP Entertainment.</li>
                 <li>Vidéo : montage réalisé à partir d’extraits de clips trouvés sur YouTube, utilisés à des fins pédagogiques. Les droits appartiennent aux auteurs respectifs.</li>
                 <li>Logo : généré initialement par une intelligence artificielle, puis modifié et adapté manuellement par les auteurs du projet.</li>
-            </ul>
-            <h2>Polices et icônes</h2>
-            <p>
+                 <li>
                Polices utilisées sur le site : Kolker Brush, Goudy Bookletter 1911 et Space Grotesk (Google Fonts).<br>
            Icônes utilisées : Boxicons (<a href="https://boxicons.com/" target="_blank">https://boxicons.com/</a>).
-               </p>
+               </li>
+            </ul>
+           
+           
 
             
 

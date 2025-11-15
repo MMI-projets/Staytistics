@@ -3,18 +3,24 @@
 // ===============================
 let streamsData = []; // contiendra les données du CSV
 
-Papa.parse("kworb_stray_top_musics_streams.csv", {
-    download: true,
-    header: false,
-    dynamicTyping: false, // On garde les chiffres en string pour traiter les ","
-    complete: function (results) {
-        // Chaque ligne = array [titre, streams, autre]
-        streamsData = results.data.map(row => ({
-            Title: row[0],
-            Streams: row[1]
-        }));
-        console.log("Données des streams chargées :", streamsData);
-    }
+function loadStreamsCSV() {
+    return new Promise((resolve, reject) => {
+        Papa.parse("kworb_stray_top_musics_streams.csv", {
+            download: true,
+            header: false,
+            complete: function (results) {
+                streamsData = results.data.map(row => ({ Title: row[0], Streams: row[1] }));
+                console.log("Données des streams chargées :", streamsData);
+                resolve();
+            },
+            error: reject
+        });
+    });
+}
+
+loadStreamsCSV().then(() => {
+    // Ici le CSV est chargé, on peut traiter les albums
+    getAllAlbums(tousLesAlbums);
 });
 
 // ===============================
@@ -32,7 +38,12 @@ let popupActive = null; // Popup actuelle (pour la fermer facilement)
 function afficherAlbums(data) {
     console.log("Données Deezer :", data);
     tousLesAlbums = data.data;
-    afficherFiltres('album'); // on affiche les "albums" par défaut
+
+    // Attendre CSV avant d'afficher les albums
+    loadStreamsCSV().then(() => {
+        afficherFiltres('album'); // Albums par défaut
+        getAllAlbums(tousLesAlbums); // Graphique évolution
+    });
 }
 
 function afficherFiltres(type) {
@@ -359,6 +370,13 @@ function getAllAlbums(data) {
 }
 
 function albumsPerYear(data) {
+    // Si le CSV n'est pas encore chargé, on attend un peu
+    if (!streamsData || streamsData.length === 0) {
+        console.warn("CSV pas encore chargé, on attend un peu...");
+        setTimeout(() => albumsPerYear(data), 100);
+        return;
+    }
+
     const albumsByYear = new Map();
 
     data.forEach(album => {
@@ -431,6 +449,109 @@ function albumsPerYear(data) {
 
 }
 
+// function afficherGraphiqueAlbumsParAnnee() {
+//     const ctx = document.getElementById('albumsOverYearsChart');
+//     if (!ctx) return;
+
+//     // On trie les années dans l'ordre croissant
+//     const anneesTriees = Object.keys(window.topAlbumsByYear).sort((a, b) => a - b);
+
+//     // Labels = années
+//     const labels = anneesTriees;
+
+//     // Données = streams max par année
+//     const streams = anneesTriees.map(year => window.topAlbumsByYear[year].streams);
+
+//     // Titres des albums pour chaque année
+//     const albumTitles = anneesTriees.map(year => window.topAlbumsByYear[year].album.title);
+
+
+//     // Si un graphique existe déjà, on le détruit pour éviter les doublons
+//     if (ctx.chartInstance) {
+//         ctx.chartInstance.destroy();
+//     }
+
+//     // Création du graphique
+//     ctx.chartInstance = new Chart(ctx, {
+//         type: 'line',
+//         data: {
+//             labels,
+//             datasets: [{
+//                 label: 'Streams (par top album)',
+//                 data: streams,
+//                 // backgroundColor: 'rgba(54, 162, 235, 0.6)',
+//                 // borderColor: 'rgba(54, 162, 235, 1)',
+//                 // borderWidth: 1
+
+//                 // STYLES CSS
+//                 backgroundColor: 'rgba(54, 162, 235, 0.3)', // remplissage sous la ligne
+//                 borderColor: '#c0392b', // couleur de la ligne
+//                 borderWidth: 3,
+//                 tension: 0.4, // ligne courbée
+//                 pointBackgroundColor: '#ffffffff', // couleur des points
+//                 pointBorderColor: '#000000ff',
+//                 pointRadius: 6,
+//                 pointHoverRadius: 8
+
+
+//             }]
+//         },
+//         options: {
+//             layout: {
+//                 padding: 150
+//             },
+//             scales: {
+//                 y: {
+//                     beginAtZero: true,
+//                     grid: {
+//                         // color: 'rgba(0,0,0,0.1)'
+//                         color: '#fff'
+//                     },
+//                     ticks: {
+//                         color: '#fff',
+//                         font: { size: 14 }
+//                     }
+//                 },
+//                 x: {
+//                     grid: {
+//                         color: 'rgba(0,0,0,0.1)'
+//                     },
+//                     ticks: {
+//                         color: '#fff',
+//                         font: { size: 14 }
+//                     }
+//                 }
+//             },
+//             plugins: {
+//                 title: {
+//                     display: true,
+//                     text: 'Top albums par année (en nombre de streams)'
+//                 },
+//                 legend: { display: false },
+//                 customCanvasBackgroundColor: {
+//                     color: '#0f1113' // <- change ici la couleur de fond du canvas (ton noir profond)
+//                 },
+//                 tooltip: {
+//                     mode: 'nearest', // important pour éviter de fusionner avec d'autres points
+//                     intersect: true, // tooltip uniquement sur le point survolé
+//                     callbacks: {
+//                         // On remplace le "title" du tooltip par le titre de l'album
+//                         title: function (context) {
+//                             const idx = context[0].dataIndex;
+//                             return albumTitles[idx]; // top album au lieu de l'année
+//                         },
+//                         label: function (context) {
+//                             const value = context.raw;
+//                             return `${value.toLocaleString()} streams`;
+//                         }
+//                     }
+//                 },
+//             }
+//         }
+//     });
+// }
+
+
 function afficherGraphiqueAlbumsParAnnee() {
     const ctx = document.getElementById('albumsOverYearsChart');
     if (!ctx) return;
@@ -447,8 +568,7 @@ function afficherGraphiqueAlbumsParAnnee() {
     // Titres des albums pour chaque année
     const albumTitles = anneesTriees.map(year => window.topAlbumsByYear[year].album.title);
 
-
-    // Si un graphique existe déjà, on le détruit pour éviter les doublons
+    // Si un graphique existe déjà, on le détruit
     if (ctx.chartInstance) {
         ctx.chartInstance.destroy();
     }
@@ -461,77 +581,120 @@ function afficherGraphiqueAlbumsParAnnee() {
             datasets: [{
                 label: 'Streams (par top album)',
                 data: streams,
-                // backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                // borderColor: 'rgba(54, 162, 235, 1)',
-                // borderWidth: 1
-
-                // STYLES CSS
-                backgroundColor: 'rgba(54, 162, 235, 0.3)', // remplissage sous la ligne
-                borderColor: '#c0392b', // couleur de la ligne
+                backgroundColor: 'rgba(54, 162, 235, 0.3)',
+                borderColor: '#c0392b',
                 borderWidth: 3,
-                tension: 0.4, // ligne courbée
-                pointBackgroundColor: '#ffffffff', // couleur des points
+                tension: 0.4,
+                pointBackgroundColor: '#ffffffff', 
                 pointBorderColor: '#000000ff',
                 pointRadius: 6,
                 pointHoverRadius: 8
-
-
             }]
         },
         options: {
-            layout: {
-                padding: 150
-            },
+            layout: { padding: 5 },
             scales: {
-                y: {
-                    beginAtZero: true,
-                    grid: {
-                        // color: 'rgba(0,0,0,0.1)'
-                        color: '#fff'
-                    },
-                    ticks: {
-                        color: '#fff',
-                        font: { size: 14 }
-                    }
-                },
-                x: {
-                    grid: {
-                        color: 'rgba(0,0,0,0.1)'
-                    },
-                    ticks: {
-                        color: '#fff',
-                        font: { size: 14 }
-                    }
-                }
+                y: { beginAtZero: true, grid: { color: '#fff' }, ticks: { color: '#fff', font: { size: 14 } } },
+                x: { grid: { color: 'rgba(0,0,0,0.1)' }, ticks: { color: '#fff', font: { size: 14 } } }
             },
             plugins: {
-                title: {
-                    display: true,
-                    text: 'Top albums par année (en nombre de streams)'
-                },
+                title: { display: true, text: 'Top albums par année (en nombre de streams)' },
                 legend: { display: false },
-                customCanvasBackgroundColor: {
-                    color: '#0f1113' // <- change ici la couleur de fond du canvas (ton noir profond)
-                },
+                customCanvasBackgroundColor: { color: '#0f1113' },
                 tooltip: {
-                    mode: 'nearest', // important pour éviter de fusionner avec d'autres points
-                    intersect: true, // tooltip uniquement sur le point survolé
+                    mode: 'nearest',
+                    intersect: true,
                     callbacks: {
-                        // On remplace le "title" du tooltip par le titre de l'album
-                        title: function (context) {
+                        title: function(context) {
                             const idx = context[0].dataIndex;
-                            return albumTitles[idx]; // top album au lieu de l'année
+                            return albumTitles[idx];
                         },
-                        label: function (context) {
+                        label: function(context) {
                             const value = context.raw;
                             return `${value.toLocaleString()} streams`;
                         }
                     }
-                },
+                }
             }
         }
     });
+
+
+
+    // =========================
+    // AFFICHAGE TEXTE DES ALBUMS
+    // =========================
+    const graphicTextsDiv = document.querySelector('.graphic-texts');
+    if (graphicTextsDiv) {
+        graphicTextsDiv.innerHTML = ''; // vider avant de remplir
+
+        anneesTriees.forEach(year => {
+            const topAlbum = window.topAlbumsByYear[year].album;
+            const tracks = topAlbum.tracks ? topAlbum.tracks.data : [];
+            const divYear = document.createElement('div');
+            divYear.className = 'year-album-text';
+            divYear.dataset.year = year; // ← indispensable pour le popup
+            divYear.innerHTML = `
+                <h3>${year} - ${topAlbum.title}</h3>
+                <ul>
+                    ${tracks.map(track => `<li>${track.title}</li>`).join('')}
+                </ul>
+            `;
+            graphicTextsDiv.appendChild(divYear);
+        });
+    }
+    // ACTIVER POPUPS SUR LES BLOCS CRÉÉS
+    document.querySelectorAll('.year-album-text').forEach(block => {
+        block.addEventListener('click', () => {
+            const year = block.dataset.year;
+            creerPopupAlbum(year);
+        });
+    });
+
+
 }
+
+
+function creerPopupAlbum(year) {
+    const topAlbum = window.topAlbumsByYear[year].album;
+    const tracks = topAlbum.tracks ? topAlbum.tracks.data : [];
+
+    // Calcul total streams
+    const totalStreams = tracks.reduce((acc, t) => {
+        const found = streamsData.find(s =>
+            (s.Title || "").trim().toLowerCase() === (t.title || "").trim().toLowerCase()
+        );
+        return acc + (found ? parseInt(found.Streams.replace(/,/g, ''), 10) : 0);
+    }, 0);
+
+    // Création du popup
+    const popup = document.createElement('div');
+    popup.className = 'popup-album-overlay';
+    popup.innerHTML = `
+        <div class="popup-album-content">
+            <button class="close-popup">X</button>
+            <h2>${topAlbum.title} (${year})</h2>
+            <p><strong>Total streams :</strong> ${totalStreams.toLocaleString()}</p>
+            <ul>
+                ${tracks.map(track => {
+                    const found = streamsData.find(s =>
+                        (s.Title || "").trim().toLowerCase() === (track.title || "").trim().toLowerCase()
+                    );
+                    const streams = found ? parseInt(found.Streams.replace(/,/g, ''), 10) : 0;
+                    return `<li>${track.title} <span>${streams.toLocaleString()} streams</span></li>`;
+                }).join('')}
+            </ul>
+        </div>
+    `;
+
+    // Fermeture
+    popup.querySelector('.close-popup').addEventListener('click', () => popup.remove());
+
+    document.body.appendChild(popup);
+}
+
+
+
 
 
 // Fonction de comparaison des titres du CSV et Deezer (il peut y avoir des différences dans le nom) 

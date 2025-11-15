@@ -30,7 +30,7 @@ let popupActive = null; // Popup actuelle (pour la fermer facilement)
 
 // Fonction appelée automatiquement par Deezer (à cause du jsonp)
 function afficherAlbums(data) {
-    console.log("✅ Données Deezer :", data);
+    console.log("Données Deezer :", data);
     tousLesAlbums = data.data;
     afficherFiltres('album'); // on affiche les "albums" par défaut
 }
@@ -44,13 +44,16 @@ function afficherFiltres(type) {
 
     // Filtrer selon le type demandé (album ou ep)
     let filtres = tousLesAlbums.filter(album => album.record_type === type);
+    let numberAlbumsEps = document.querySelector('span.number-albums-eps');
+    numberAlbumsEps.textContent = "(Résultats trouvés :" + filtres.length + ")";
+
 
     if (!filtres || filtres.length === 0) {
         albumsDiv.textContent = "Aucun résultat trouvé...";
         return;
     }
 
-    // Appliquer le tri alphabétique si demandé
+    // Appliquer le tri alphabétique si cela est demandé
     if (sortAlphabetique) {
         filtres.sort((a, b) => {
             const ta = (a.title || '').toString();
@@ -70,7 +73,7 @@ function afficherFiltres(type) {
         div.dataset.idAlbum = album.id || '';
         div.dataset.titleAlbum = album.title || '';
 
-        // Préparer le titre (tronqué si trop long)
+        // Réduction du titre (si le titre est trop long)
         let titleDisplay = album.title || '';
         if (titleDisplay.length > 30) {
             titleDisplay = titleDisplay.substr(0, 30) + '...';
@@ -85,7 +88,7 @@ function afficherFiltres(type) {
             <div>
                 <h3>${titleDisplay}</h3><br>
                 <p>Sortie : ${album.release_date || 'Inconnue'}</p><br>
-                <a href="${album.link || '#'}" target="_blank">Écouter sur Deezer</a>
+                <a href="${album.link || '#'}" target="_blank" class="button-deezer"><i class='bx bx-play-circle'></i>Écouter sur Deezer</a>
             </div>
         `;
 
@@ -120,22 +123,28 @@ function ouvrirPopupAlbum(album) {
 
     divPopup.innerHTML = `
         <div class="popup">
-            <img src="${album.cover_medium}" alt="${album.title}">
-            <h2>${album.title}</h2>
-            <p>Date de sortie : ${album.release_date}</p>
-            <p>Type : ${album.record_type}</p>
-            <a href="${album.link}" target="_blank">Écouter l'album sur Deezer</a><br><br><br>
-
-            <strong>Pistes :</strong>
-            <ul id="trackList">Chargement des pistes...</ul>
-
-            <br>
-            <strong>Nombres d'écoutes :</strong> <br>
-            <i class="disclaimer">(Certaines musiques n'ont pas de données)</i>
-            <canvas id="trackChart" width="350" height="250"></canvas>
-
-            <br>
             <button id="closePopup">X</button>
+            <div class="album-popup-infos">
+                <img src="${album.cover_medium}" alt="${album.title}">
+                <div class="album-texts-popup-infos">
+                    <h2>${album.title}</h2>
+                    <p>Date de sortie : ${album.release_date}</p>
+                    <p>Type : ${album.record_type}</p>
+                    <a href="${album.link}" target="_blank" class="button-deezer">Écouter l'album sur Deezer</a><br><br><br>
+                </div>
+            </div>
+
+            <div class="tracks-album-popup">
+                <strong>Pistes :</strong>
+                <ul id="trackList">Chargement des pistes...</ul>
+            </div>
+
+            <br>
+            <div class="graphic-songs-popup">
+                <strong>Nombres d'écoutes :</strong> <br>
+                <i class="disclaimer">(Certaines musiques n'ont pas de données)</i>
+                <canvas id="trackChart" width="350" height="250"></canvas>
+            </div>
         </div>
     `;
 

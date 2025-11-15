@@ -126,26 +126,47 @@
     <section id="discographie">
         <div class="discographie">
 
-            <div class="discographie-header">
+            <!-- HEADER NORMAL -->
+            <div class="discographie-header-normal">
                 <img src="images/disque.png" alt="Image d'un disque" class="discographie-img">
                 <h2>Discographies</h2>
-                <div class="tri-container">
-                    <button class="tri"><i class='bx  bx-filter'></i> Par ordre alphabétique</button>
+                <div class="display-type-albums normal-header">
+                    <button class="display-albums active">Albums</button>
+                    <button class="display-eps">EPs</button>
                 </div>
-
-                <div class="display-type-albums">
-                    <button class="display-albums">🎵 Albums</button>
-                    <button class="display-eps">🎧 EPs</button>
-                </div>
-                    
-                   
             </div>
 
+            <!-- HEADER STICKY COMPACT -->
+            <div class="discographie-header-sticky">
+                <div class="title-logo-discographie">
+                    <img src="images/disque.png" alt="Image d'un disque" class="discographie-img">
+                    <h2>Discographies</h2>
+                </div>    
+
+                <div class="container-tri-title compact-header">
+                    <h2 class="title-list-albums-eps">Albums</h2>                   
+                    <div class="tri-container">
+                        <button class="tri"><i class='bx  bx-filter'></i> Par ordre alphabétique</button>
+                    </div>
+                </div>
+                    
+                <div class="display-type-albums compact-header">
+                    <button class="display-albums active">Albums</button>
+                    <button class="display-eps">EPs</button>
+                </div>
+            </div>
+
+            <!-- CONTENU DES ALBUMS / EPs -->
             <div class="list-albums-eps">
-                <h2 class="title-list-albums-eps">Albums</h2>
+                <div class="container-tri-title">
+                    <h2 class="title-list-albums-eps">Albums</h2>
+                    <!-- <div class="tri-container">
+                        <button class="tri"><i class='bx  bx-filter'></i> Par ordre alphabétique</button>
+                    </div> -->
+                </div>
                 <span class="number-albums-eps"></span>
                 <div class="discographie-lists">
-                    <!-- Albums / EPs seront insérés ici dynamiquement -->
+                    <!-- Albums / EPs dynamiques -->
                 </div>
             </div>
 

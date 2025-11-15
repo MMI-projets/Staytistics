@@ -6,6 +6,7 @@
     /* --ff-text: "Goudy Bookletter 1911", serif; */
     --ff-text: "Glory", serif;
     --ff-second-title: "Space Grotesk", sans-serif;
+    --color-red: #ff380c;
 }
 
 html {
@@ -313,8 +314,6 @@ header button:hover {
 /* ============================= */
 /* Discographie */
 .discographie {
-    /* padding: 60px 80px; */
-    /* background-color: #1B1616; */
     border-bottom-left-radius : 70px;
     border-bottom-right-radius : 70px;
 
@@ -328,64 +327,99 @@ header button:hover {
     position: relative;
 }
 
-.discographie-header {
+/* HEADER NORMAL */
+.discographie-header-normal {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: #1B1616;
-    padding: 60px 80px;
-    border-bottom-left-radius: 200px;
-    border-bottom-right-radius: 200px;
-    box-shadow: 3px 3px 3px black;
+    color: white;
+    padding: 60px 0 20px;
+    border-bottom-left-radius: 150px;
+    border-bottom-right-radius: 150px;
     width: 100%;
-
-    /* position: sticky;
-    top: 0; */
+    box-shadow: 8px 8px 4px black;
 }
 
-.discographie-img {
+.discographie-header-normal .discographie-img {
     height: 100px;
-    width: auto;
+    transition: all 0.3s ease;
 }
 
-
-.discographie h2 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 600;
-    font-size: 2.5rem;
-    color: #fff;
-
+.discographie-header-normal h2 {
+    font-size: 2rem;
+    margin: 10px 0;
 }
 
-.tri-container {
-    margin-top: 20px;
+.discographie-header-normal .display-type-albums {
     display: flex;
-    gap: 15px;
+    gap: 10px;
+    margin-top: 15px;
 }
 
-.tri-container button {
+/* HEADER STICKY COMPACT */
+.discographie-header-sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     display: flex;
-    justify-content: center;
+    align-items: center;
+    padding: 8px 20px;
+    background: #1B1616ee;
+    color: white;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.35);
+    backdrop-filter: blur(6px);
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+/* Sticky actif */
+.discographie-header-sticky.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Bloc gauche : logo + titre */
+.discographie-header-sticky .title-logo-discographie {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    z-index: 10; 
+}
+
+.discographie-header-sticky .discographie-img {
+    height: 40px;
+}
+
+/* Bloc central : titre contenu + bouton tri */
+.discographie-header-sticky .container-tri-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
     align-items: center;
 }
-.tri {
-    background-color: #ffffff;
-    color: #000000;
-    font-family:'Space Grotesk', sans-serif;
-    border: none;
-    border-radius: 25px;
-    padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+
+/* Bloc droit : boutons Albums/EPs */
+.discographie-header-sticky .display-type-albums.compact-header {
+    margin-left: auto; 
+    display: flex;
+    gap: 5px;
+    z-index: 10; 
 }
-.tri:hover {
-    background-color: #e2e1e0;
+
+.discographie-header-sticky .container-tri-title .tri-container {
+    position: relative;
+    right: 0;
+    top: 0;
 }
-.tri:active {
-    background-color: #c32f09;
-}
+
+
 
 
 .discographie-lists {
@@ -444,7 +478,7 @@ a.button-deezer:hover {
     border-radius: 10px;
     background-color: black;
     color: white;
-    border: 2px solid white;
+    /* border: 2px solid white; */
     font-weight: bold;
     font-size: 1.1rem;
     transition: all 0.2s ease-in;
@@ -454,6 +488,13 @@ a.button-deezer:hover {
     cursor: pointer;
     /* background-color: black;
     color: white; */
+}
+
+.display-albums.active,
+.display-eps.active {
+    border-bottom: 3px solid var(--color-red);
+    padding-bottom: 5px;
+    font-weight: bold;
 }
 
 /* Discographie - Listes des albums / EPs */
@@ -469,7 +510,59 @@ a.button-deezer:hover {
     font-size: 2rem;
     color: black;
     margin-bottom: 6px;
+    margin-left: auto; 
+    margin-right: auto; 
 }
+
+
+.list-albums-eps .container-tri-title {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.container-tri-title .tri-container {
+    position: absolute;
+    right: 10%;
+    top: 50%;
+    transform: translateY(-50%); 
+}
+
+
+.tri-container {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+.tri-container button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tri {
+    background-color: #fff;
+    color: #000000;
+
+    /* border: none; */
+    border-radius: 25px;
+    border: 2px solid black;
+
+    font-family:'Space Grotesk', sans-serif;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.tri:hover {
+    background-color: #f1f1f0;
+}
+.tri:active {
+    background-color: #c32f09;
+}
+
 
 span.number-albums-eps {
     font-size: 1.2rem;

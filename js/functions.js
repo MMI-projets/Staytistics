@@ -44,7 +44,7 @@ function afficherFiltres(type) {
 
     // Filtrer selon le type demandé (album ou ep)
     let filtres = tousLesAlbums.filter(album => album.record_type === type);
-    let numberAlbumsEps = document.querySelector('span.number-albums-eps');
+    let numberAlbumsEps = document.querySelector('.number-albums-eps');
     numberAlbumsEps.textContent = "(Résultats trouvés :" + filtres.length + ")";
 
 

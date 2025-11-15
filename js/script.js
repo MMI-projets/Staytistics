@@ -27,15 +27,73 @@ document.addEventListener("DOMContentLoaded", (event) => {
     /* ============================= */
 
     // Gestion des boutons
-    document.querySelector('.display-albums').addEventListener('click', () => {
-        document.querySelector("h2.title-list-albums-eps").textContent = "Albums";
-        afficherFiltres('album');
-    });
-    document.querySelector('.display-eps').addEventListener('click', () => {
-        document.querySelector("h2.title-list-albums-eps").textContent = "EPs";
-        afficherFiltres('ep');
+    // Tous les titres à mettre à jour
+    const allTitles = document.querySelectorAll("h2.title-list-albums-eps");
+
+    // Tous les boutons Albums / EPs
+    const allButtons = document.querySelectorAll(".display-type-albums button");
+
+    // Sticky header principal
+    const stickyHeaderTitle = document.querySelector(".discographie-header-sticky .title-logo-discographie h2");
+
+    // Fonction pour gérer le clic sur un bouton
+    function switchFilter(typeClass) {
+        // Mettre à jour tous les boutons
+        allButtons.forEach(btn => {
+            if (btn.classList.contains(typeClass)) {
+                btn.classList.add("active");
+            } else {
+                btn.classList.remove("active");
+            }
+        });
+
+        // Mettre à jour tous les titres
+        allTitles.forEach(title => {
+            title.textContent = typeClass === "display-albums" ? "Albums" : "EPs";
+        });
+
+        // Le sticky header principal reste "Discographies"
+        stickyHeaderTitle.textContent = "Discographies";
+
+        // Afficher le contenu filtré
+        afficherFiltres(typeClass === "display-albums" ? "album" : "ep");
+    }
+
+    // Ajouter écouteur à tous les boutons
+    allButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const typeClass = btn.classList[0]; // "display-albums" ou "display-eps"
+            switchFilter(typeClass);
+        });
     });
 
+
+    /* ============================= */
+    /* Navbar en position sticky de la partie discographie */
+    /* ============================= */
+    // Position sticky pour avoir une nav en position sticky 
+    const stickyHeader = document.querySelector(".discographie-header-sticky");
+    const normalHeader = document.querySelector(".discographie-header-normal");
+
+    // Hauteur à partir de laquelle le sticky apparaît
+    const triggerStart = normalHeader.getBoundingClientRect().bottom + window.scrollY;
+
+    // Hauteur à laquelle le sticky disparaît
+    const triggerEnd = 5075; // tu l'as déterminé manuellement
+
+    window.addEventListener("scroll", () => {
+        const scrollY = window.scrollY;
+
+        if (scrollY >= triggerStart && scrollY < triggerEnd) {
+            stickyHeader.classList.add("active");
+        } else {
+            stickyHeader.classList.remove("active");
+        }
+
+        console.log("Scroll Y :", scrollY); // debug
+    }, { passive: true });
+
+    
     /* ============================= */
     /* Effet de compteur - Animation - Chiffres du nombres d'écoutes sur Spotify de Stray Kids */
     /* ============================= */

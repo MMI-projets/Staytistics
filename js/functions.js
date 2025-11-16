@@ -604,9 +604,66 @@
                 ouvrirPopupAlbum(album); // Ouverture du popup principal
             });
         });
-
-
+        activerInteractiviteGraphiqueEtTexte();
     }
+
+function activerInteractiviteGraphiqueEtTexte() {
+    const ctx = document.getElementById('albumsOverYearsChart');
+    if (!ctx || !ctx.chartInstance) return;
+
+    const chart = ctx.chartInstance;
+    const labels = chart.data.labels;
+
+    // --- Interaction du graphique vers le texte ---
+    ctx.addEventListener('mousemove', (evt) => {
+        const points = chart.getElementsAtEventForMode(evt, 'nearest', { intersect: true }, false);
+
+        // Reset tous les highlights
+        document.querySelectorAll('.year-album-text').forEach(block => {
+            block.classList.remove('highlight');
+        });
+
+        if (points.length > 0) {
+            const idx = points[0].index;
+            const year = labels[idx];
+
+            const block = document.querySelector(`.year-album-text[data-year="${year}"]`);
+            if (block) block.classList.add('highlight');
+        }
+    });
+
+    ctx.addEventListener('mouseleave', () => {
+        // Quand on sort du graphique, on retire tous les highlights
+        document.querySelectorAll('.year-album-text').forEach(block => {
+            block.classList.remove('highlight');
+        });
+    });
+
+    // --- Interaction du texte vers le graphique ---
+    document.querySelectorAll('.year-album-text').forEach(block => {
+        const year = block.dataset.year;
+        const pointIndex = labels.indexOf(year);
+
+        block.addEventListener('mouseenter', () => {
+            block.classList.add('highlight');
+
+            if (pointIndex !== -1) {
+                // Simule hover sur le point
+                chart.setActiveElements([{ datasetIndex: 0, index: pointIndex }]);
+                chart.tooltip.setActiveElements([{ datasetIndex: 0, index: pointIndex }], { x: 0, y: 0 });
+                chart.update();
+            }
+        });
+
+        block.addEventListener('mouseleave', () => {
+            block.classList.remove('highlight');
+
+            chart.setActiveElements([]);
+            chart.tooltip.setActiveElements([], { x: 0, y: 0 });
+            chart.update();
+        });
+    });
+}
 
 
     function creerPopupAlbum(year) {
@@ -650,47 +707,70 @@
     // ===============================
     // CALCUL DU TOP 5 GLOBAL
     // ===============================
-    function getTop5GlobalSongs() {
-        if (!streamsData || streamsData.length === 0) return [];
+// function getTop5GlobalSongs() {
+//     if (!streamsData || streamsData.length === 0) return [];
 
-        // Trier du plus écouté au moins écouté
-        return streamsData
-            .filter(item => item.title && !isNaN(item.streams))
-            .sort((a, b) => b.streams - a.streams)
-            .slice(0, 5);
-    }
+//     // Trier du plus écouté au moins écouté
+//     return streamsData
+//         .filter(item => item.title && !isNaN(item.streams))
+//         .sort((a, b) => b.streams - a.streams)
+//         .slice(0, 5);
+// }
 
     // ===============================
     // AFFICHAGE DU GRAPHIQUE TOP 5
     // ===============================
+
+// ===============================
+// DICTIONNAIRE TITRES → YOUTUBE
+// ===============================
+
+
+function getTop5GlobalSongs() {
+    if (!streamsData || streamsData.length === 0) return [];
+
+    return streamsData
+        .filter(item => item.title && !isNaN(item.streams))
+        .sort((a, b) => b.streams - a.streams)
+        .slice(0, 5);
+}
+
 function afficherTop5GlobalSongs() {
     const ctx = document.getElementById('top5Chart');
-    if (!ctx) return;
+    const iframeContainer = document.getElementById('youtubeIframeContainer');
+    if (!ctx || !iframeContainer) return;
+
+    // Dictionnaire avec juste les liens YouTube
+    const youtubeLinks = {
+        "God's Menu": "https://www.youtube.com/embed/TQTlCHxyuu8?list=RDTQTlCHxyuu8",
+        "MANIAC": "https://www.youtube.com/embed/OvioeS1ZZ7o?list=RDOvioeS1ZZ7o",
+        "Chk Chk Boom": "https://www.youtube.com/embed/0P0aQreFs8w?list=RD0P0aQreFs8w",
+        "Thunderous": "https://www.youtube.com/embed/EaswWiwMVs8?list=RDEaswWiwMVs8",
+        "S-Class": "https://www.youtube.com/embed/JsOOis4bBFg?list=RDJsOOis4bBFg"
+    };
 
     const top5 = getTop5GlobalSongs();
-    console.log("Top 5 chansons :", top5);
-
     const labels = top5.map(item => item.title);
     const streams = top5.map(item => item.streams);
 
     if (ctx.chartInstance) ctx.chartInstance.destroy();
 
     ctx.chartInstance = new Chart(ctx, {
-        type: 'line', // ligne avec interpolation
+        type: 'line',
         data: {
-            labels,
+            labels: labels,
             datasets: [{
                 label: 'Streams',
                 data: streams,
                 backgroundColor: 'rgba(165, 29, 25, 0.2)',
                 borderColor: 'rgba(224, 52, 30, 1)',
-                borderWidth: 3,
-                tension: 0.4, // ici l’interpolation (courbe lissée)
-                fill: true,   // remplissage sous la courbe
+                borderWidth: 5,
+                tension: 0.4,
+                fill: true,
                 pointBackgroundColor: 'rgba(224, 52, 30, 1)',
                 pointBorderColor: '#fff',
-                pointRadius: 6,
-                pointHoverRadius: 10
+                pointRadius: 8,
+                pointHoverRadius: 12
             }]
         },
         options: {
@@ -698,25 +778,39 @@ function afficherTop5GlobalSongs() {
                 legend: { display: false },
                 tooltip: {
                     callbacks: {
-                        label: context => context.raw.toLocaleString('fr-FR') + " streams"
+                        label: function(context) {
+                            return context.raw.toLocaleString('fr-FR') + " streams";
+                        }
                     }
                 }
             },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: { font: { size: 14 } }
-                },
-                x: {
-                    ticks: { font: { size: 14 } }
-                }
-            },
-            elements: {
-                line: { borderJoinStyle: 'round' }
-            }
+            scales: { y: { beginAtZero: true }, x: {} },
+            elements: { line: { borderJoinStyle: 'round' } }
         }
     });
+
+ctx.onclick = function(event) {
+    const points = ctx.chartInstance.getElementsAtEventForMode(event, 'nearest', { intersect: true }, false);
+    if (points.length > 0) {
+        const idx = points[0].index;
+        const title = labels[idx];
+        const link = youtubeLinks[title];
+
+        if (link) {
+            iframeContainer.innerHTML = `<iframe 
+                src="${link}" 
+                title="${title}" 
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen>
+            </iframe>`;
+        }
+    }
+};
 }
+
+
 
 
     // Fonction de comparaison des titres du CSV et Deezer (il peut y avoir des différences dans le nom) 

@@ -231,7 +231,7 @@ function ouvrirPopUpMentionsCredits() {
                     <ul>
                         <li>API publique Deezer (<a href="https://developers.deezer.com/api" target="_blank">developers.deezer.com/api</a>) : données relatives aux albums, titres et métadonnées musicales.</li>
                         <li>Kworb (<a href="https://kworb.net/spotify/artist/2dIgFjalVxs4ThymZ67YCE_songs.html" target="_blank">https://kworb.net/</a>) : statistiques publiques concernant les écoutes des musiques de Stray Kids. (Kworb n’est pas une source officielle, il utilise des données provenant de différentes plateformes.)</li>
-                        <li>Les images présentes sur le site des artistes sont relayées par l’entreprise JYP Entertainment.</li>
+                        <li>Les images présentes sur le site des artistes sont relayées par la société de production JYP Entertainment a des fins de promotions pour le groupe Stray Kids.</li>
                         <li>Vidéo : montage réalisé à partir d’extraits de clips trouvés sur YouTube, utilisés à des fins pédagogiques. Les droits appartiennent aux auteurs respectifs.</li>
                         <li>Logo : généré initialement par une intelligence artificielle, puis modifié et adapté manuellement par les auteurs du projet.</li>
                         <li>Polices utilisées sur le site : Kolker Brush, Goudy Bookletter 1911 et Space Grotesk (Google Fonts).</li>

@@ -663,6 +663,13 @@ span.number-albums-eps {
 .year-album-text:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    background: #c0392b;
+    color: #fff !important; 
+    cursor: pointer;
+}
+
+.year-album-text:hover h3 {
+    color: white;
 }
 
 /* Titre année - album */
@@ -756,6 +763,61 @@ span.number-albums-eps {
     padding: 8px 12px;
     border-bottom: 1px solid #eee;
     font-size: 0.95rem;
+}
+
+
+/* ============================= */
+/* 5 Meilleurs musiques les plus écoutés */
+/* ============================= */
+/* SECTION — Top 5 Musiques */
+.five-best-songs {
+    width: 90%;
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    transition: 0.3s ease;
+}
+
+.five-best-songs:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+}
+
+/* Titre */
+.five-best-songs h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #a51d19; /* ton rouge Bordeaux */
+    text-align: center;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+}
+
+/* Canvas = centre + adaptation */
+#top5Chart {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 420px;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .five-best-songs {
+        padding: 20px;
+    }
+
+    .five-best-songs h2 {
+        font-size: 22px;
+    }
+
+    #top5Chart {
+        max-height: 320px;
+    }
 }
 
 

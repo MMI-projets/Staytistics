@@ -3,7 +3,6 @@ let currentFilterType = 'album'; // Filtre courant par défaut
 
 document.addEventListener("DOMContentLoaded", (event) => {
   console.log("DOM fully loaded and parsed");
-
     /* ============================= */
     /* Boutons stop/play pour la vidéo dans le hero-section */
     /* ============================= */
@@ -90,7 +89,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             stickyHeader.classList.remove("active");
         }
 
-        console.log("Scroll Y :", scrollY); // debug
+        // console.log("Scroll Y :", scrollY); // debug
     }, { passive: true });
 
     

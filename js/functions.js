@@ -789,25 +789,25 @@ function afficherTop5GlobalSongs() {
         }
     });
 
-ctx.onclick = function(event) {
-    const points = ctx.chartInstance.getElementsAtEventForMode(event, 'nearest', { intersect: true }, false);
-    if (points.length > 0) {
-        const idx = points[0].index;
-        const title = labels[idx];
-        const link = youtubeLinks[title];
+    ctx.onclick = function(event) {
+        const points = ctx.chartInstance.getElementsAtEventForMode(event, 'nearest', { intersect: true }, false);
+        if (points.length > 0) {
+            const idx = points[0].index;
+            const title = labels[idx];
+            const link = youtubeLinks[title];
 
-        if (link) {
-            iframeContainer.innerHTML = `<iframe 
-                src="${link}" 
-                title="${title}" 
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen>
-            </iframe>`;
+            if (link) {
+                iframeContainer.innerHTML = `<iframe 
+                    src="${link}" 
+                    title="${title}" 
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen>
+                </iframe>`;
+            }
         }
-    }
-};
+    };
 }
 
 

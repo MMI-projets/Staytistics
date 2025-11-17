@@ -1,6 +1,50 @@
 let sortAlphabetique = false;  // Tri alphabétique désactivé par défaut
 let currentFilterType = 'album'; // Filtre courant par défaut
 
+// Données sur les présentataions des membres
+const membersData = {
+    "BangChan": {
+        name: "Bang Chan",
+        img: "images/bangchan-member.jpg",
+        desc: `Leader du groupe Stray Kids, Bang Chan est reconnu pour son talent polyvalent en tant que chanteur, danseur, rappeur et producteur. Perfectionniste et travailleur, il est à l’origine de nombreuses compositions du groupe grâce à son implication au sein du trio de production 3RACHA. Charismatique et bienveillant, il est apprécié pour son énergie, sa créativité et son dévouement envers les fans comme envers ses membres.`
+    },
+    "Felix": {
+        name: "Felix",
+        img: "images/members/felix-member.jpg",
+        desc: `Felix est connu pour sa voix grave iconique, son charisme puissant sur scène et sa personnalité douce hors scène. Danseur exceptionnel, il apporte une énergie unique aux performances du groupe.`
+    },
+    "Seungmin": {
+        name: "Seungmin",
+        img: "images/members/seungmin-member.jpg",
+        desc: `Seungmin est le vocaliste principal du groupe, reconnu pour sa voix stable et émotionnelle. Appliqué et sérieux, il met un point d'honneur à toujours offrir des performances impeccables.`
+    },
+    "IN": {
+        name: "IN",
+        img: "images/members/in-member.jpg",
+        desc: `IN est le plus jeune membre du groupe. Il possède une voix douce mais puissante et travaille constamment pour améliorer ses performances. Il est apprécié pour son humour et sa personnalité attachante.`
+    },
+    "Han": {
+        name: "Han",
+        img: "images/members/han-member.jpg",
+        desc: `Han est chanteur, rappeur et producteur. Son talent polyvalent et sa sensibilité artistique sont au cœur de l'identité musicale du groupe.`
+    },
+    "Lee Know": {
+        name: "Lee Know",
+        img: "images/members/leeknow-member.jpg",
+        desc: `Lee Know est danseur principal, connu pour sa précision et son charisme. Il possède un humour particulier très apprécié par les fans.`
+    },
+    "Hyunjin": {
+        name: "Hyunjin",
+        img: "images/members/hyunjin-member.jpg",
+        desc: `Hyunjin est danseur principal et visuel du groupe. Ses expressions scéniques et son élégance en font l’un des membres les plus remarqués du groupe.`
+    },
+    "Changbin": {
+        name: "Changbin",
+        img: "images/members/changbin-member.jpg",
+        desc: `Rappeur et membre de 3RACHA, Changbin est connu pour son flow rapide et puissant. Malgré son apparence intense, il est très impliqué et attentionné envers ses fans.`
+    }
+};
+
 document.addEventListener("DOMContentLoaded", (event) => {
   console.log("DOM fully loaded and parsed");
     /* ============================= */
@@ -25,49 +69,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
     /* Contenu sur les présentations des différents membres de Stray Kids */
     /* ============================= */
 
-    const membersData = {
-        "BangChan": {
-            name: "Bang Chan",
-            img: "images/bangchan-member.jpg",
-            desc: `Leader du groupe Stray Kids, Bang Chan est reconnu pour son talent polyvalent en tant que chanteur, danseur, rappeur et producteur. Perfectionniste et travailleur, il est à l’origine de nombreuses compositions du groupe grâce à son implication au sein du trio de production 3RACHA. Charismatique et bienveillant, il est apprécié pour son énergie, sa créativité et son dévouement envers les fans comme envers ses membres.`
-        },
-        "Felix": {
-            name: "Felix",
-            img: "images/members/felix-member.jpg",
-            desc: `Felix est connu pour sa voix grave iconique, son charisme puissant sur scène et sa personnalité douce hors scène. Danseur exceptionnel, il apporte une énergie unique aux performances du groupe.`
-        },
-        "Seungmin": {
-            name: "Seungmin",
-            img: "images/members/seungmin-member.jpg",
-            desc: `Seungmin est le vocaliste principal du groupe, reconnu pour sa voix stable et émotionnelle. Appliqué et sérieux, il met un point d'honneur à toujours offrir des performances impeccables.`
-        },
-        "IN": {
-            name: "IN",
-            img: "images/members/in-member.jpg",
-            desc: `IN est le plus jeune membre du groupe. Il possède une voix douce mais puissante et travaille constamment pour améliorer ses performances. Il est apprécié pour son humour et sa personnalité attachante.`
-        },
-        "Han": {
-            name: "Han",
-            img: "images/members/han-member.jpg",
-            desc: `Han est chanteur, rappeur et producteur. Son talent polyvalent et sa sensibilité artistique sont au cœur de l'identité musicale du groupe.`
-        },
-        "Lee Know": {
-            name: "Lee Know",
-            img: "images/members/leeknow-member.jpg",
-            desc: `Lee Know est danseur principal, connu pour sa précision et son charisme. Il possède un humour particulier très apprécié par les fans.`
-        },
-        "Hyunjin": {
-            name: "Hyunjin",
-            img: "images/members/hyunjin-member.jpg",
-            desc: `Hyunjin est danseur principal et visuel du groupe. Ses expressions scéniques et son élégance en font l’un des membres les plus remarqués du groupe.`
-        },
-        "Changbin": {
-            name: "Changbin",
-            img: "images/members/changbin-member.jpg",
-            desc: `Rappeur et membre de 3RACHA, Changbin est connu pour son flow rapide et puissant. Malgré son apparence intense, il est très impliqué et attentionné envers ses fans.`
-        }
-    };
-
     // Sélection des éléments
     const buttons = document.querySelectorAll(".navbar-members button");
     const nameEl = document.querySelector(".infos-member .text-member h2");
@@ -78,10 +79,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
     buttons.forEach(button => {
         button.addEventListener("click", () => {
 
-            // Style bouton actif
-            document.querySelector(".navbar-members .active")
-                    ?.classList.remove("active");
-            button.classList.add("active");
+        // Style bouton actif
+        const activeButton = document.querySelector(".navbar-members .active");
+
+        if (activeButton) {
+            activeButton.classList.remove("active");
+        }
+
+        button.classList.add("active");
 
             const memberKey = button.textContent.trim();
 

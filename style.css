@@ -863,6 +863,7 @@ span.number-albums-eps {
     flex-direction: column;
 
     position: relative;
+    height: 100vh;
 }
 
 .five-best-songs h2 {

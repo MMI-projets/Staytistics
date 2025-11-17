@@ -5,7 +5,7 @@
 :root {
     --ff-text: "Glory", serif;
     --ff-second-title: "Space Grotesk", sans-serif;
-    --color-red: #ff380c;
+    --color-red: #AD2000;
     --color-black: #1B1616; 
 }
 
@@ -48,7 +48,7 @@ header h1 {
     font-size: 15rem;
     font-family: "Kolker Brush", cursive;
     font-weight: 400;
-    color: #ff380c;
+    color: #AD2000;
     margin: 1px;
 }
 
@@ -56,6 +56,7 @@ header p {
     font-size: 2rem;
     font-family: var(--ff-text);
     margin: 5px;
+    color:#ffffff; 
 }
 
 header button {
@@ -72,6 +73,9 @@ header button {
     cursor: pointer;
     transition: 0.3s ease;
     z-index: 2;
+}
+.play {
+    font-size: 1.6rem;
 }
 
 header button:hover {
@@ -322,7 +326,7 @@ header button:hover {
     left: 0;
     width: 220px;
     height: 2px;
-    background-color: #ff380c;
+    background-color: #AD2000;
     border-radius: 2px;
 }
 
@@ -830,7 +834,7 @@ span.number-albums-eps {
     position: absolute;
     top: 15px;
     right: 15px;
-    background: #c0392b;
+    background: #AD2000;
     color: #fff;
     border: none;
     border-radius: 50%;

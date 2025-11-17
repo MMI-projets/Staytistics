@@ -5,7 +5,7 @@ let currentFilterType = 'album'; // Filtre courant par défaut
 const membersData = {
     "BangChan": {
         name: "Bang Chan",
-        img: "images/bangchan-member.jpg",
+        img: "images/members/bangchan-member.jpg",
         desc: `Leader du groupe Stray Kids, Bang Chan est reconnu pour son talent polyvalent en tant que chanteur, danseur, rappeur et producteur. Perfectionniste et travailleur, il est à l’origine de nombreuses compositions du groupe grâce à son implication au sein du trio de production 3RACHA. Charismatique et bienveillant, il est apprécié pour son énergie, sa créativité et son dévouement envers les fans comme envers ses membres.`
     },
     "Felix": {

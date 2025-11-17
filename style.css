@@ -113,14 +113,14 @@ header button:hover {
 
 .who-text h2 {
     color: #fff;
-    text-align: center;
+    text-align: left;
 }
 
 .who-text h2::after {
     content: "";
     position: absolute;
     bottom: -10px;
-    left: 70px;
+    left: 0px;
     width: 230px;
     height: 2px;
     background-color: #ff380c;

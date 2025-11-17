@@ -1,9 +1,14 @@
+
 // ===============================
-// CHARGEMENT DU CSV DES STREAMS
+// VARIABLES GLOBALES
 // ===============================
+let tousLesAlbums = []; // Données de Deezer
+let popupActive = null; // Popup actuelle (pour la fermer facilement)
+
+    // CHARGEMENT DU CSV DES STREAMS
 let streamsData = []; // contiendra les données du CSV
 
-// Promise globale pour ne charger le CSV qu'une seule fois
+    // Promise globale pour ne charger le CSV qu'une seule fois
 let streamsCSVPromise = null;
 
 function getStreamsData() {
@@ -26,11 +31,6 @@ function getStreamsData() {
     return streamsCSVPromise;
 }
 
-// ===============================
-// VARIABLES GLOBALES
-// ===============================
-let tousLesAlbums = []; // Données de Deezer
-let popupActive = null; // Popup actuelle (pour la fermer facilement)
 
 
 // ===============================
@@ -55,7 +55,7 @@ function afficherFiltres(type) {
     const albumsDiv = document.querySelector(".discographie-lists");
     albumsDiv.innerHTML = ""; // on vide le conteneur
 
-    // mettre à jour le filtre courant (utile pour le bouton de tri)
+    // mettre à jour le filtre courant (pour le bouton de tri)
     currentFilterType = type;
 
     // Filtrer selon le type demandé (album ou ep)
@@ -89,7 +89,7 @@ function afficherFiltres(type) {
         div.dataset.idAlbum = album.id || '';
         div.dataset.titleAlbum = album.title || '';
 
-        // Réduction du titre (si le titre est trop long)
+        // Réduire le titre (si le titre est trop long)
         let titleDisplay = album.title || '';
         if (titleDisplay.length > 30) {
             titleDisplay = titleDisplay.substr(0, 30) + '...';
@@ -131,7 +131,9 @@ function ouvrirPopupAlbum(album) {
     document.body.style.overflow = 'hidden';
 
     // On ferme une popup existante
-    if (popupActive) popupActive.remove();
+    if (popupActive) {
+        popupActive.remove();
+    } 
 
     // On crée la popup
     const divPopup = document.createElement('div');
@@ -183,11 +185,10 @@ function ouvrirPopUpMentionsCredits() {
     // On bloque le scroll du body
     document.body.style.overflow = 'hidden';
 
-
-    console.log("ertesesrafgazeabdjnok,")
-
     // On ferme une popup existante
-    if (popupActive) popupActive.remove();
+    if (popupActive) {
+        popupActive.remove();
+    } 
 
     const divPopupMentionsCredits = document.createElement('div');
     divPopupMentionsCredits.className = 'popup-MentionsCredits';
@@ -302,7 +303,6 @@ function parseTracks(data) {
         console.log(track)
         console.log("---");
 
-
         const li = document.createElement('li');
         li.textContent = track.title;
         trackListUl.appendChild(li);
@@ -328,20 +328,19 @@ function parseTracks(data) {
 
 function afficherGraphiquePistes(tracksDeezer) {
     const ctx = popupActive.querySelector('#trackChart');
-    if (!ctx) return;
-
-    // On récupère les labels et les streams
-    // const { labels, streams } = compareTitleFromCSV_Deezer(tracksDeezer);
-
+    if (!ctx) {
+        return;
+    }
+    
     const { labels, streams } = getLabelsAndStreamsForAlbum(tracksDeezer);
-
 
     console.log("=====");
     console.log(labels, streams);
     console.log("=====");
 
-
-    if (ctx.chartInstance) ctx.chartInstance.destroy();
+    if (ctx.chartInstance) {
+        ctx.chartInstance.destroy();
+    } 
 
     ctx.chartInstance = new Chart(ctx, {
         type: 'bar',
@@ -370,7 +369,7 @@ function afficherGraphiquePistes(tracksDeezer) {
 // ========= Idées =========
 // =========================
 // Prendre les données du nombres d'écoutes des musiques du fichier CSV, 
-// puispar l'API Deezer où on récupère les morceaux de musique par album, 
+// puis par l'API Deezer où on récupère les morceaux de musique par album, 
 // On fait la somme de toutes les musiques de l'album en question 
 // Chaque année, on récupère les données de tous les albums d'une même année,
 // On pioche l'album qui a fait le plus d'écoutes (qui correspond au MAX du nb d'écoutes sur tous les albums de la même année),
@@ -490,7 +489,6 @@ function afficherGraphiqueAlbumsParAnnee() {
     // Titres des albums pour chaque année
     const albumTitles = anneesTriees.map(year => window.topAlbumsByYear[year].album.title);
 
-    // Si un graphique existe déjà, on le détruit
     if (ctx.chartInstance) {
         ctx.chartInstance.destroy();
     }
@@ -581,8 +579,6 @@ function afficherGraphiqueAlbumsParAnnee() {
         }
     };
 
-
-
     // =========================
     // AFFICHAGE TEXTE DES ALBUMS
     // =========================
@@ -595,7 +591,7 @@ function afficherGraphiqueAlbumsParAnnee() {
             const tracks = topAlbum.tracks ? topAlbum.tracks.data : [];
             const divYear = document.createElement('div');
             divYear.className = 'year-album-text';
-            divYear.dataset.year = year; // ← indispensable pour le popup
+            divYear.dataset.year = year; // Très important à mettre
             divYear.innerHTML = `
                 <h3>${year} - ${topAlbum.title}</h3>
                 <ul>
@@ -618,7 +614,9 @@ function afficherGraphiqueAlbumsParAnnee() {
 
 function activerInteractiviteGraphiqueEtTexte() {
     const ctx = document.getElementById('albumsOverYearsChart');
-    if (!ctx || !ctx.chartInstance) return;
+    if (!ctx || !ctx.chartInstance) {
+        return;
+    }
 
     const chart = ctx.chartInstance;
     const labels = chart.data.labels;
@@ -666,7 +664,6 @@ function activerInteractiviteGraphiqueEtTexte() {
 
         block.addEventListener('mouseleave', () => {
             block.classList.remove('highlight');
-
             chart.setActiveElements([]);
             chart.tooltip.setActiveElements([], { x: 0, y: 0 });
             chart.update();
@@ -677,7 +674,13 @@ function activerInteractiviteGraphiqueEtTexte() {
 
 function creerPopupAlbum(year) {
     const topAlbum = window.topAlbumsByYear[year].album;
-    const tracks = topAlbum.tracks ? topAlbum.tracks.data : [];
+    let tracks = [];
+
+    if (topAlbum.tracks) {
+        tracks = topAlbum.tracks.data;
+    } else {
+        tracks = [];
+    }
 
     // Calcul total streams
     const totalStreams = tracks.reduce((acc, t) => {
@@ -844,7 +847,16 @@ function getLabelsAndStreamsForAlbum(albumTracks) {
             const trackTitle = (track.title || "").trim().toLowerCase();
             return csvTitle && trackTitle && (trackTitle.includes(csvTitle) || trackTitle === csvTitle);
         });
-        return found ? found.streams : 0;
+        let streamCount = 0;
+
+        if (found) {
+            streamCount = found.streams;
+        } else {
+            streamCount = 0;
+        }
+
+        return streamCount;
+
     });
 
     return { labels, streams };

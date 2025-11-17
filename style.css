@@ -145,7 +145,17 @@ header button:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+@media screen and (max-width: 1080px) {
+    .who2 {
+        width: 50%;
+    }
+}
 
+@media screen and (max-width: 1260px) {
+    .who2 {
+        width: 60%;
+    }
+}
     /* ============================= */
     /* Bloc des Membres Modernisé */
     /* ============================= */
@@ -171,6 +181,10 @@ header button:hover {
 
 .navbar-members {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 30px;
     gap: 20px;
     flex-wrap: wrap;
     margin-bottom: 40px;
@@ -328,6 +342,12 @@ header button:hover {
     height: 2px;
     background-color: #AD2000;
     border-radius: 2px;
+}
+
+@media screen and (max-width: 1220px) {
+    .interet {
+        flex-direction: column;
+    }
 }
 
 /* ============================= */
@@ -695,6 +715,8 @@ span.number-albums-eps {
 
 .graphic-over-years .canvas-texts {
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .graphic-over-years h2 {
@@ -796,6 +818,19 @@ span.number-albums-eps {
     color: white;
 }
 
+@media screen and (max-width: 1180px) {
+    .canvas-texts {
+        flex-direction: column;
+    }
+    .graphic-texts {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+}
+
 /* ============================= */
 /* 5 Meilleures musiques les plus écoutées */
 /* ============================= */
@@ -865,6 +900,28 @@ span.number-albums-eps {
     box-shadow: 0 5px 20px rgba(0,0,0,0.2);
 }
 
+@media screen and (max-width: 1400px) {
+    .five-best-songs {
+        height: 120vh;
+    }    
+
+    .top5-container {
+        flex-direction: column;
+        gap: 30px;
+        height: 600px;
+    }
+
+    #youtubeIframeContainer {
+        max-width: 700px;
+        height: 600px;
+            
+    }
+
+    .canvasContainer {
+        height: 350px
+    }
+
+}
 
 /* ============================= */
 /* POPUPs */

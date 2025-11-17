@@ -32,7 +32,7 @@
     <!-- Bibliothèque pour animation de compteur -->
     <script src="https://unpkg.com/counterup2@2.0.2/dist/index.js"></script>
 
-    <!-- AOS -->
+    <!-- AOS - Animate On Scroll Library -->
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 </head>
@@ -77,6 +77,7 @@
                     <span>Hyunjin</span><span class="sep">-</span>
                     <span>Changbin</span>
                 </p>
+                <!-- Deuxième partie répétée pour créer un effet "infini" -->
                 <p>
                     <span>Felix</span><span class="sep">-</span>
                     <span>Seungmin</span><span class="sep">-</span>
@@ -104,14 +105,15 @@
             </div>
             <div class="infos-member">
                 <div class="text-member">
+                    <!-- Par défaut, celui du leader du groupe -->
+                    <!-- Cette partie change en fonction du membre qui a été cliqué depuis le bouton -->
                     <h2>BangChan</h2>
                     <p>
                         Leader du groupe Stray Kids, Bang Chan est reconnu pour son talent polyvalent en tant que chanteur, danseur, rappeur et producteur. Perfectionniste et travailleur, il est à l’origine de nombreuses compositions du groupe grâce à son implication au sein du trio de production 3RACHA. Charismatique et bienveillant, il est apprécié pour son énergie, sa créativité et son dévouement envers les fans comme envers ses membres.
                     </p>
                 </div>
-                <img src="images/members/bangchan-member.jpg" alt="">
+                <img src="images/members/bangchan-member.jpg" alt="Membre de Stray Kids">
             </div>
-
         </div>
 
     </section>
@@ -136,24 +138,20 @@
         </div>
     </section>
 
-    <div class="banniere" data-aos="zoom-in-left">
+    <section class="banniere" data-aos="zoom-in-left">
         <div class="banniere-content">
             <h2>Les données ne s'arrêtent pas aux albums : chaque morceau est aussi analysé !</h2>
-            
             <div class="banniere-content-button">
                 <a href="#discographie" class="info-btn">
-                    <i class='bx bx-chart-bar-big-columns'></i>
-                    Se renseigner
+                    <i class='bx bx-chart-bar-big-columns'></i>Se renseigner
                 </a>
             </div>
-            
         </div>
-    </div>
+    </section>
 
 
     <section id="discographie">
         <div class="discographie">
-
             <!-- HEADER NORMAL -->
             <div class="discographie-header-normal">
                 <img src="images/disque.png" alt="Image d'un disque" class="discographie-img">
@@ -188,9 +186,6 @@
             <div class="list-albums-eps">
                 <div class="container-tri-title">
                     <h2 class="title-list-albums-eps">Albums</h2>
-                    <!-- <div class="tri-container">
-                        <button class="tri"><i class='bx  bx-filter'></i> Par ordre alphabétique</button>
-                    </div> -->
                 </div>
                 <span class="number-albums-eps"></span>
                 <div class="discographie-lists">
@@ -205,21 +200,14 @@
         <h2><i class='bx  bx-trophy-star'></i> Top 5 des musiques les plus écoutées</h2>
 
         <div class="top5-container">
-
-            <!-- Iframe YouTube à gauche -->
             <div id="youtubeIframeContainer">
                 <!-- Par défaut, on met le plus écouté (God's Menu) -->
                 <iframe width="800" height="400" src="https://www.youtube.com/embed/TQTlCHxyuu8?list=RDTQTlCHxyuu8" title="Stray Kids &quot;神메뉴(God&#39;s Menu)&quot; M/V" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
 
-
-            <!-- Graphique à droite -->
             <div class="canvasContainer">
                 <canvas id="top5Chart"></canvas>
             </div>
-
-
-
         </div>
     </section>
 
@@ -247,12 +235,8 @@
     <!-- ============ -->
     <script src="js/script.js"></script>
     <script src="js/functions.js"></script>
-    <!-- TEST POUR L'EVOLUTION AU FIL DU TEMPS -->
-    <!-- <script src="https://api.deezer.com/album/663535781/tracks?output=jsonp&callback=getTracksFromAlbum"></script> -->
-    <script src="https://api.deezer.com/artist/13923487/albums?output=jsonp&callback=getAllAlbums"></script>
 
     <!-- Appel JSONP Deezer -->
     <script src="https://api.deezer.com/artist/13923487/albums?output=jsonp&callback=afficherAlbums"></script>
-
 </body>
 </html>

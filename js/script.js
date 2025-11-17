@@ -46,7 +46,7 @@ const membersData = {
 };
 
 document.addEventListener("DOMContentLoaded", (event) => {
-  console.log("DOM fully loaded and parsed");
+  console.log("DOM complètement chargé et parsé");
     /* ============================= */
     /* Boutons stop/play pour la vidéo dans le hero-section */
     /* ============================= */
@@ -138,7 +138,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
         stickyHeaderTitle.textContent = "Discographies";
 
         // Afficher le contenu filtré
-        afficherFiltres(typeClass === "display-albums" ? "album" : "ep");
+        let filtreType;
+
+        if (typeClass === "display-albums") {
+            filtreType = "album";
+        } else {
+            filtreType = "ep";
+        }
+
+        afficherFiltres(filtreType);
     }
 
     // Ajouter écouteur à tous les boutons
@@ -153,7 +161,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     /* ============================= */
     /* Navbar en position sticky de la partie discographie */
     /* ============================= */
-    // Position sticky pour avoir une nav en position sticky 
+
     const stickyHeader = document.querySelector(".discographie-header-sticky");
     const normalHeader = document.querySelector(".discographie-header-normal");
 
@@ -161,7 +169,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     const triggerStart = normalHeader.getBoundingClientRect().bottom + window.scrollY;
 
     // Hauteur à laquelle le sticky disparaît
-    const triggerEnd = 5075; // tu l'as déterminé manuellement
+    const triggerEnd = 5075;
 
     window.addEventListener("scroll", () => {
         const scrollY = window.scrollY;
@@ -172,7 +180,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
             stickyHeader.classList.remove("active");
         }
 
-        // console.log("Scroll Y :", scrollY); // debug
     }, { passive: true });
 
     
@@ -180,8 +187,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
     /* Effet de compteur - Animation - Chiffres du nombres d'écoutes sur Spotify de Stray Kids */
     /* ============================= */
     AOS.init({
-        once: true, // animation une seule fois
-        duration: 1200 // durée globale des animations
+        once: true,
+        duration: 1200 
     });
 
     // Sélection de tous les compteurs
@@ -210,10 +217,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
     document.querySelector("button.mentions-legales-credits").addEventListener("click", ouvrirPopUpMentionsCredits);
 
 
-    // ===============================
-    // ATTACHEMENT DU BOUTON DE TRI
-    // ===============================
-
+    /* =============================== */
+    /* ATTACHEMENT DU BOUTON DE TRI */
+    /* =============================== */
 
     const triBtn = document.querySelector('.tri');
     if (!triBtn) {
@@ -230,10 +236,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         } else {
             triBtn.innerHTML = "<i class='bx bx-filter'></i> Par ordre alphabétique";
         }
-        // Raffraîchir l'affichage en gardant le filtre courant
         afficherFiltres(currentFilterType);
     });
-
-
 });
 

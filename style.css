@@ -3,7 +3,6 @@
 /* ============================= */
 
 :root {
-    /* --ff-text: "Goudy Bookletter 1911", serif; */
     --ff-text: "Glory", serif;
     --ff-second-title: "Space Grotesk", sans-serif;
     --color-red: #ff380c;
@@ -61,10 +60,10 @@ header p {
 
 header button {
     position: absolute;
-    bottom: 15px;
-    right: 10px;
-    width: 50px;
-    height: 50px;
+    bottom: 40px;
+    right: 40px;
+    width: 80px;
+    height: 80px;
     border: none;
     border-radius: 50%;
     background-color: rgba(100, 100, 100, 0.7);
@@ -143,10 +142,9 @@ header button:hover {
 }
 
 
-
-/* ============================= */
-/* Bloc des Membres Modernisé */
-/* ============================= */
+    /* ============================= */
+    /* Bloc des Membres Modernisé */
+    /* ============================= */
 
 .presentation-members {
     width: 100%;
@@ -178,7 +176,6 @@ header button:hover {
     padding: 10px 22px;
     font-size: 1.1rem;
     border-radius: 50px;
-    /* background: linear-gradient(90deg, var(--color-red), #ef300efb); */
     background: var(--color-red);
     color: white;
     border: none;
@@ -188,7 +185,6 @@ header button:hover {
 }
 
 .navbar-members button:hover {
-    /* transform: translateY(-3px); */
     box-shadow: inset 0 0 40px rgba(106, 29, 11, 0.07);
     color: var(--color-red);
     background-color: #fff;
@@ -223,12 +219,8 @@ header button:hover {
 .text-member h2 {
     font-size: 3rem;
     margin-bottom: 20px;
-    /* background: linear-gradient(90deg, #ff5a2e, #ff9665); */
     color: var(--color-red);
     font-family: var(--ff-second-title);
-    /* background: linear-gradient(90deg, var(--color-red), #ef300efb);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; */
 }
 
 .text-member p {
@@ -237,25 +229,20 @@ header button:hover {
     opacity: 0.9;
     color: black;
 }
-/* ============================= */
-/* Défilement horizontal SKZ des membres */
-/* ============================= */
+    /* ============================= */
+    /* Défilement horizontal SKZ des membres */
+    /* ============================= */
 
 .scrolling-members-skz {
   width: 100%;
   overflow: hidden;
   white-space: nowrap;
   background: var(--color-black);
-  /* background: #a62305;
-  background: #fff;  */
-  /* color: var(--color-red); */
   color: #fff;
   font-family: var(--ff-second-title);
   font-weight: 600;
   padding: 20px 0;
   position: relative;
-
-  /* Ajout des lignes pointillées */
 }
 
 .scrolling-members-skz span {
@@ -284,7 +271,7 @@ header button:hover {
   opacity: 0.5;
 }
 
-/* Animation fluide, sans retour en arrière */
+    /* Animation fluide, sans retour en arrière */
 @keyframes scroll-left {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
@@ -326,7 +313,6 @@ header button:hover {
     color: #000;
     margin-bottom: 25px;
     font-family: var(--ff-second-title);
-
 }
 
 .interet-text h2::after {
@@ -341,7 +327,7 @@ header button:hover {
 }
 
 /* ============================= */
-/* 🖼️ BANNIERE */
+/* BANNIERE */
 /* ============================= */
 .banniere {
     position: relative;
@@ -352,14 +338,14 @@ header button:hover {
     color: #fff;
     overflow: hidden;
 
-    /* Image en fond, avec effet de parallaxe */
+    /* Image en fond, avec un effet de parallaxe */
     background-image: url("images/image-3.webp");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
 }
 
-/*  Couche sombre sur l'image/banniere (ne touche pas au texte) */
+    /* Couche sombre sur l'image/banniere (ne touche pas au texte) */
 .banniere::before {
     content: "";
     position: absolute;
@@ -374,7 +360,6 @@ header button:hover {
 .banniere-content {
     position: relative;
     z-index: 1; 
-    /* text-align: center; */
     max-width: 70%;
 }
 
@@ -416,6 +401,8 @@ header button:hover {
 
 /* ============================= */
 /* Discographie */
+/* ============================= */
+
 .discographie {
     border-bottom-left-radius : 70px;
     border-bottom-right-radius : 70px;
@@ -430,7 +417,7 @@ header button:hover {
     position: relative;
 }
 
-/* HEADER NORMAL */
+    /* HEADER NORMAL */
 .discographie-header-normal {
     display: flex;
     flex-direction: column;
@@ -461,7 +448,7 @@ header button:hover {
     margin-top: 15px;
 }
 
-/* HEADER STICKY COMPACT */
+    /* HEADER STICKY COMPACT */
 .discographie-header-sticky {
     position: fixed;
     top: 0;
@@ -480,13 +467,13 @@ header button:hover {
     transition: opacity 0.3s ease;
 }
 
-/* Sticky actif */
+    /* Sticky actif */
 .discographie-header-sticky.active {
     opacity: 1;
     pointer-events: auto;
 }
 
-/* Bloc gauche : logo + titre */
+    /* Bloc gauche : logo + titre */
 .discographie-header-sticky .title-logo-discographie {
     display: flex;
     align-items: center;
@@ -498,7 +485,7 @@ header button:hover {
     height: 40px;
 }
 
-/* Bloc central : titre contenu + bouton tri */
+    /* Bloc central : titre contenu + bouton tri */
 .discographie-header-sticky .container-tri-title {
     position: absolute;
     left: 50%;
@@ -508,7 +495,7 @@ header button:hover {
     align-items: center;
 }
 
-/* Bloc droit : boutons Albums/EPs */
+    /* Bloc droit : boutons Albums/EPs */
 .discographie-header-sticky .display-type-albums.compact-header {
     margin-left: auto; 
     display: flex;
@@ -522,15 +509,13 @@ header button:hover {
     top: 0;
 }
 
-
-
-
 .discographie-lists {
     display: flex;
     justify-content: space-between;
     margin-top: 30px;
     gap: 30px;
 }
+
 .discographie-lists img {
     height: auto;
     border-radius: 10px;
@@ -568,7 +553,6 @@ a.button-deezer:hover {
     box-shadow: 3px 3px 6px black;
 }
 
-
 .display-type-albums {
     display: flex;
     padding: 20px;
@@ -581,7 +565,6 @@ a.button-deezer:hover {
     border-radius: 10px;
     background-color: black;
     color: white;
-    /* border: 2px solid white; */
     font-weight: bold;
     font-size: 1.1rem;
     transition: all 0.2s ease-in;
@@ -589,8 +572,6 @@ a.button-deezer:hover {
 
 .display-type-albums button:hover {
     cursor: pointer;
-    /* background-color: black;
-    color: white; */
 }
 
 .display-albums.active,
@@ -600,7 +581,7 @@ a.button-deezer:hover {
     font-weight: bold;
 }
 
-/* Discographie - Listes des albums / EPs */
+    /* Discographie - Listes des albums / EPs */
 .list-albums-eps {
     padding: 30px;
     display: flex;
@@ -617,7 +598,6 @@ a.button-deezer:hover {
     margin-right: auto; 
 }
 
-
 .list-albums-eps .container-tri-title {
     position: relative;
     width: 100%;
@@ -631,7 +611,6 @@ a.button-deezer:hover {
     top: 50%;
     transform: translateY(-50%); 
 }
-
 
 .tri-container {
     margin-top: 20px;
@@ -649,7 +628,6 @@ a.button-deezer:hover {
     background-color: #fff;
     color: #000000;
 
-    /* border: none; */
     border-radius: 25px;
     border: 2px solid black;
 
@@ -659,13 +637,14 @@ a.button-deezer:hover {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
+
 .tri:hover {
     background-color: #f1f1f0;
 }
+
 .tri:active {
     background-color: #c32f09;
 }
-
 
 span.number-albums-eps {
     font-size: 1.2rem;
@@ -697,7 +676,6 @@ span.number-albums-eps {
 }
 
 
-/* graphic-over-years */
 /* ===========================
    SECTION : Graphique sur les années
    =========================== */
@@ -716,7 +694,7 @@ span.number-albums-eps {
     display: flex;
 }
 
-/* Titre */
+    /* Titre */
 .graphic-over-years h2 {
     font-family: "Space Grotesk", sans-serif;
     font-weight: 700;
@@ -724,12 +702,11 @@ span.number-albums-eps {
     margin-bottom: 40px;
     letter-spacing: 1px;
     color: #000;
-    /* border-bottom: 2px solid #000; */
     display: inline-block;
     padding-bottom: 8px;
 }
 
-/* Conteneur du graphique */
+    /* Conteneur du graphique */
 .graphic-over-years canvas {
     width: 60%;
     max-width: 850px;
@@ -741,28 +718,25 @@ span.number-albums-eps {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* ==============================
-   SECTION : Texte des albums par année
-   ============================== */
+    /* ============================== */
+    /* SECTION : Texte des albums par année */
+    /* ============================== */
 .graphic-texts {
     display: flex;
     flex-direction: column;
-    gap: 10px; /* espace entre chaque année */
-    /* margin-top: 40px; */
+    gap: 10px; 
     width: 100%;
     max-width: 1000px;
 }
 
-/* Chaque bloc année-album */
 .year-album-text {
     background: linear-gradient(135deg, #f0f0f0, #ffffff);
     border-radius: 12px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-    /* padding: 20px 25px; */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Hover effect pour chaque album */
+
 .year-album-text:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
@@ -775,18 +749,16 @@ span.number-albums-eps {
     color: white;
 }
 
-/* Titre année - album */
 .year-album-text h3 {
     font-family: "Space Grotesk", sans-serif;
     font-weight: 700;
     font-size: 1.3rem;
     margin-bottom: 15px;
-    color: #c0392b; /* accent rouge pour le titre */
+    color: #c0392b;
     border-bottom: 2px solid #c0392b;
     padding-bottom: 5px;
 }
 
-/* Liste des pistes */
 .year-album-text ul {
     list-style: none;
     padding-left: 0;
@@ -796,7 +768,6 @@ span.number-albums-eps {
     gap: 8px 15px;
 }
 
-/* Chaque piste */
 .year-album-text ul li {
     background-color: #eaeaea;
     padding: 8px 12px;
@@ -806,7 +777,6 @@ span.number-albums-eps {
     transition: background-color 0.3s ease;
 }
 
-/* Hover effect piste */
 .year-album-text ul li:hover {
     background-color: #c0392b;
     color: #fff;
@@ -827,7 +797,7 @@ span.number-albums-eps {
 
 /* POPUP OVERLAY GRAPHIC */
 
-/* Popup overlay */
+    /* Popup overlay */
 .popup-album-overlay {
     position: fixed;
     top: 0;
@@ -841,7 +811,7 @@ span.number-albums-eps {
     z-index: 9999;
 }
 
-/* Popup contenu */
+    /* Popup contenu */
 .popup-album-content {
     background: #fff;
     color: #111;
@@ -855,7 +825,7 @@ span.number-albums-eps {
     position: relative;
 }
 
-/* Fermer popup */
+    /* Fermer popup */
 .popup-album-content button.close-popup {
     position: absolute;
     top: 15px;
@@ -870,7 +840,7 @@ span.number-albums-eps {
     cursor: pointer;
 }
 
-/* Liste des pistes avec écoutes */
+    /* Liste des pistes avec écoutes */
 .popup-album-content ul li {
     display: flex;
     justify-content: space-between;
@@ -883,7 +853,7 @@ span.number-albums-eps {
 /* ============================= */
 /* 5 Meilleurs musiques les plus écoutés */
 /* ============================= */
-/* SECTION — Top 5 Musiques */
+    /* SECTION — Top 5 Musiques */
 .five-best-songs {
     padding: 40px;
     background: var(--color-black);
@@ -896,7 +866,7 @@ span.number-albums-eps {
 }
 
 .five-best-songs h2 {
-    color: var(--color-red);
+    color: #fff;
     font-size: 3rem;
     font-weight: 700;
     
@@ -908,18 +878,17 @@ span.number-albums-eps {
 
 .five-best-songs .top5-container {
     display: flex;
-    /* flex-direction: column; */
     justify-content: center;
     align-items: center;
     width: 100%;
     margin: auto;
 }
 
-/* Iframe */
+    /* Iframe */
 #youtubeIframeContainer {
     width: 60%;
     max-width: 1000px;
-    height: 300px;   /* réduit la hauteur pour matcher le graphique */
+    height: 300px;   
     border-radius: 12px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.2);
     overflow: hidden;
@@ -934,25 +903,20 @@ span.number-albums-eps {
 
 .canvasContainer {
     display: flex;
-    justify-content: left;
+    justify-content: center;
     align-items: center;
     width: 100%;
     height: 400px;  
 }
 
-
-/* Graphique */
+    /* Graphique */
 #top5Chart {
     width: 80%;
     max-width: 800px;
-    height: 100px;    /* hauteur réduite */
+    height: 100px;  
     border-radius: 12px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.2);
 }
-
-
-
-
 
 
 /* ============================= */
@@ -975,7 +939,6 @@ div.popup-MentionsCredits {
     transition: background-color 0.3s ease;
 }
 
-
 div.popup {
     background: #fff;
     padding: 25px 30px;
@@ -995,7 +958,7 @@ div.popup {
     flex-direction: column;
 }
 
-/* POPUP D'UN ALBUM */
+    /* POPUP D'UN ALBUM */
 
 div.album-popup-infos {
     display: flex;
@@ -1008,7 +971,6 @@ div.album-popup-infos div.album-texts-popup-infos h2 {
     text-align: center;
 }
 
-/* Image de l'album */
 div.popup img {
     display: flex;
     margin: auto;
@@ -1018,7 +980,6 @@ div.popup img {
     margin-bottom: 15px;
 }
 
-/* Titres et textes */
 div.popup h2 {
     margin: 10px 0 5px;
     font-size: 1.5rem;
@@ -1031,7 +992,7 @@ div.popup p {
     line-height: 1.4;
 }
 
-/* Liste des pistes */
+    /* Liste des pistes */
 div.popup ul {
     list-style: none;
     padding-left: 0;
@@ -1048,14 +1009,14 @@ div.popup ul li {
     font-size: 0.9rem;
 }
 
-/* Canvas du graphique */
+    /* Canvas du graphique */
 div.popup canvas {
     width: 100% !important;
     height: auto !important;
     margin-bottom: 15px;
 }
 
-/* Bouton fermer */
+    /* Bouton fermer */
 div.popup button#closePopup {
     position: fixed;
     top: 15px;
@@ -1074,7 +1035,7 @@ div.popup button#closePopup:hover {
     background: #e04343;
 }
 
-/* Scrollbar interne (optionnel, pour Firefox et Webkit) */
+    /* Scrollbar interne */
 div.popup::-webkit-scrollbar {
     width: 6px;
 }
@@ -1093,7 +1054,7 @@ div.popup::-webkit-scrollbar-track {
     color: rgb(206, 203, 203);
 }
 
-/* POP UP - MENTIONS LEGALES */
+    /* POP UP - MENTIONS LEGALES */
 
 div.popup section {
     padding: 0 30px;
@@ -1110,6 +1071,7 @@ div.popup div[class^="infos-"] {
 div.popup h1 {
     margin: 10px 0 0 0;
 }
+
 /* ============================= */
 /* Footer */
 /* ============================= */

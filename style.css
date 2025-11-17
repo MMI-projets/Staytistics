@@ -18,7 +18,7 @@ body {
     background-color: #ffffff;
     color: #ffffff;
     overflow-x: hidden;
-    font-family: var(--ff-text); /* police d'écriture de texte par défaut*/
+    font-family: var(--ff-text); /* Police d'écriture de texte par défaut*/
 }
 
 /* ============================= */
@@ -471,7 +471,6 @@ header button:hover {
     transition: opacity 0.3s ease;
 }
 
-    /* Sticky actif */
 .discographie-header-sticky.active {
     opacity: 1;
     pointer-events: auto;
@@ -680,9 +679,9 @@ span.number-albums-eps {
 }
 
 
-/* ===========================
-   SECTION : Graphique sur les années
-   =========================== */
+/* =========================== */
+/* SECTION : Graphique sur les années */
+/* =========================== */
 .graphic-over-years {
     background-color: #fff;
     color: #111;
@@ -698,7 +697,6 @@ span.number-albums-eps {
     display: flex;
 }
 
-    /* Titre */
 .graphic-over-years h2 {
     font-family: "Space Grotesk", sans-serif;
     font-weight: 700;
@@ -768,7 +766,7 @@ span.number-albums-eps {
     padding-left: 0;
     margin: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* colonnes adaptatives */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
     gap: 8px 15px;
 }
 
@@ -798,64 +796,8 @@ span.number-albums-eps {
     color: white;
 }
 
-
-/* POPUP OVERLAY GRAPHIC */
-
-    /* Popup overlay */
-.popup-album-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-}
-
-    /* Popup contenu */
-.popup-album-content {
-    background: #fff;
-    color: #111;
-    padding: 25px;
-    border-radius: 12px;
-    width: 90%;
-    max-width: 600px;
-    max-height: 80vh;
-    overflow-y: auto;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    position: relative;
-}
-
-    /* Fermer popup */
-.popup-album-content button.close-popup {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: #AD2000;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    font-size: 1rem;
-    cursor: pointer;
-}
-
-    /* Liste des pistes avec écoutes */
-.popup-album-content ul li {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 12px;
-    border-bottom: 1px solid #eee;
-    font-size: 0.95rem;
-}
-
-
 /* ============================= */
-/* 5 Meilleurs musiques les plus écoutés */
+/* 5 Meilleures musiques les plus écoutées */
 /* ============================= */
     /* SECTION — Top 5 Musiques */
 .five-best-songs {
@@ -964,7 +906,6 @@ div.popup {
 }
 
     /* POPUP D'UN ALBUM */
-
 div.album-popup-infos {
     display: flex;
     flex-direction: column;
@@ -1060,13 +1001,12 @@ div.popup::-webkit-scrollbar-track {
 }
 
     /* POP UP - MENTIONS LEGALES */
-
 div.popup section {
     padding: 0 30px;
 }
 
 div.popup > div {
-    padding: 10px 30px;
+    padding: 10prgba(255, 197, 197, 0.7)
 }
 
 div.popup div[class^="infos-"] {

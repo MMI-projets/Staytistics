@@ -55,7 +55,7 @@ function afficherFiltres(type) {
     const albumsDiv = document.querySelector(".discographie-lists");
     albumsDiv.innerHTML = ""; // on vide le conteneur
 
-    // mettre à jour le filtre courant (pour le bouton de tri)
+    // Mettre à jour le filtre courant (pour le bouton de tri)
     currentFilterType = type;
 
     // Filtrer selon le type demandé (album ou ep)
@@ -157,7 +157,6 @@ function ouvrirPopupAlbum(album) {
                 <ul id="trackList">Chargement des pistes...</ul>
             </div>
 
-
             <br>
             <div class="graphic-songs-popup">
                 <strong>Nombres d'écoutes :</strong> <br>
@@ -175,7 +174,6 @@ function ouvrirPopupAlbum(album) {
     document.body.appendChild(divPopup);
     popupActive = divPopup;
     popupActive.dataset.albumTitle = album.title; // On stocke le titre
-
 
     // Charger les pistes via JSONP
     chargerPistesAlbum(album.id);
@@ -475,7 +473,9 @@ function albumsPerYear(data) {
 
 function afficherGraphiqueAlbumsParAnnee() {
     const ctx = document.getElementById('albumsOverYearsChart');
-    if (!ctx) return;
+    if (!ctx) {
+        return;
+    }
 
     // On trie les années dans l'ordre croissant
     const anneesTriees = Object.keys(window.topAlbumsByYear).sort((a, b) => a - b);
@@ -588,7 +588,15 @@ function afficherGraphiqueAlbumsParAnnee() {
 
         anneesTriees.forEach(year => {
             const topAlbum = window.topAlbumsByYear[year].album;
-            const tracks = topAlbum.tracks ? topAlbum.tracks.data : [];
+
+            let tracks = [];
+
+            if (topAlbum.tracks) {
+                tracks = topAlbum.tracks.data;
+            } else {
+                tracks = [];
+            }
+
             const divYear = document.createElement('div');
             divYear.className = 'year-album-text';
             divYear.dataset.year = year; // Très important à mettre
@@ -635,7 +643,9 @@ function activerInteractiviteGraphiqueEtTexte() {
             const year = labels[idx];
 
             const block = document.querySelector(`.year-album-text[data-year="${year}"]`);
-            if (block) block.classList.add('highlight');
+            if (block) {
+                block.classList.add('highlight');
+            }
         }
     });
 
@@ -655,7 +665,7 @@ function activerInteractiviteGraphiqueEtTexte() {
             block.classList.add('highlight');
 
             if (pointIndex !== -1) {
-                // Simule hover sur le point
+                // Simule le hover sur le point
                 chart.setActiveElements([{ datasetIndex: 0, index: pointIndex }]);
                 chart.tooltip.setActiveElements([{ datasetIndex: 0, index: pointIndex }], { x: 0, y: 0 });
                 chart.update();
@@ -669,51 +679,6 @@ function activerInteractiviteGraphiqueEtTexte() {
             chart.update();
         });
     });
-}
-
-
-function creerPopupAlbum(year) {
-    const topAlbum = window.topAlbumsByYear[year].album;
-    let tracks = [];
-
-    if (topAlbum.tracks) {
-        tracks = topAlbum.tracks.data;
-    } else {
-        tracks = [];
-    }
-
-    // Calcul total streams
-    const totalStreams = tracks.reduce((acc, t) => {
-        const found = streamsData.find(s =>
-            (s.Title || "").trim().toLowerCase() === (t.title || "").trim().toLowerCase()
-        );
-        return acc + (found ? parseInt(found.Streams.replace(/,/g, ''), 10) : 0);
-    }, 0);
-
-    // Création du popup
-    const popup = document.createElement('div');
-    popup.className = 'popup-album-overlay';
-    popup.innerHTML = `
-        <div class="popup-album-content">
-            <button class="close-popup">X</button>
-            <h2>${topAlbum.title} (${year})</h2>
-            <p><strong>Total streams :</strong> ${totalStreams.toLocaleString()}</p>
-            <ul>
-                ${tracks.map(track => {
-                    const found = streamsData.find(s =>
-                        (s.Title || "").trim().toLowerCase() === (track.title || "").trim().toLowerCase()
-                    );
-                    const streams = found ? parseInt(found.Streams.replace(/,/g, ''), 10) : 0;
-                    return `<li>${track.title} <span>${streams.toLocaleString()} streams</span></li>`;
-                }).join('')}
-            </ul>
-        </div>
-    `;
-
-    // Fermeture
-    popup.querySelector('.close-popup').addEventListener('click', () => popup.remove());
-
-    document.body.appendChild(popup);
 }
 
 // ===============================
@@ -734,7 +699,9 @@ function getTop5GlobalSongs() {
 function afficherTop5GlobalSongs() {
     const ctx = document.getElementById('top5Chart');
     const iframeContainer = document.getElementById('youtubeIframeContainer');
-    if (!ctx || !iframeContainer) return;
+    if (!ctx || !iframeContainer) {
+        return;
+    }
 
     // Dictionnaire avec juste les liens YouTube
     const youtubeLinks = {
@@ -749,8 +716,10 @@ function afficherTop5GlobalSongs() {
     const labels = top5.map(item => item.title);
     const streams = top5.map(item => item.streams);
 
-    if (ctx.chartInstance) ctx.chartInstance.destroy();
-
+    if (ctx.chartInstance) {
+        ctx.chartInstance.destroy();
+    }
+    
     ctx.chartInstance = new Chart(ctx, {
         type: 'line',
         data: {

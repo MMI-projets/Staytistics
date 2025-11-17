@@ -6,47 +6,48 @@ const membersData = {
     "BangChan": {
         name: "Bang Chan",
         img: "images/members/bangchan-member.jpg",
-        desc: `Leader du groupe Stray Kids, Bang Chan est reconnu pour son talent polyvalent en tant que chanteur, danseur, rappeur et producteur. Perfectionniste et travailleur, il est à l’origine de nombreuses compositions du groupe grâce à son implication au sein du trio de production 3RACHA. Charismatique et bienveillant, il est apprécié pour son énergie, sa créativité et son dévouement envers les fans comme envers ses membres.`
+        desc: `Bang Chan incarne le cœur créatif de Stray Kids. En tant que leader, il rassemble et guide le groupe tout en mettant en lumière sa polyvalence exceptionnelle : chanteur, danseur, rappeur et producteur. Il façonne l’identité musicale du groupe grâce à son travail acharné et à son implication au sein de 3RACHA, où il compose et produit une grande partie de leur discographie.`
     },
     "Felix": {
         name: "Felix",
         img: "images/members/felix-member.jpg",
-        desc: `Felix est connu pour sa voix grave iconique, son charisme puissant sur scène et sa personnalité douce hors scène. Danseur exceptionnel, il apporte une énergie unique aux performances du groupe.`
+        desc: `Danseur et rappeur de Stray Kids, Felix est reconnu pour son timbre grave singulier et sa présence scénique puissante. Dévoué et enthousiaste, il apporte une énergie lumineuse au groupe ainsi qu’une intensité marquante dans chaque performance. Bienveillant et chaleureux, il est apprécié pour sa personnalité rayonnante, son travail acharné et son impact vocal instantanément identifiable.`
     },
     "Seungmin": {
         name: "Seungmin",
         img: "images/members/seungmin-member.jpg",
-        desc: `Seungmin est le vocaliste principal du groupe, reconnu pour sa voix stable et émotionnelle. Appliqué et sérieux, il met un point d'honneur à toujours offrir des performances impeccables.`
+        desc: `Vocaliste principal de Stray Kids, Seungmin se distingue par sa voix claire, stable et expressive. Sérieux et assidu, il contribue à définir la couleur vocale du groupe grâce à sa précision et à sa musicalité. Posé et attentionné, il est apprécié pour sa sincérité, son professionnalisme et sa capacité à transmettre une grande émotion à travers ses interprétations.`
     },
     "IN": {
         name: "IN",
         img: "images/members/in-member.jpg",
-        desc: `IN est le plus jeune membre du groupe. Il possède une voix douce mais puissante et travaille constamment pour améliorer ses performances. Il est apprécié pour son humour et sa personnalité attachante.`
+        desc: `Vocaliste de Stray Kids, I.N est reconnu pour son timbre distinct et sa progression constante au fil des années. Déterminé et appliqué, il travaille sans relâche pour affiner sa technique et trouver sa propre couleur artistique. Joyeux et sensible, il est apprécié pour son enthousiasme, sa gentillesse et la fraîcheur qu’il apporte au groupe en tant que plus jeune membre.`
     },
     "Han": {
         name: "Han",
         img: "images/members/han-member.jpg",
-        desc: `Han est chanteur, rappeur et producteur. Son talent polyvalent et sa sensibilité artistique sont au cœur de l'identité musicale du groupe.`
+        desc: `Membre polyvalent de Stray Kids, Han excelle en tant que rappeur, chanteur et producteur. Talentueux et créatif, il contribue à l’écriture et à la composition de nombreuses chansons grâce à son rôle essentiel au sein de 3RACHA. Émotif et brillant, il est admiré pour sa capacité à transmettre des sentiments profonds, sa sensibilité artistique et son aisance dans tous les registres musicaux.`
     },
     "Lee Know": {
         name: "Lee Know",
         img: "images/members/leeknow-member.jpg",
-        desc: `Lee Know est danseur principal, connu pour sa précision et son charisme. Il possède un humour particulier très apprécié par les fans.`
+        desc: `Danseur principal de Stray Kids, Lee Know est reconnu pour sa précision remarquable et son sens aiguisé du détail. Perfectionniste et rigoureux, il contribue fortement à l’identité scénique du groupe grâce à son style chorégraphique unique et maîtrisé. Charismatique et réservé, il est apprécié pour son humour discret, son professionnalisme et son engagement constant envers les performances du groupe.`
     },
     "Hyunjin": {
         name: "Hyunjin",
         img: "images/members/hyunjin-member.jpg",
-        desc: `Hyunjin est danseur principal et visuel du groupe. Ses expressions scéniques et son élégance en font l’un des membres les plus remarqués du groupe.`
+        desc: `Danseur et visage du groupe, Hyunjin est reconnu pour son élégance scénique et son expressivité artistique. Appliqué et inspiré, il apporte une dimension visuelle forte à Stray Kids grâce à son implication dans l’esthétique et la narration des performances. Sensible et charismatique, il est apprécié pour sa présence captivante, son implication émotionnelle et son dévouement à perfectionner chaque détail.`
     },
     "Changbin": {
         name: "Changbin",
         img: "images/members/changbin-member.jpg",
-        desc: `Rappeur et membre de 3RACHA, Changbin est connu pour son flow rapide et puissant. Malgré son apparence intense, il est très impliqué et attentionné envers ses fans.`
+        desc: `Rappeur principal de Stray Kids, Changbin se distingue par son flow puissant et sa maîtrise technique. Travailleur acharné et passionné, il participe à la composition et à l’écriture de nombreux titres grâce à son rôle fondamental au sein de 3RACHA. Créatif et déterminé, il est admiré pour son énergie explosive, son sens artistique et sa capacité à insuffler une intensité unique dans chaque morceau.`
     }
 };
 
 document.addEventListener("DOMContentLoaded", (event) => {
   console.log("DOM complètement chargé et parsé");
+   
     /* ============================= */
     /* Boutons stop/play pour la vidéo dans le hero-section */
     /* ============================= */
@@ -115,9 +116,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
     // Tous les boutons Albums / EPs
     const allButtons = document.querySelectorAll(".display-type-albums button");
 
-    // Sticky header principal
-    const stickyHeaderTitle = document.querySelector(".discographie-header-sticky .title-logo-discographie h2");
-
     // Fonction pour gérer le clic sur un bouton
     function switchFilter(typeClass) {
         // Mettre à jour tous les boutons
@@ -131,11 +129,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
         // Mettre à jour tous les titres
         allTitles.forEach(title => {
-            title.textContent = typeClass === "display-albums" ? "Albums" : "EPs";
-        });
+            if (typeClass === "display-albums") {
+                title.textContent = "Albums";
+            } else {
+                title.textContent = "EPs";
+            }
 
-        // Le sticky header principal reste "Discographies"
-        stickyHeaderTitle.textContent = "Discographies";
+        });
 
         // Afficher le contenu filtré
         let filtreType;
@@ -216,7 +216,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
     /* ============================= */
     document.querySelector("button.mentions-legales-credits").addEventListener("click", ouvrirPopUpMentionsCredits);
 
-
     /* =============================== */
     /* ATTACHEMENT DU BOUTON DE TRI */
     /* =============================== */
@@ -239,4 +238,3 @@ document.addEventListener("DOMContentLoaded", (event) => {
         afficherFiltres(currentFilterType);
     });
 });
-

@@ -1100,3 +1100,205 @@ footer button.mentions-legales-credits {
 footer button.mentions-legales-credits:hover {
     cursor: pointer;
 }
+
+
+/* ============================= */
+/* 📱 RESPONSIVE — TABLETTES & TÉLÉPHONES */
+/* ============================= */
+
+@media screen and (max-width: 768px) {
+
+    /* GLOBAL */
+    body {
+        font-size: 14px;
+    }
+
+    /* HEADER */
+    header h1 {
+        font-size: 6rem;
+    }
+
+    header p {
+        font-size: 1.2rem;
+    }
+
+    header .hero-section-content {
+        top: 20%;
+        left: 5%;
+    }
+
+    header video {
+        height: 80vh;
+        width: 140%;
+    }
+
+    header button {
+        width: 60px;
+        height: 60px;
+        font-size: 0.9rem;
+        bottom: 20px;
+        right: 20px;
+    }
+
+    /* WHO */
+    .who {
+        flex-direction: column;
+        height: auto;
+        padding: 40px 20px;
+        text-align: center;
+    }
+
+    .who-text h2::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .who2 {
+        width: 90% !important;
+    }
+
+    .who-text p {
+        margin: 2rem 0;
+        font-size: 1.1rem;
+    }
+
+    /* MEMBERS */
+    .infos-member {
+        flex-direction: column;
+        gap: 30px;
+        text-align: center;
+    }
+
+    .infos-member img {
+        height: 350px;
+        width: auto;
+    }
+
+    .text-member {
+        width: 90%;
+    }
+
+    .text-member h2 {
+        font-size: 2.2rem;
+    }
+
+    .text-member p {
+        font-size: 1.1rem;
+    }
+
+    /* NAVBAR MEMBERS */
+    .navbar-members {
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .navbar-members button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+
+    /* INTERET */
+    .interet {
+        flex-direction: column;
+        padding: 40px 20px;
+        text-align: center;
+    }
+
+    .interet .logo img {
+        width: 250px;
+        height: 250px;
+    }
+
+    .interet-text p {
+        font-size: 1.1rem;
+    }
+
+    .interet-text h2::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    /* BANNIERE */
+    .banniere {
+        height: 50vh;
+        background-attachment: scroll; /* évite les bugs sur mobile */
+    }
+
+    .banniere-content {
+        max-width: 90%;
+        text-align: center;
+    }
+
+    /* DISCOGRAPHIE */
+    .display-type-albums {
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 20px 0;
+    }
+
+    .discographie-lists {
+        width: 100%;
+        padding: 10px;
+        gap: 20px;
+    }
+
+    .discographie-lists .album {
+        width: 45%;
+        padding: 15px;
+    }
+
+    /* Tri container */
+    .container-tri-title .tri-container {
+        position: static;
+        transform: none;
+        margin-top: 20px;
+        justify-content: center;
+    }
+
+    /* GRAPHIC OVER YEARS */
+    .graphic-over-years canvas {
+        width: 90%;
+        height: auto;
+    }
+
+    .graphic-texts {
+        padding: 0 10px;
+    }
+
+    /* YEAR ALBUM TEXT */
+    .year-album-text ul {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+}
+
+/* ============================= */
+/* 📱 RESPONSIVE — PETITS TÉLÉPHONES (≤ 480px) */
+/* ============================= */
+
+@media screen and (max-width: 480px) {
+
+    header h1 {
+        font-size: 4rem;
+    }
+
+    header button {
+        width: 50px;
+        height: 50px;
+    }
+
+    .who-text h2 {
+        font-size: 1.8rem;
+    }
+
+    .interet-text h2 {
+        font-size: 1.8rem;
+    }
+
+    .discographie-lists .album {
+        width: 90%;
+    }
+
+    .infos-member img {
+        height: 280px;
+    }
+}

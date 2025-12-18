@@ -221,11 +221,11 @@ function ouvrirPopUpMentionsCredits() {
 
                     <h2>Équipe du projet</h2>
                     <p>Le projet a été réalisé par :<br>
-                    Alex Fiol, développeur front-end et contributeur au graphisme.<br>
+                    Claire Fiol, développeur front-end et contributeur au graphisme.<br>
                     Jimmy TE, développeur back-end et graphiste.</p>
 
                     <p>Pour toute demande de contact, vous pouvez nous contacter à nos adresses universitaires :<br>
-                    <a href="mailto:alex.fiol@edu.univ-eiffel.fr">alex.fiol@edu.univ-eiffel.fr</a><br>
+                    <a href="mailto:claire.fiol@edu.univ-eiffel.fr">claire.fiol@edu.univ-eiffel.fr</a><br>
                     <a href="mailto:jimmy.te@edu.univ-eiffel.fr">jimmy.te@edu.univ-eiffel.fr</a></p>
                 </div>
             </div>
